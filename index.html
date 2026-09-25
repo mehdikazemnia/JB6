@@ -6,8 +6,6 @@
 <title>Jardin Botanique 6</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <style>
   :root {
@@ -292,7 +290,7 @@
         <li>Bike storage (ground floor)</li>
         <li>Cinema Room (basement)</li>
         <li>Gym (basement)</li>
-        <li>Garden/terrace, shared with houses 6 and 8</li>
+        <li>Garden/terrace, shared with houses 4 and 8</li>
       </ul>
     </div>
     <div class="info-card">
@@ -338,19 +336,6 @@
       </div>
       <a href="Welcome%20to%20Cohabs%20-%20Brussels.pdf" download style="flex-shrink:0;font-size:13px;color:var(--green-light);text-decoration:none;padding:8px 16px;border:1px solid rgba(74,124,47,.3);border-radius:7px;background:rgba(74,124,47,.08);font-weight:500;">⬇ Download PDF</a>
     </div>
-  </div>
-  <div style="margin-top:24px;">
-    <div class="section-title" style="font-size:20px;margin-bottom:4px;">📍 Useful Places</div>
-    <div class="section-sub" style="margin-bottom:10px;">Explore the neighbourhood — click a pin for details</div>
-    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;" id="map-filter-btns">
-      <button class="fbtn active" onclick="filterMap('all',this)">All</button>
-      <button class="fbtn" onclick="filterMap('groceries',this)">🛒 Groceries</button>
-      <button class="fbtn" onclick="filterMap('health',this)">🏥 Health</button>
-      <button class="fbtn" onclick="filterMap('sport',this)">🏋️ Sport</button>
-      <button class="fbtn" onclick="filterMap('nature',this)">🌿 Nature</button>
-      <button class="fbtn" onclick="filterMap('cultural',this)">🎭 Cultural</button>
-    </div>
-    <div id="map" style="width:100%;height:55vh;border-radius:10px;border:1px solid var(--cream-dark);"></div>
   </div>
 </div>
 
@@ -754,7 +739,6 @@ function showTab(id, btn) {
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + id).classList.add('active');
   if (btn) btn.classList.add('active');
-  if (id === 'newcomer') initMap();
   history.replaceState(null, '', id === 'home' ? location.pathname + location.search : '#' + id);
 }
 
@@ -770,68 +754,6 @@ function showToast(msg) {
   t.textContent = msg;
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 3000);
-}
-
-// ══════════════════════════════════════════════
-// MAP — Useful Places
-// ══════════════════════════════════════════════
-// All coordinates verified via OpenStreetMap Nominatim
-const PLACES = [
-  // Groceries
-  {name:'Carrefour Express',        cat:'groceries', lat:50.8548190, lng:4.3667386, note:'Supermarket · Rue Royale (closest)'},
-  {name:'Carrefour Express',        cat:'groceries', lat:50.8580086, lng:4.3684342, note:'Supermarket · Rue Royale (north)'},
-  // Health
-  {name:'Clinique Saint-Jean',      cat:'health',    lat:50.8539286, lng:4.3602880, note:'Hospital · Bd du Jardin Botanique'},
-  // Sport
-  {name:'Basic-Fit Rogier',         cat:'sport',     lat:50.8570185, lng:4.3556544, note:'Gym · Rue des Croisades 19 · 24/7'},
-  {name:'Les Bains de Saint-Josse', cat:'sport',     lat:50.8568170, lng:4.3654199, note:'Public swimming pool'},
-  // Nature
-  {name:'Jardin Botanique',         cat:'nature',    lat:50.8547117, lng:4.3648337, note:'Botanical garden — on your doorstep!'},
-  {name:'Parc de Bruxelles',        cat:'nature',    lat:50.8445950, lng:4.3636534, note:'Royal park · 15 min walk'},
-  {name:'Parc Josaphat',            cat:'nature',    lat:50.8641004, lng:4.3832370, note:'Large park in Schaerbeek · 20 min walk'},
-  // Cultural
-  {name:'Le Botanique (venue)',     cat:'cultural',  lat:50.8549274, lng:4.3652033, note:'Concerts & exhibitions · next door!'},
-  {name:'Bozar',                    cat:'cultural',  lat:50.8442043, lng:4.3590833, note:'Centre for Fine Arts · Rue Ravenstein 23'},
-];
-
-let mapInstance = null;
-let mapMarkers = [];
-
-const CAT_COLORS = {
-  groceries:'#e67e22', health:'#e74c3c', sport:'#3498db',
-  nature:'#27ae60',    cultural:'#9b59b6', social:'#f39c12'
-};
-
-function initMap() {
-  if (mapInstance || typeof L === 'undefined') return;
-  mapInstance = L.map('map').setView([50.8542519, 4.3679838], 16);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution:'© OpenStreetMap contributors', maxZoom:19
-  }).addTo(mapInstance);
-
-  const houseIcon = L.divIcon({html:'<div style="background:#1a2e1a;color:#e8c87a;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:14px;border:2px solid #e8c87a;">🏡</div>', className:'', iconSize:[28,28], iconAnchor:[14,14]});
-  L.marker([50.8542519, 4.3679838], {icon:houseIcon}).addTo(mapInstance).bindPopup('<strong>Jardin Botanique 6</strong><br>Rue Traversière 4, 1210 Saint-Josse');
-
-  PLACES.forEach(p => {
-    const icon = L.divIcon({
-      html:`<div style="background:${CAT_COLORS[p.cat]};color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.3);"></div>`,
-      className:'', iconSize:[22,22], iconAnchor:[11,11]
-    });
-    const m = L.marker([p.lat, p.lng], {icon}).bindPopup(`<strong>${p.name}</strong><br><em style="color:${CAT_COLORS[p.cat]}">${p.cat}</em><br>${p.note}`);
-    m._cat = p.cat;
-    m.addTo(mapInstance);
-    mapMarkers.push(m);
-  });
-}
-
-function filterMap(cat, btn) {
-  document.querySelectorAll('#map-filter-btns .fbtn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  if (!mapInstance) return;
-  mapMarkers.forEach(m => {
-    if (cat === 'all' || m._cat === cat) m.addTo(mapInstance);
-    else mapInstance.removeLayer(m);
-  });
 }
 
 // ══════════════════════════════════════════════
