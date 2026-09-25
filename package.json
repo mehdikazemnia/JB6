@@ -1,14 +1,11 @@
 {
-  "name": "jb4-reminders",
+  "name": "jb6-duty-schedule",
   "version": "1.0.0",
-  "description": "Weekly duty reminders for Jardin Botanique 4",
+  "description": "Duty schedule for Jardin Botanique 6",
   "main": "send-reminders.js",
   "scripts": {
-    "send": "node send-reminders.js",
-    "test-dry": "DRY_RUN=true node send-reminders.js"
-  },
-  "dependencies": {
-    "nodemailer": "^6.9.9"
+    "schedule": "node send-reminders.js",
+    "check": "node send-reminders.js"
   },
   "engines": {
     "node": ">=18"

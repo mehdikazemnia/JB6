@@ -1,169 +1,104 @@
 {
-  "house": "Jardin Botanique 4",
-  "ambassador": {
-    "name": "Ambassador",
-    "emailSecret": "AMBASSADOR_EMAIL"
-  },
+  "house": "Jardin Botanique 6",
   "referenceMonday": "2025-02-09",
-  "groups": [
+  "units": [
     {
-      "id": "G1",
-      "name": "Group 1",
-      "color": "yellow",
-      "members": [
-        { "room": "101", "name": "Alex",     "emailSecret": "EMAIL_G1_M1" },
-        { "room": "102", "name": "Anna",     "emailSecret": "EMAIL_G1_M2" },
-        { "room": "103", "name": "Gianluca", "emailSecret": "EMAIL_G1_M3" },
-        { "room": "104", "name": "Stevan",   "emailSecret": "EMAIL_G1_M4" },
-        { "room": "105", "name": "Rafael",  "emailSecret": "EMAIL_G1_M5" }
-      ]
+      "id": "U1",
+      "name": "Unit 1",
+      "ambassador": { "name": "TBD" },
+      "note": "Rooms 1-16 grouped 4 by 4"
     },
     {
-      "id": "G2",
-      "name": "Group 2",
-      "color": "blue",
-      "members": [
-        { "room": "201", "name": "Claudia",  "emailSecret": "EMAIL_G2_M1" },
-        { "room": "202", "name": "Almudena", "emailSecret": "EMAIL_G2_M2" },
-        { "room": "203", "name": "Eduard",   "emailSecret": "EMAIL_G2_M3" },
-        { "room": "204", "name": "Maxime",   "emailSecret": "EMAIL_G2_M4" },
-        { "room": "205", "name": "Victoria", "emailSecret": "EMAIL_G2_M5" }
-      ]
-    },
-    {
-      "id": "G3",
-      "name": "Group 3",
-      "color": "purple",
-      "members": [
-        { "room": "301", "name": "Tadeusz",  "emailSecret": "EMAIL_G3_M1" },
-        { "room": "302", "name": "Antonio", "emailSecret": "EMAIL_G3_M2" },
-        { "room": "303", "name": "Ayman",   "emailSecret": "EMAIL_G3_M3" },
-        { "room": "304", "name": "Aurelien","emailSecret": "EMAIL_G3_M4" },
-        { "room": "305", "name": "Samy",    "emailSecret": "EMAIL_G3_M5" }
-      ]
-    },
-    {
-      "id": "G4",
-      "name": "Group 4",
-      "color": "red",
-      "members": [
-        { "room": "401", "name": "Larissa", "emailSecret": "EMAIL_G4_M1" },
-        { "room": "402", "name": "Jose",    "emailSecret": "EMAIL_G4_M2" },
-        { "room": "403", "name": "Adithi", "emailSecret": "EMAIL_G4_M3" },
-        { "room": "404", "name": "Gergo",  "emailSecret": "EMAIL_G4_M4" }
-      ]
-    },
-    {
-      "id": "G5",
-      "name": "Group 5",
-      "color": "green",
-      "members": [
-        { "room": "501", "name": "Caterina", "emailSecret": "EMAIL_G5_M1" },
-        { "room": "502", "name": "Erwann",  "emailSecret": "EMAIL_G5_M2" },
-        { "room": "503", "name": "Aysegul", "emailSecret": "EMAIL_G5_M3" },
-        { "room": "504", "name": "Franco",  "emailSecret": "EMAIL_G5_M4" }
-      ]
+      "id": "U2",
+      "name": "Unit 2",
+      "ambassador": { "name": "TBD" },
+      "note": "Rooms 1-12 grouped 4 by 4"
     }
   ],
-  "trashSchedule": [
-    { "date": "2025-02-09", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-02-16", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-02-23", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-03-02", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-03-09", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-03-16", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-03-23", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-03-30", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-04-06", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-04-13", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-04-20", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-04-27", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-05-04", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-05-11", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-05-18", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-05-25", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-06-01", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-06-08", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-06-15", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-06-22", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-06-29", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-07-06", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-07-13", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-07-20", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-07-27", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-08-03", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-08-10", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-08-17", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-08-24", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-08-31", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-09-07", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-09-14", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-09-21", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-09-28", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-10-05", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-10-12", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-10-19", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-10-26", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-11-02", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-11-09", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-11-16", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-11-23", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-11-30", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-12-07", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-12-14", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-12-21", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2025-12-28", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-01-04", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-01-11", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-01-18", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-01-25", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-02-01", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-02-08", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-02-15", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-02-22", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-03-01", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-03-08", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-03-15", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-03-22", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-03-29", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-04-05", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-04-12", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-04-19", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-04-26", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-05-03", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-05-10", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-05-17", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-05-24", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-05-31", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-06-07", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-06-14", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-06-21", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-06-28", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-07-05", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-07-12", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-07-19", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-07-26", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-08-02", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-08-09", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-08-16", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-08-23", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-08-30", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-09-06", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-09-13", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-09-20", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-09-27", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-10-04", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-10-11", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-10-18", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-10-25", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-11-01", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-11-08", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-11-15", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-11-22", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-11-29", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-12-06", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-12-13", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-12-20", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" },
-    { "date": "2026-12-27", "type": "blue", "label": "Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)" }
+  "groups": [
+    {
+      "id": "U1-G1",
+      "unit": "U1",
+      "name": "Unit 1 · Group 1",
+      "color": "yellow",
+      "members": [
+        { "room": "1", "name": "" },
+        { "room": "2", "name": "" },
+        { "room": "3", "name": "" },
+        { "room": "4", "name": "" }
+      ]
+    },
+    {
+      "id": "U1-G2",
+      "unit": "U1",
+      "name": "Unit 1 · Group 2",
+      "color": "blue",
+      "members": [
+        { "room": "5", "name": "" },
+        { "room": "6", "name": "" },
+        { "room": "7", "name": "" },
+        { "room": "8", "name": "" }
+      ]
+    },
+    {
+      "id": "U1-G3",
+      "unit": "U1",
+      "name": "Unit 1 · Group 3",
+      "color": "purple",
+      "members": [
+        { "room": "9", "name": "" },
+        { "room": "10", "name": "" },
+        { "room": "11", "name": "" },
+        { "room": "12", "name": "" }
+      ]
+    },
+    {
+      "id": "U1-G4",
+      "unit": "U1",
+      "name": "Unit 1 · Group 4",
+      "color": "red",
+      "members": [
+        { "room": "13", "name": "" },
+        { "room": "14", "name": "" },
+        { "room": "15", "name": "" },
+        { "room": "16", "name": "" }
+      ]
+    },
+    {
+      "id": "U2-G1",
+      "unit": "U2",
+      "name": "Unit 2 · Group 1",
+      "color": "green",
+      "members": [
+        { "room": "1", "name": "" },
+        { "room": "2", "name": "" },
+        { "room": "3", "name": "" },
+        { "room": "4", "name": "" }
+      ]
+    },
+    {
+      "id": "U2-G2",
+      "unit": "U2",
+      "name": "Unit 2 · Group 2",
+      "color": "grey",
+      "members": [
+        { "room": "5", "name": "" },
+        { "room": "6", "name": "" },
+        { "room": "7", "name": "" },
+        { "room": "8", "name": "" }
+      ]
+    },
+    {
+      "id": "U2-G3",
+      "unit": "U2",
+      "name": "Unit 2 · Group 3",
+      "color": "orange",
+      "members": [
+        { "room": "9", "name": "" },
+        { "room": "10", "name": "" },
+        { "room": "11", "name": "" },
+        { "room": "12", "name": "" }
+      ]
+    }
   ]
 }

@@ -1,20 +1,13 @@
-name: Weekly Duty Reminders
+name: Weekly Duty Check
 
 on:
   schedule:
-    - cron: '0 17 * * 0'   # Every Sunday 17:00 UTC = 18:00 Brussels (CET) / 19:00 (CEST)
+    - cron: '0 17 * * 0'
   workflow_dispatch:
-    inputs:
-      dry_run:
-        description: 'Dry run — log only, send no emails'
-        required: false
-        default: 'false'
-        type: choice
-        options: ['false', 'true']
 
 jobs:
-  send-reminders:
-    name: Send weekly reminders
+  duty-check:
+    name: Log current duty assignments
     runs-on: ubuntu-latest
 
     steps:
@@ -30,46 +23,5 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Send reminder emails
-        env:
-          # ── Gmail sender account ──────────────────────────────────────────
-          GMAIL_USER:       ${{ secrets.GMAIL_USER }}
-          GMAIL_APP_PASS:   ${{ secrets.GMAIL_APP_PASS }}
-          AMBASSADOR_EMAIL: ${{ secrets.AMBASSADOR_EMAIL }}
-
-          # ── Group 1: Alex, Gianluca, Stevan, Anna, Rafael ────────────────
-          EMAIL_G1_M1: ${{ secrets.EMAIL_G1_M1 }}
-          EMAIL_G1_M2: ${{ secrets.EMAIL_G1_M2 }}
-          EMAIL_G1_M3: ${{ secrets.EMAIL_G1_M3 }}
-          EMAIL_G1_M4: ${{ secrets.EMAIL_G1_M4 }}
-          EMAIL_G1_M5: ${{ secrets.EMAIL_G1_M5 }}
-
-          # ── Group 2: Claudia, Aurelien, Eduard, Antonio, Victoria ─────────
-          EMAIL_G2_M1: ${{ secrets.EMAIL_G2_M1 }}
-          EMAIL_G2_M2: ${{ secrets.EMAIL_G2_M2 }}
-          EMAIL_G2_M3: ${{ secrets.EMAIL_G2_M3 }}
-          EMAIL_G2_M4: ${{ secrets.EMAIL_G2_M4 }}
-          EMAIL_G2_M5: ${{ secrets.EMAIL_G2_M5 }}
-
-          # ── Group 3: Maria, Larissa, Ayman, Almudena, Samy ───────────────
-          EMAIL_G3_M1: ${{ secrets.EMAIL_G3_M1 }}
-          EMAIL_G3_M2: ${{ secrets.EMAIL_G3_M2 }}
-          EMAIL_G3_M3: ${{ secrets.EMAIL_G3_M3 }}
-          EMAIL_G3_M4: ${{ secrets.EMAIL_G3_M4 }}
-          EMAIL_G3_M5: ${{ secrets.EMAIL_G3_M5 }}
-
-          # ── Group 4: Maxime, Tadeusz, Adithi, Gergo ──────────────────────
-          EMAIL_G4_M1: ${{ secrets.EMAIL_G4_M1 }}
-          EMAIL_G4_M2: ${{ secrets.EMAIL_G4_M2 }}
-          EMAIL_G4_M3: ${{ secrets.EMAIL_G4_M3 }}
-          EMAIL_G4_M4: ${{ secrets.EMAIL_G4_M4 }}
-
-          # ── Group 5: Franco, Erwann, Aysegul, Maxime ─────────────────────
-          EMAIL_G5_M1: ${{ secrets.EMAIL_G5_M1 }}
-          EMAIL_G5_M2: ${{ secrets.EMAIL_G5_M2 }}
-          EMAIL_G5_M3: ${{ secrets.EMAIL_G5_M3 }}
-          EMAIL_G5_M4: ${{ secrets.EMAIL_G5_M4 }}
-
-          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
-
+      - name: Print this week's duty groups
         run: node send-reminders.js

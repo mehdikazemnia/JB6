@@ -1,8 +1,10 @@
-# 🌿 Jardin Botanique 4 — House Dashboard
+# 🌿 Jardin Botanique 6 — House Dashboard
 
-Live dashboard + automated weekly email reminders for all 23 residents.
+Live dashboard + weekly duty schedule for the JB6 house.
 
-Hi everyone — I built this dashboard to manage our house tasks and give an overview of our house rules. Hope it's useful!
+This repo is designed around a static residents.json source of truth. When a resident moves in or out, update the JSON and the generated duty schedule will continue without a database or email workflow.
+
+Each unit has its own ambassador, and the ambassador name can be kept directly in the unit config in residents.json.
 
 ---
 

@@ -3,16 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jardin Botanique 4</title>
+<title>Jardin Botanique 6</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
 <!-- GoatCounter analytics — replace YOUR_CODE with your goatcounter.com subdomain -->
-<script data-goatcounter="https://jb4.goatcounter.com/count"
+<script data-goatcounter="https://jb6.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 
 <style>
@@ -47,7 +45,7 @@
   .site-header { background:var(--green-deep); padding:0; position:relative; overflow:hidden; }
   .header-inner { max-width:1100px; margin:0 auto; padding:28px 24px 0; }
   .site-header::before { content:''; position:absolute; top:-60px; right:-60px; width:300px; height:300px; background:radial-gradient(circle,rgba(74,124,47,.25) 0%,transparent 70%); pointer-events:none; }
-  .site-header::after { content:'JB4'; position:absolute; right:36px; bottom:8px; font-family:'Playfair Display',serif; font-size:110px; color:rgba(255,255,255,.04); line-height:1; pointer-events:none; }
+  .site-header::after { content:'JB6'; position:absolute; right:36px; bottom:8px; font-family:'Playfair Display',serif; font-size:110px; color:rgba(255,255,255,.04); line-height:1; pointer-events:none; }
   .house-eyebrow { font-size:12px; color:var(--green-muted); letter-spacing:.18em; text-transform:uppercase; margin-bottom:5px; }
   .house-title { font-family:'Playfair Display',serif; font-size:clamp(26px,5vw,44px); color:var(--cream); line-height:1.1; }
   .house-title em { color:var(--gold-light); font-style:italic; }
@@ -82,7 +80,7 @@
   .tutorial-shell { display:grid; grid-template-columns:minmax(0,1.65fr) 320px; gap:18px; align-items:stretch; }
   .tutorial-stage { background:var(--green-deep); border-radius:12px; border:1px solid rgba(196,151,58,.25); box-shadow:0 8px 24px var(--shadow); overflow:hidden; min-height:520px; display:flex; flex-direction:column; }
   .tutorial-screen { flex:1; padding:28px; display:flex; flex-direction:column; gap:16px; position:relative; overflow:hidden; }
-  .tutorial-screen::after { content:'JB4'; position:absolute; right:22px; bottom:-10px; font-family:'Playfair Display',serif; font-size:96px; line-height:1; color:rgba(255,255,255,.035); pointer-events:none; }
+  .tutorial-screen::after { content:'JB6'; position:absolute; right:22px; bottom:-10px; font-family:'Playfair Display',serif; font-size:96px; line-height:1; color:rgba(255,255,255,.035); pointer-events:none; }
   .tutorial-kicker { font-family:'DM Mono',monospace; font-size:11px; color:var(--gold-light); letter-spacing:.12em; text-transform:uppercase; }
   .tutorial-title { font-family:'Playfair Display',serif; font-size:clamp(25px,4vw,42px); color:var(--cream); line-height:1.05; max-width:620px; }
   .tutorial-visual { flex:1; min-height:260px; border-radius:10px; border:1px solid rgba(255,255,255,.11); background:rgba(255,255,255,.05); padding:18px; display:flex; align-items:center; justify-content:center; position:relative; z-index:1; }
@@ -312,7 +310,7 @@
 <!-- HEADER -->
 <div class="site-header">
   <div class="header-inner">
-  <div class="house-title">Jardin <em>Botanique</em> 4</div>
+  <div class="house-title">Jardin <em>Botanique</em> 6</div>
   <div class="house-meta">Community dashboard</div>
   <div class="intro-pop" onclick="startTutorialFromGuide()" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();startTutorialFromGuide();}">New here? Click for a quick intro</div>
   <nav class="nav">
@@ -321,7 +319,6 @@
     <button class="nav-btn" onclick="showTab('newcomer',this)">Newcomer Guide</button>
     <button class="nav-btn" onclick="showTab('leaderboard',this)">Leaderboard</button>
     <button class="nav-btn" onclick="showTab('residents',this)">Residents</button>
-    <button class="nav-btn" onclick="showTab('secrets',this)" style="display:none">⚙️ Email Setup</button>
   </nav>
   </div>
 </div>
@@ -331,13 +328,13 @@
 <!-- ══════════ TUTORIAL ══════════ -->
 <div class="tab-panel" id="tab-tutorial">
   <div class="section-title">Newcomer Video Tutorial</div>
-  <div class="section-sub">A quick guided tour of the JB4 dashboard: duties, calendar imports, task check-offs, rankings, and house basics.</div>
+  <div class="section-sub">A quick guided tour of the JB6 dashboard: duties, calendar imports, task check-offs, rankings, and house basics.</div>
 
-  <div class="tutorial-shell" aria-label="JB4 newcomer video tutorial">
+  <div class="tutorial-shell" aria-label="JB6 newcomer video tutorial">
     <div class="tutorial-stage">
       <div class="tutorial-screen" id="tutorial-screen">
         <div class="tutorial-kicker" id="tutorial-kicker">Welcome</div>
-        <div class="tutorial-title" id="tutorial-title">Welcome to JB4</div>
+        <div class="tutorial-title" id="tutorial-title">Welcome to JB6</div>
         <div class="tutorial-visual" id="tutorial-visual"></div>
         <div class="tutorial-caption" id="tutorial-caption"></div>
       </div>
@@ -462,7 +459,7 @@
 <!-- ══════════ NEWCOMER ══════════ -->
 <div class="tab-panel" id="tab-newcomer">
   <div class="nc-hero">
-    <h2>Welcome to Jardin Botanique 4 🌱</h2>
+    <h2>Welcome to Jardin Botanique 6 🌱</h2>
     <p>Start with the dashboard tutorial, then use this guide for the practical house basics.</p>
     <button onclick="startTutorialFromGuide()" style="margin-top:18px;background:var(--gold);color:var(--green-deep);border:none;border-radius:8px;padding:10px 18px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">▶ Watch dashboard tutorial</button>
   </div>
@@ -472,7 +469,7 @@
       <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;">
         <a href="https://chat.whatsapp.com/J6zQf7K3vWeC8DPrX3x7Yx?s=cl&p=i&mlu=1" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;text-decoration:none;padding:10px 16px;border:1px solid rgba(74,124,47,.3);border-radius:8px;background:rgba(74,124,47,.08);color:var(--green-light);font-weight:500;font-size:13px;">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          JB4 House Group
+          JB6 House Group
         </a>
         <a href="https://chat.whatsapp.com/KQDrjWbt5KmDeyWAXrKAdX?s=cl&p=i&mlu=1" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;text-decoration:none;padding:10px 16px;border:1px solid rgba(74,124,47,.3);border-radius:8px;background:rgba(74,124,47,.08);color:var(--green-light);font-weight:500;font-size:13px;">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -515,7 +512,7 @@
     <div class="info-card">
       <h3>🗑️ Duty System</h3>
       <ul class="info-list">
-        <li>5 groups rotate weekly</li>
+        <li>7 groups rotate weekly across the two units</li>
         <li>Trash: Mon/Thu — bags out the <strong>evening before</strong>; Fri — out by 9am</li>
         <li>Dishwasher: empty before 10:00 AM</li>
         <li>Check the Calendar tab for your schedule</li>
@@ -533,8 +530,8 @@
     <div class="info-card">
       <h3>📞 Contacts</h3>
       <ul class="info-list">
-        <li>House Ambassador (Leika), just ask in the group chat</li>
-        <li>Cohabs: will add later</li>
+        <li>Unit 1 ambassador: ask in the group chat</li>
+        <li>Unit 2 ambassador: ask in the group chat</li>
         <li>Emergency maintenance: Cohabs app</li>
         <li>House WhatsApp group</li>
       </ul>
@@ -583,30 +580,6 @@
   </div>
 </div>
 
-<!-- ══════════ EMAIL SETUP ══════════ -->
-<div class="tab-panel" id="tab-secrets">
-  <div class="section-title">⚙️ Email Setup Guide</div>
-  <div class="section-sub">How to add emails privately via GitHub Secrets — zero emails stored in the repo</div>
-
-  <div class="card" style="margin-bottom:18px;">
-    <div class="card-title"><div class="card-icon">🔐</div>How it works</div>
-    <p style="font-size:14px;color:var(--text-mid);line-height:1.7;margin-bottom:14px;">
-      Emails are stored as <strong>GitHub Secrets</strong> — encrypted, never visible in code, never in git history.
-      Each resident has a secret named like <code style="background:var(--cream-dark);padding:1px 5px;border-radius:3px;">EMAIL_G1_M1</code>.
-      The reminder script reads these at runtime via environment variables.
-    </p>
-    <p style="font-size:14px;color:var(--text-mid);line-height:1.7;">
-      Go to your GitHub repo → <strong>Settings → Secrets and variables → Actions → New repository secret</strong>
-      and add each one below.
-    </p>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><div class="card-icon">📋</div>Secret names → Residents</div>
-    <table class="secrets-table" id="secrets-table"></table>
-  </div>
-</div>
-
 </div><!-- /content -->
 
 <!-- MODAL -->
@@ -625,7 +598,7 @@
 <div class="modal-overlay" id="group-picker-overlay" onclick="if(event.target===this)closeGroupPicker()">
   <div class="modal" style="max-width:540px;">
     <h3>Choose your group</h3>
-    <p>Download your duties as a .ics calendar file. <strong>Tip:</strong> when importing, put the events in a calendar named <em>"JB4 Duties"</em> — then to remove all events at once, just delete that calendar in your app.</p>
+    <p>Download your duties as a .ics calendar file. <strong>Tip:</strong> when importing, put the events in a calendar named <em>"JB6 Duties"</em> — then to remove all events at once, just delete that calendar in your app.</p>
     <div id="group-picker-cards" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;"></div>
     <div class="modal-btns" style="margin-top:16px;">
       <button class="btn-close" onclick="closeGroupPicker()">Cancel</button>
@@ -639,7 +612,7 @@
     <p style="margin-bottom:12px;">To delete all <strong id="remove-help-name"></strong> events at once:</p>
     <ol style="padding-left:20px;font-size:14px;line-height:2;color:var(--text-mid);">
       <li>Open your calendar app (Google Calendar, Apple Calendar, Outlook…)</li>
-      <li>Find the calendar named <strong>"JB4 Duties"</strong></li>
+      <li>Find the calendar named <strong>"JB6 Duties"</strong></li>
       <li>Delete / unsubscribe from that calendar — all events disappear instantly</li>
     </ol>
     <p style="margin-top:12px;font-size:12px;color:var(--text-light);">If you imported into your main calendar instead, you'll need to delete the events one by one — or re-import with the file below (works in Outlook).</p>
@@ -664,165 +637,78 @@
 
 <script>
 // ══════════════════════════════════════════════
-// DATA  — matches residents.json exactly
+// DATA  — source of truth lives in residents.json
 // ══════════════════════════════════════════════
-const GROUPS = [
-  { id:'G1', name:'Group 1', color:'g1b', hdr:'gh-g1',
-    members:[
-      {room:'101', name:'Alex'},
-      {room:'102', name:'Anna'},
-      {room:'103', name:'Gianluca'},
-      {room:'104', name:'Stevan'},
-      {room:'105', name:'Rafael'},
-    ]},
-  { id:'G2', name:'Group 2', color:'g2b', hdr:'gh-g2',
-    members:[
-      {room:'201', name:'Claudia'},
-      {room:'202', name:'Almudena'},
-      {room:'203', name:'Eduard'},
-      {room:'204', name:'Maxime'},
-      {room:'205', name:'Victoria'},
-    ]},
-  { id:'G3', name:'Group 3', color:'g3b', hdr:'gh-g3',
-    members:[
-      {room:'301', name:'Tadeusz'},
-      {room:'302', name:'Antonio'},
-      {room:'303', name:'Ayman'},
-      {room:'304', name:'Aurelien'},
-      {room:'305', name:'Samy'},
-    ]},
-  { id:'G4', name:'Group 4', color:'g4b', hdr:'gh-g4',
-    members:[
-      {room:'401', name:'Larissa'},
-      {room:'402', name:'Jose'},
-      {room:'403', name:'Adithi'},
-      {room:'404', name:'Gergo'},
-    ]},
-  { id:'G5', name:'Group 5', color:'g5b', hdr:'gh-g5',
-    members:[
-      {room:'501', name:'Caterina'},
-      {room:'502', name:'Erwann'},
-      {room:'503', name:'Aysegul'},
-      {room:'504', name:'Franco'},
-    ]},
+const HOUSE_NAME = 'Jardin Botanique 6';
+const DEFAULT_GROUPS = [
+  { id:'U1-G1', unit:'U1', name:'Unit 1 · Group 1', color:'g1b', hdr:'gh-g1', members:[
+    {room:'1', name:''},
+    {room:'2', name:''},
+    {room:'3', name:''},
+    {room:'4', name:''},
+  ]},
+  { id:'U1-G2', unit:'U1', name:'Unit 1 · Group 2', color:'g2b', hdr:'gh-g2', members:[
+    {room:'5', name:''},
+    {room:'6', name:''},
+    {room:'7', name:''},
+    {room:'8', name:''},
+  ]},
+  { id:'U1-G3', unit:'U1', name:'Unit 1 · Group 3', color:'g3b', hdr:'gh-g3', members:[
+    {room:'9', name:''},
+    {room:'10', name:''},
+    {room:'11', name:''},
+    {room:'12', name:''},
+  ]},
+  { id:'U1-G4', unit:'U1', name:'Unit 1 · Group 4', color:'g4b', hdr:'gh-g4', members:[
+    {room:'13', name:''},
+    {room:'14', name:''},
+    {room:'15', name:''},
+    {room:'16', name:''},
+  ]},
+  { id:'U2-G1', unit:'U2', name:'Unit 2 · Group 1', color:'g5b', hdr:'gh-g5', members:[
+    {room:'1', name:''},
+    {room:'2', name:''},
+    {room:'3', name:''},
+    {room:'4', name:''},
+  ]},
+  { id:'U2-G2', unit:'U2', name:'Unit 2 · Group 2', color:'g1b', hdr:'gh-g1', members:[
+    {room:'5', name:''},
+    {room:'6', name:''},
+    {room:'7', name:''},
+    {room:'8', name:''},
+  ]},
+  { id:'U2-G3', unit:'U2', name:'Unit 2 · Group 3', color:'g2b', hdr:'gh-g2', members:[
+    {room:'9', name:''},
+    {room:'10', name:''},
+    {room:'11', name:''},
+    {room:'12', name:''},
+  ]},
 ];
 
-// Rotation reference: 9-Feb-2025 = week 0 = Group 1 on trash, Group 2 on dishes
-// From your spreadsheet:
-//   9-Feb  trash=1 dishes=2
-//  16-Feb  trash=3 dishes=4   → trash offset by +0, dishes offset by +1 from trash
-// Pattern: dishes group = trash group index + 1 (mod 5)
+let GROUPS = DEFAULT_GROUPS.map(group => ({
+  ...group,
+  members: group.members.map(member => ({ ...member }))
+}));
+
 const REF_MONDAY = new Date('2025-02-09');
+const SCHEDULE_END = new Date('2027-12-31');
 
-// Trash schedule — week starts, group rotates G1→G2→G3→G4→G5→G1…
-// From your spreadsheet the rotation for trash is: 1,3,5,2,4,1,3,5,2,4,1,3,5,2,4,1
-// That's not a simple +1 each week — it's +2 each week (mod 5).
-// Let's verify: week0=G1, week1=G3, week2=G5, week3=G2, week4=G4, week5=G1 ✓
-// So trashGroupIndex = (weekIndex * 2) mod 5
+function buildTrashSchedule(start = REF_MONDAY, end = SCHEDULE_END) {
+  const schedule = [];
+  const cursor = new Date(start);
+  cursor.setHours(0, 0, 0, 0);
+  while (cursor <= end) {
+    schedule.push({
+      date: cursor.toISOString().slice(0, 10),
+      type: 'blue',
+      label: 'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'
+    });
+    cursor.setDate(cursor.getDate() + 7);
+  }
+  return schedule;
+}
 
-// Dishwasher from spreadsheet: 2,4,1,3,5,2,4,1,3,5… = trashGroup+1 (mod 5) ✓
-
-const TRASH_SCHEDULE = [
-  {date:'2025-02-09', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-02-16', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-02-23', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-03-02', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-03-09', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-03-16', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-03-23', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-03-30', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-04-06', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-04-13', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-04-20', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-04-27', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-05-04', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-05-11', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-05-18', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-05-25', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-06-01', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-06-08', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-06-15', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-06-22', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-06-29', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-07-06', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-07-13', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-07-20', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-07-27', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-08-03', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-08-10', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-08-17', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-08-24', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-08-31', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-09-07', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-09-14', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-09-21', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-09-28', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-10-05', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-10-12', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-10-19', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-10-26', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-11-02', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-11-09', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-11-16', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-11-23', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-11-30', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-12-07', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-12-14', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-12-21', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2025-12-28', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-01-04', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-01-11', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-01-18', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-01-25', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-02-01', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-02-08', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-02-15', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-02-22', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-03-01', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-03-08', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-03-15', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-03-22', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-03-29', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-04-05', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-04-12', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-04-19', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-04-26', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-05-03', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-05-10', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-05-17', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-05-24', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-05-31', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-06-07', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-06-14', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-06-21', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-06-28', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-07-05', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-07-12', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-07-19', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-07-26', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-08-02', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-08-09', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-08-16', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-08-23', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-08-30', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-09-06', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-09-13', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-09-20', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-09-27', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-10-04', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-10-11', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-10-18', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-10-25', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-11-01', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-11-08', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-11-15', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-11-22', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-11-29', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-12-06', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-12-13', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-12-20', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-  {date:'2026-12-27', type:'blue', label:'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'},
-];
+const TRASH_SCHEDULE = buildTrashSchedule();
 
 const HOUSE_RULES = [
   {n:'01', t:'<strong>Quiet hours</strong> are 11pm to 8am. Be mindful of neighbours above, below, and beside you.'},
@@ -853,10 +739,12 @@ function weekIdx(monday) {
 
 // Trash rotation: +2 per week (mod 5), offset +1 to align with actual planning
 function trashGroupForWeek(wi) {
-  return GROUPS[((wi * 2 + 1) % 5 + 5) % 5];
+  const count = GROUPS.length || 1;
+  return GROUPS[((wi * 2 + 1) % count + count) % count];
 }
 function dishGroupForWeek(wi) {
-  return GROUPS[((wi * 2 + 2) % 5 + 5) % 5];
+  const count = GROUPS.length || 1;
+  return GROUPS[((wi * 2 + 2) % count + count) % count];
 }
 
 function fmtDate(s) {
@@ -881,41 +769,12 @@ function renderTicker() {
 }
 
 // ══════════════════════════════════════════════
-// FIREBASE — shared real-time task storage
+// STATIC DATA ONLY — no Firebase / storage layer
 // ══════════════════════════════════════════════
-// Paste your Firebase project config here.
-// See SETUP_NOTES.txt for step-by-step instructions.
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAN9csH1m4P6KIWpQTXjdfu1cHWkpwHPvY",
-  authDomain: "jbotan4.firebaseapp.com",
-  databaseURL: "https://jbotan4-default-rtdb.europe-west1.firebasedatabase.app/",
-  projectId: "jbotan4",
-  storageBucket: "jbotan4.firebasestorage.app",
-  messagingSenderId: "1037838517284",
-  appId: "1:1037838517284:web:78d501a54bbe23cbac44b1"
-};
-
-firebase.initializeApp(firebaseConfig);
-const _db = firebase.database();
 let _tasks = {};
 let residentEditMode = false;
 let residentAdminTapCount = 0;
 let residentAdminTapTimer = null;
-
-// Real-time listener — fires on load and on every change from any device
-_db.ref('tasks').on('value', snapshot => {
-  _tasks = snapshot.val() || {};
-  renderThisWeek();
-  renderLeaderboard();
-});
-
-// Optional resident name overrides. This lets the ambassador update names
-// without editing and redeploying index.html every time someone moves.
-_db.ref('residentNames').on('value', snapshot => {
-  applyResidentNames(snapshot.val());
-  refreshHouseViews();
-});
 
 function loadTasks() { return _tasks; }
 
@@ -923,26 +782,16 @@ function loadTasks() { return _tasks; }
 // TASK SYSTEM
 // ══════════════════════════════════════════════
 function openTaskPicker(taskId) {
-  const alreadyDone = Object.keys(_tasks[taskId] || {});
-  const available = GROUPS.flatMap(g => g.members.map(m => m.name)).sort()
-    .filter(n => !alreadyDone.includes(n));
-  if (!available.length) { showToast('Everyone has already checked this off!'); return; }
-  document.getElementById('task-name-grid').innerHTML = available.map(n =>
-    `<button class="name-btn" onclick="completeTask('${taskId}','${n}')">${n}</button>`
-  ).join('');
-  document.getElementById('task-picker-overlay').classList.add('open');
+  showToast('Task tracking is intentionally disabled in this static repo setup. Update residents.json and regenerate the site when people move.');
 }
 function closeTaskPicker() {
   document.getElementById('task-picker-overlay').classList.remove('open');
 }
 function completeTask(taskId, personName) {
-  _db.ref('tasks/' + taskId + '/' + personName).set({ time: new Date().toISOString() });
-  closeTaskPicker();
-  showToast(`✓ ${personName} marked task as done!`);
+  showToast('Task updates are not persisted in this setup.');
 }
 function removeCompleter(taskId, personName) {
-  _db.ref('tasks/' + taskId + '/' + personName).remove();
-  showToast(`Removed ${personName}`);
+  showToast('Task updates are not persisted in this setup.');
 }
 
 // ══════════════════════════════════════════════
@@ -1363,7 +1212,6 @@ function refreshHouseViews() {
   renderThisWeek();
   renderCalendar();
   renderGroups();
-  renderSecretsTable();
   renderLeaderboard();
 }
 
@@ -1396,31 +1244,11 @@ function saveResidentNames() {
     if (GROUPS[gi]?.members[mi] && value) GROUPS[gi].members[mi].name = value;
   });
 
-  _db.ref('residentNames').set(currentResidentNamesPayload()).then(() => {
-    residentEditMode = false;
-    refreshHouseViews();
-    showToast('Resident names saved for everyone');
-  }).catch(() => {
-    showToast('Could not save names. Check Firebase permissions.');
-  });
+  residentEditMode = false;
+  refreshHouseViews();
+  showToast('Resident names are kept in residents.json and should be updated in the repository.');
 }
 
-
-// ══════════════════════════════════════════════
-// RENDER: SECRETS TABLE
-// ══════════════════════════════════════════════
-function renderSecretsTable() {
-  let rows = `<tr><th>GitHub Secret name</th><th>Resident</th><th>Group</th></tr>`;
-  rows += `<tr><td>GMAIL_USER</td><td class="name-col">House Gmail address</td><td>—</td></tr>`;
-  rows += `<tr><td>GMAIL_APP_PASS</td><td class="name-col">Gmail App Password</td><td>—</td></tr>`;
-  rows += `<tr><td>AMBASSADOR_EMAIL</td><td class="name-col">Your email</td><td>—</td></tr>`;
-  GROUPS.forEach((g,gi) => {
-    g.members.forEach((m,mi) => {
-      rows += `<tr><td>EMAIL_G${gi+1}_M${mi+1}</td><td class="name-col">${m.name}</td><td>${g.name}</td></tr>`;
-    });
-  });
-  document.getElementById('secrets-table').innerHTML = rows;
-}
 
 // ══════════════════════════════════════════════
 // TUTORIAL PLAYER
@@ -1657,7 +1485,7 @@ function exportGroupICS(gid, cancel) {
   const vevent = (uid, dtstart, dtend, summary, desc) => {
     const status = cancel ? 'STATUS:CANCELLED\r\n' : '';
     const alm    = cancel ? '' : alarm;
-    return `BEGIN:VEVENT\r\nUID:${uid}\r\nDTSTART:${dtstart}\r\nDTEND:${dtend}\r\nSUMMARY:${summary}\r\nDESCRIPTION:${desc}\r\nLOCATION:Jardin Botanique 4\\, Brussels\r\n${status}${alm}END:VEVENT\r\n`;
+    return `BEGIN:VEVENT\r\nUID:${uid}\r\nDTSTART:${dtstart}\r\nDTEND:${dtend}\r\nSUMMARY:${summary}\r\nDESCRIPTION:${desc}\r\nLOCATION:Jardin Botanique 6\\, Brussels\r\n${status}${alm}END:VEVENT\r\n`;
   };
 
   let events = '';
@@ -1673,27 +1501,27 @@ function exportGroupICS(gid, cancel) {
     const mem = names(g);
 
     if (tg.id === gid) {
-      events += vevent(`${gid}-${t.date}-glass@jb4`,  fmtDT(sun,20), fmtDT(sun,20,30),
+      events += vevent(`${gid}-${t.date}-glass@jb6`,  fmtDT(sun,20), fmtDT(sun,20,30),
         `🟩 Glass out — ${g.name}`,  `Put glass bin outside Sunday evening at 8pm. ${mem}`);
-      events += vevent(`${gid}-${t.date}-blue@jb4`,   fmtDT(mon,18), fmtDT(mon,18,30),
+      events += vevent(`${gid}-${t.date}-blue@jb6`,   fmtDT(mon,18), fmtDT(mon,18,30),
         `🔵⬜️ Blue+White bags out — ${g.name}`, `Put blue/PMC and white bags outside. ${mem}`);
-      events += vevent(`${gid}-${t.date}-yellow@jb4`, fmtDT(thu,18),  fmtDT(thu,18,30),
+      events += vevent(`${gid}-${t.date}-yellow@jb6`, fmtDT(thu,18),  fmtDT(thu,18,30),
         `🟡⬜ White+Yellow bags out — ${g.name}`, `Put white + yellow (paper) bags outside Thursday at 6pm. ${mem}`);
-      events += vevent(`${gid}-${t.date}-green@jb4`,  fmtDT(fri,18), fmtDT(fri,18,30),
+      events += vevent(`${gid}-${t.date}-green@jb6`,  fmtDT(fri,18), fmtDT(fri,18,30),
         `🟠 Orange bags out — ${g.name}`, `Put orange bags outside. ${mem}`);
     }
 
     if (dg.id === gid) {
-      events += vevent(`${gid}-${t.date}-dishes@jb4`, fmtDT(mon,8), fmtDT(mon,8,30),
+      events += vevent(`${gid}-${t.date}-dishes@jb6`, fmtDT(mon,8), fmtDT(mon,8,30),
         `🍽️ Dishwasher week — ${g.name}`, `Your group empties the dishwasher this week (daily before 10:00). ${names(g)}`);
     }
   });
 
   const method = cancel ? 'METHOD:CANCEL\r\n' : '';
-  const ics = `BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//JB4//Dashboard//EN\r\n${method}X-WR-CALNAME:JB4 Duties — ${g.name}\r\nX-WR-TIMEZONE:Europe/Brussels\r\n${events}END:VCALENDAR`;
+  const ics = `BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//JB6//Dashboard//EN\r\n${method}X-WR-CALNAME:JB6 Duties — ${g.name}\r\nX-WR-TIMEZONE:Europe/Brussels\r\n${events}END:VCALENDAR`;
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([ics], {type:'text/calendar'}));
-  a.download = `jb4-${gid.toLowerCase()}-duties${cancel ? '-CANCEL' : ''}.ics`;
+  a.download = `jb6-${gid.toLowerCase()}-duties${cancel ? '-CANCEL' : ''}.ics`;
   a.click();
   showToast(cancel ? `Cancel file ready — import it to remove all events` : `Calendar downloaded for ${g.name} 📅`);
 }
@@ -1706,8 +1534,8 @@ function openReminder(gid, dateStr, type, label) {
   const n = names(g);
   const date = fmtDate(dateStr);
   const msg = type==='trash'
-    ? `🏡 *Jardin Botanique 4 — Trash Reminder*\n\nHi ${n}! 👋\n\n*${g.name}* is on trash duty this week.\n\n🗑️ ${label}\n📅 ${date}\n⏰ Please put the bags outside *before 7:00 AM*\n\nThank you! 🌿`
-    : `🏡 *Jardin Botanique 4 — Dishwasher Reminder*\n\nHi ${n}! 👋\n\n*${g.name}* is on dishwasher duty this week.\n\n🍽️ Please empty the dishwasher *before 10:00 AM* each morning.\n📅 Week of ${date}\n\nThank you! 🌿`;
+    ? `🏡 *Jardin Botanique 6 — Trash Reminder*\n\nHi ${n}! 👋\n\n*${g.name}* is on trash duty this week.\n\n🗑️ ${label}\n📅 ${date}\n⏰ Please put the bags outside *before 7:00 AM*\n\nThank you! 🌿`
+    : `🏡 *Jardin Botanique 6 — Dishwasher Reminder*\n\nHi ${n}! 👋\n\n*${g.name}* is on dishwasher duty this week.\n\n🍽️ Please empty the dishwasher *before 10:00 AM* each morning.\n📅 Week of ${date}\n\nThank you! 🌿`;
   document.getElementById('modal-title').textContent = `Reminder — ${g.name}`;
   document.getElementById('modal-text').value = msg;
   document.getElementById('modal-overlay').classList.add('open');
@@ -1726,7 +1554,7 @@ function openGroupReminder(gid) {
   // Generic
   const g = GROUPS.find(x=>x.id===gid);
   document.getElementById('modal-title').textContent = `Reminder — ${g.name}`;
-  document.getElementById('modal-text').value = `🏡 *Jardin Botanique 4*\n\nHi ${names(g)}! 👋\n\nJust a heads-up to check your upcoming duties on the house dashboard. 📅\n\nThank you! 🌿`;
+  document.getElementById('modal-text').value = `🏡 *Jardin Botanique 6*\n\nHi ${names(g)}! 👋\n\nJust a heads-up to check your upcoming duties on the house dashboard. 📅\n\nThank you! 🌿`;
   document.getElementById('modal-overlay').classList.add('open');
 }
 
@@ -1806,7 +1634,7 @@ function initMap() {
 
   // House marker
   const houseIcon = L.divIcon({html:'<div style="background:#1a2e1a;color:#e8c87a;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:14px;border:2px solid #e8c87a;">🏡</div>', className:'', iconSize:[28,28], iconAnchor:[14,14]});
-  L.marker([50.8542519, 4.3679838], {icon:houseIcon}).addTo(mapInstance).bindPopup('<strong>Jardin Botanique 4</strong><br>Rue Traversière 4, 1210 Saint-Josse');
+  L.marker([50.8542519, 4.3679838], {icon:houseIcon}).addTo(mapInstance).bindPopup('<strong>Jardin Botanique 6</strong><br>Rue Traversière 4, 1210 Saint-Josse');
 
   PLACES.forEach(p => {
     const icon = L.divIcon({
@@ -1832,15 +1660,40 @@ function filterMap(cat, btn) {
 // ══════════════════════════════════════════════
 // INIT
 // ══════════════════════════════════════════════
-renderTicker();
-renderThisWeek();
-renderRules();
-renderCalendar();
-renderGroups();
-renderSecretsTable();
-renderTutorial();
-renderLeaderboard();
-if (new URLSearchParams(window.location.search).get('editResidents') === '1') enableResidentEditing();
+async function loadHouseConfig() {
+  try {
+    const response = await fetch('./residents.json');
+    if (!response.ok) throw new Error('Could not fetch residents.json');
+    const data = await response.json();
+    if (Array.isArray(data.groups) && data.groups.length) {
+      GROUPS = data.groups.map(group => ({
+        ...group,
+        members: Array.isArray(group.members) ? group.members.map(member => ({ ...member })) : []
+      }));
+    }
+  } catch (error) {
+    GROUPS = DEFAULT_GROUPS.map(group => ({
+      ...group,
+      members: group.members.map(member => ({ ...member }))
+    }));
+  }
+
+  if (window.location.hostname === 'localhost' || window.location.protocol === 'file:') {
+    document.title = `${HOUSE_NAME} — House Dashboard`;
+  }
+
+  renderTicker();
+  renderThisWeek();
+  renderRules();
+  renderCalendar();
+  renderGroups();
+  renderSecretsTable();
+  renderTutorial();
+  renderLeaderboard();
+  if (new URLSearchParams(window.location.search).get('editResidents') === '1') enableResidentEditing();
+}
+
+loadHouseConfig();
 </script>
 </body>
 </html>
