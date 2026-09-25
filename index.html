@@ -1,473 +1,1307 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jardin Botanique 6</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jardin Botanique 6</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
 
-<style>
-  :root {
-    --green-deep: #1a2e1a;
-    --green-mid: #2d5016;
-    --green-light: #4a7c2f;
-    --green-muted: #8fb573;
-    --green-pale: #d4e8c2;
-    --cream: #f5f0e8;
-    --cream-dark: #ede6d6;
-    --warm-white: #faf8f3;
-    --gold: #c4973a;
-    --gold-light: #e8c87a;
-    --text-dark: #1a1a14;
-    --text-mid: #4a4a3a;
-    --text-light: #7a7a6a;
-    --shadow: rgba(26,46,26,0.13);
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:'DM Sans',sans-serif; background:var(--cream); color:var(--text-dark); min-height:100vh; overflow-x:hidden; }
+  <style>
+    :root {
+      --green-deep: #1a2e1a;
+      --green-mid: #2d5016;
+      --green-light: #4a7c2f;
+      --green-muted: #8fb573;
+      --green-pale: #d4e8c2;
+      --cream: #f5f0e8;
+      --cream-dark: #ede6d6;
+      --warm-white: #faf8f3;
+      --gold: #c4973a;
+      --gold-light: #e8c87a;
+      --text-dark: #1a1a14;
+      --text-mid: #4a4a3a;
+      --text-light: #7a7a6a;
+      --shadow: rgba(26, 46, 26, 0.13);
+    }
 
-  /* TICKER */
-  .ticker-wrap { background:var(--green-deep); overflow:hidden; height:38px; display:flex; align-items:center; border-bottom:2px solid var(--gold); position:sticky; top:0; z-index:100; }
-  .ticker-label { background:var(--gold); color:var(--green-deep); font-family:'DM Mono',monospace; font-size:11px; font-weight:500; padding:0 14px; height:100%; display:flex; align-items:center; white-space:nowrap; letter-spacing:.08em; text-transform:uppercase; flex-shrink:0; }
-  .ticker-track { display:flex; animation:ticker 40s linear infinite; white-space:nowrap; }
-  .ticker-track span { padding:0 36px; font-size:13px; color:var(--green-pale); font-weight:300; }
-  .ticker-track .sep { color:var(--gold); opacity:.5; padding:0 4px; }
-  @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  /* HEADER */
-  .site-header { background:var(--green-deep); padding:0; position:relative; overflow:hidden; }
-  .header-inner { max-width:1100px; margin:0 auto; padding:28px 24px 0; }
-  .site-header::before { content:''; position:absolute; top:-60px; right:-60px; width:300px; height:300px; background:radial-gradient(circle,rgba(74,124,47,.25) 0%,transparent 70%); pointer-events:none; }
-  .site-header::after { content:'JB6'; position:absolute; right:36px; bottom:8px; font-family:'Playfair Display',serif; font-size:110px; color:rgba(255,255,255,.04); line-height:1; pointer-events:none; }
-  .house-title { font-family:'Playfair Display',serif; font-size:clamp(26px,5vw,44px); color:var(--cream); line-height:1.1; }
-  .house-title em { color:var(--gold-light); font-style:italic; }
-  .house-meta { font-size:13px; color:var(--green-muted); margin-top:7px; font-weight:300; }
-  .nav { display:flex; margin-top:24px; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
-  .nav::-webkit-scrollbar { display:none; }
-  .nav-btn { background:none; border:none; color:var(--green-muted); font-family:'DM Sans',sans-serif; font-size:13px; font-weight:500; letter-spacing:.06em; text-transform:uppercase; padding:12px 22px; cursor:pointer; border-bottom:3px solid transparent; transition:all .2s; flex-shrink:0; }
-  .nav-btn:hover { color:var(--cream); }
-  .nav-btn.active { color:var(--gold-light); border-bottom-color:var(--gold); }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-  /* CONTENT */
-  .content { max-width:1100px; margin:0 auto; padding:40px 24px 80px; }
-  @media(max-width:600px){ .content{padding:20px 14px 60px;} .card{padding:18px;} .header-inner{padding-left:14px;padding-right:14px;} }
-  .tab-panel { display:none; }
-  .tab-panel.active { display:block; }
-  .section-title { font-family:'Playfair Display',serif; font-size:26px; color:var(--green-deep); margin-bottom:4px; }
-  .section-sub { font-size:13px; color:var(--text-light); margin-bottom:28px; font-weight:300; }
-  .load-error { display:none; background:#fdecea; border:1px solid #e6a39b; color:#8a2a1f; border-radius:10px; padding:14px 16px; margin-bottom:20px; font-size:13px; line-height:1.5; }
-  .load-error.show { display:block; }
+    /* TICKER */
+    .ticker-wrap {
+      background: var(--green-deep);
+      overflow: hidden;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      border-bottom: 2px solid var(--gold);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
 
-  /* CARDS */
-  .card { background:var(--warm-white); border-radius:12px; padding:26px; border:1px solid rgba(74,124,47,.13); box-shadow:0 2px 10px var(--shadow); }
-  .card-title { font-family:'Playfair Display',serif; font-size:17px; color:var(--green-deep); margin-bottom:14px; display:flex; align-items:center; gap:9px; }
-  .card-icon { width:30px; height:30px; background:var(--green-pale); border-radius:7px; display:flex; align-items:center; justify-content:center; font-size:15px; }
+    .ticker-label {
+      background: var(--gold);
+      color: var(--green-deep);
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 0 14px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
 
-  @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
-  .bounce { animation:bounce 1s ease-in-out infinite; display:inline-block; }
-  .kitchen-warn { color:#c0392b; font-weight:600; font-size:14px; text-align:center; margin-bottom:18px; letter-spacing:.03em; }
+    .ticker-track {
+      display: flex;
+      animation: ticker 40s linear infinite;
+      white-space: nowrap;
+    }
 
-  /* HOME GRID */
-  .home-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
-  .home-grid .week-card { grid-column:1 / -1; }
-  @media(max-width:900px){ .home-grid{grid-template-columns:1fr;} }
+    .ticker-track span {
+      padding: 0 36px;
+      font-size: 13px;
+      color: var(--green-pale);
+      font-weight: 300;
+    }
 
-  /* THIS WEEK */
-  .week-card { background:var(--green-deep); }
-  .week-card .card-title { color:var(--gold-light); }
-  .week-card .card-icon { background:rgba(196,151,58,.2); }
-  .week-note { font-size:12px; color:var(--gold-light); background:rgba(196,151,58,.14); border:1px solid rgba(196,151,58,.3); border-radius:7px; padding:8px 12px; margin-bottom:14px; }
-  .units-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
-  @media(max-width:700px){ .units-grid{grid-template-columns:1fr;} }
-  .unit-col { background:rgba(255,255,255,.04); border-radius:9px; padding:14px; }
-  .unit-col h4 { font-family:'Playfair Display',serif; font-size:16px; color:var(--cream); margin-bottom:10px; font-weight:700; }
-  .duty-block { padding:8px 0; border-top:1px solid rgba(255,255,255,.08); }
-  .duty-head { font-size:11px; color:var(--gold); font-weight:600; letter-spacing:.07em; text-transform:uppercase; display:flex; align-items:center; gap:7px; flex-wrap:wrap; }
-  .duty-names { font-size:12px; color:var(--green-pale); margin:5px 0 4px; line-height:1.5; }
-  .duty-task { font-size:12px; color:var(--cream); padding:4px 8px; border-radius:6px; background:rgba(255,255,255,.04); margin-top:3px; }
-  .duty-task.today { background:rgba(196,151,58,.25); }
-  .duty-task.past { opacity:.45; }
-  .week-foot { font-size:11px; color:var(--green-muted); padding-top:10px; margin-top:12px; border-top:1px solid rgba(255,255,255,.08); }
+    .ticker-track .sep {
+      color: var(--gold);
+      opacity: .5;
+      padding: 0 4px;
+    }
 
-  /* GROUP BADGES (colors come from residents.json) */
-  .gbadge { display:inline-block; padding:3px 9px; border-radius:20px; font-size:11px; font-family:'DM Mono',monospace; font-weight:500; white-space:nowrap; text-transform:none; letter-spacing:0; }
+    @keyframes ticker {
+      0% {
+        transform: translateX(0)
+      }
 
-  /* RULES */
-  .rule-item { display:flex; gap:12px; padding:11px 0; border-bottom:1px solid var(--cream-dark); align-items:flex-start; }
-  .rule-item:last-child { border-bottom:none; }
-  .rule-num { font-family:'DM Mono',monospace; font-size:11px; color:var(--gold); background:rgba(196,151,58,.1); border:1px solid rgba(196,151,58,.25); padding:2px 6px; border-radius:4px; flex-shrink:0; margin-top:2px; }
-  .rule-text { font-size:13px; line-height:1.5; color:var(--text-mid); }
-  .rule-text strong { color:var(--text-dark); }
+      100% {
+        transform: translateX(-50%)
+      }
+    }
 
-  /* CALENDAR */
-  .filter-row { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px; align-items:center; }
-  .fbtn, .view-btn { padding:6px 14px; border-radius:20px; border:1px solid var(--cream-dark); background:var(--warm-white); font-family:'DM Sans',sans-serif; font-size:12px; cursor:pointer; transition:all .2s; color:var(--text-mid); }
-  .fbtn:hover, .view-btn:hover { border-color:var(--green-muted); }
-  .fbtn.active, .view-btn.active { background:var(--green-deep); color:var(--cream); border-color:var(--green-deep); }
-  .cal-month-nav { display:flex; align-items:center; gap:16px; margin-bottom:14px; }
-  .cal-month-nav button { background:var(--warm-white); border:1px solid var(--cream-dark); border-radius:6px; padding:4px 14px; font-size:20px; cursor:pointer; line-height:1.3; color:var(--text-mid); }
-  .cal-month-nav button:hover { background:var(--cream-dark); }
-  .cal-month-nav button:disabled { opacity:.35; cursor:default; }
-  #cal-month-label { font-family:'Playfair Display',serif; font-size:20px; font-weight:700; color:var(--green-deep); }
-  .month-grid { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:3px; }
-  .month-day-hdr { text-align:center; font-size:11px; font-weight:600; color:var(--text-light); letter-spacing:.06em; text-transform:uppercase; padding:6px 2px; }
-  .month-cell { min-height:72px; background:var(--warm-white); border-radius:6px; padding:5px 4px; min-width:0; }
-  .month-cell.other-month { background:var(--cream); opacity:.5; }
-  .month-cell.today { outline:2px solid var(--gold); outline-offset:-2px; }
-  .month-cell-num { font-size:11px; font-weight:600; color:var(--text-mid); margin-bottom:3px; }
-  .cal-badge { display:block; font-size:10px; border-radius:3px; padding:2px 4px; margin-bottom:2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; line-height:1.3; }
-  .cal-legend { font-size:12px; color:var(--text-light); margin-top:12px; line-height:1.7; }
-  .table-scroll { overflow-x:auto; }
-  .sched-table { width:100%; border-collapse:collapse; font-size:13px; min-width:520px; }
-  .sched-table th { background:var(--green-deep); color:var(--cream); padding:9px 12px; text-align:left; font-weight:500; font-size:11px; letter-spacing:.06em; text-transform:uppercase; }
-  .sched-table td { padding:10px 12px; border-bottom:1px solid var(--cream-dark); vertical-align:top; }
-  .sched-table tr.current td { background:rgba(196,151,58,.08); }
-  .chips { display:flex; flex-wrap:wrap; gap:5px; margin-top:4px; }
-  .chip { background:var(--cream-dark); border-radius:20px; padding:2px 8px; font-size:11px; color:var(--text-mid); }
+    /* HEADER */
+    .site-header {
+      background: var(--green-deep);
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
 
-  /* RESIDENTS */
-  .unit-heading { font-family:'Playfair Display',serif; font-size:20px; color:var(--green-deep); margin:6px 0 4px; }
-  .unit-sub { font-size:12px; color:var(--text-light); margin-bottom:12px; }
-  .groups-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(min(210px,100%),1fr)); gap:14px; margin-bottom:30px; }
-  .grp-card { background:var(--warm-white); border-radius:10px; border:1px solid rgba(74,124,47,.13); overflow:hidden; }
-  .grp-head { padding:11px 14px; display:flex; justify-content:space-between; align-items:center; }
-  .grp-title { font-family:'Playfair Display',serif; font-size:15px; color:#fff; }
-  .grp-count { font-family:'DM Mono',monospace; font-size:11px; color:rgba(255,255,255,.75); }
-  .room-row { display:flex; justify-content:space-between; align-items:center; padding:7px 14px; border-bottom:1px solid var(--cream-dark); }
-  .room-lbl { font-size:11px; color:var(--text-light); font-family:'DM Mono',monospace; }
-  .res-name { font-size:13px; font-weight:500; }
-  .grp-next { padding:8px 14px 10px; font-size:11px; color:var(--text-light); line-height:1.6; background:var(--cream); }
-  .rem-btns { display:flex; flex-wrap:wrap; gap:8px; }
-  .rem-btn { padding:8px 15px; background:rgba(74,124,47,.1); border:1px solid rgba(74,124,47,.3); border-radius:6px; font-size:13px; color:var(--green-light); cursor:pointer; font-family:'DM Sans',sans-serif; transition:all .2s; }
-  .rem-btn:hover { background:rgba(74,124,47,.2); }
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 24px 0;
+    }
 
-  /* NEWCOMER */
-  .nc-hero { background:var(--green-deep); border-radius:14px; padding:36px; margin-bottom:24px; position:relative; overflow:hidden; }
-  .nc-hero::after { content:'🌿'; position:absolute; right:28px; top:18px; font-size:72px; opacity:.12; }
-  .nc-hero h2 { font-family:'Playfair Display',serif; font-size:24px; color:var(--cream); margin-bottom:8px; }
-  .nc-hero p { color:var(--green-muted); font-size:13px; line-height:1.6; max-width:480px; font-weight:300; }
-  .info-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(min(250px,100%),1fr)); gap:14px; margin-bottom:20px; }
-  .info-card { background:var(--warm-white); border-radius:10px; padding:20px; border:1px solid rgba(74,124,47,.13); }
-  .info-card h3 { font-family:'Playfair Display',serif; font-size:15px; color:var(--green-deep); margin-bottom:10px; display:flex; align-items:center; gap:7px; }
-  .info-list { list-style:none; }
-  .info-list li { font-size:13px; color:var(--text-mid); padding:4px 0; display:flex; gap:7px; border-bottom:1px solid var(--cream-dark); line-height:1.4; }
-  .info-list li:last-child { border-bottom:none; }
-  .info-list li::before { content:'—'; color:var(--green-muted); flex-shrink:0; }
-  .supply-tag { display:inline-block; background:rgba(74,124,47,.1); border:1px solid rgba(74,124,47,.25); color:var(--green-light); font-size:10px; padding:1px 6px; border-radius:8px; margin-left:4px; }
+    .site-header::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(74, 124, 47, .25) 0%, transparent 70%);
+      pointer-events: none;
+    }
 
-  /* MODAL */
-  .modal-overlay { display:none; position:fixed; inset:0; background:rgba(26,46,26,.55); z-index:200; align-items:center; justify-content:center; padding:16px; }
-  .modal-overlay.open { display:flex; }
-  .modal { background:var(--warm-white); border-radius:13px; padding:26px; max-width:420px; width:100%; max-height:90vh; overflow-y:auto; box-shadow:0 18px 50px rgba(0,0,0,.25); }
-  .modal h3 { font-family:'Playfair Display',serif; font-size:19px; color:var(--green-deep); margin-bottom:6px; }
-  .modal p { font-size:13px; color:var(--text-light); margin-bottom:14px; line-height:1.5; }
-  .modal textarea { width:100%; padding:11px; border:1px solid var(--cream-dark); border-radius:7px; font-family:'DM Mono',monospace; font-size:12px; color:var(--text-dark); background:var(--cream); resize:none; height:180px; margin-bottom:12px; }
-  .modal-btns { display:flex; gap:8px; justify-content:flex-end; }
-  .btn-copy { background:var(--green-deep); color:var(--cream); border:none; padding:8px 16px; border-radius:5px; font-family:'DM Sans',sans-serif; font-size:13px; cursor:pointer; }
-  .btn-close { background:var(--cream-dark); color:var(--text-mid); border:none; padding:8px 16px; border-radius:5px; font-family:'DM Sans',sans-serif; font-size:13px; cursor:pointer; }
-  .picker-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px; }
-  @media(max-width:520px){ .picker-grid{grid-template-columns:1fr;} }
-  .picker-card { border-radius:9px; overflow:hidden; border:1px solid var(--cream-dark); background:#fff; }
-  .picker-head { padding:9px 14px; font-family:'Playfair Display',serif; font-size:14px; color:#fff; }
-  .picker-links { padding:10px 14px 12px; display:flex; flex-direction:column; gap:6px; }
-  .picker-links a, .picker-links button { display:block; text-align:center; padding:7px 0; border-radius:6px; font-family:'DM Sans',sans-serif; font-size:12px; font-weight:600; cursor:pointer; text-decoration:none; }
-  .lnk-primary { background:var(--gold); color:var(--green-deep); border:none; }
-  .lnk-secondary { background:var(--warm-white); color:var(--green-mid); border:1px solid rgba(74,124,47,.35); }
-  .toast { position:fixed; bottom:26px; right:26px; background:var(--green-deep); color:var(--cream); padding:11px 18px; border-radius:7px; font-size:13px; opacity:0; transform:translateY(8px); transition:all .3s; z-index:300; pointer-events:none; border-left:3px solid var(--gold); }
-  .toast.show { opacity:1; transform:translateY(0); }
-</style>
+    .site-header::after {
+      content: 'JB6';
+      position: absolute;
+      right: 36px;
+      bottom: 8px;
+      font-family: 'Playfair Display', serif;
+      font-size: 110px;
+      color: rgba(255, 255, 255, .04);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .house-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(26px, 5vw, 44px);
+      color: var(--cream);
+      line-height: 1.1;
+    }
+
+    .house-title em {
+      color: var(--gold-light);
+      font-style: italic;
+    }
+
+    .house-meta {
+      font-size: 13px;
+      color: var(--green-muted);
+      margin-top: 7px;
+      font-weight: 300;
+    }
+
+    .nav {
+      display: flex;
+      margin-top: 24px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-btn {
+      background: none;
+      border: none;
+      color: var(--green-muted);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 12px 22px;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all .2s;
+      flex-shrink: 0;
+    }
+
+    .nav-btn:hover {
+      color: var(--cream);
+    }
+
+    .nav-btn.active {
+      color: var(--gold-light);
+      border-bottom-color: var(--gold);
+    }
+
+    /* CONTENT */
+    .content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    @media(max-width:600px) {
+      .content {
+        padding: 20px 14px 60px;
+      }
+
+      .card {
+        padding: 18px;
+      }
+
+      .header-inner {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      color: var(--green-deep);
+      margin-bottom: 4px;
+    }
+
+    .section-sub {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-bottom: 28px;
+      font-weight: 300;
+    }
+
+    .load-error {
+      display: none;
+      background: #fdecea;
+      border: 1px solid #e6a39b;
+      color: #8a2a1f;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .load-error.show {
+      display: block;
+    }
+
+    /* CARDS */
+    .card {
+      background: var(--warm-white);
+      border-radius: 12px;
+      padding: 26px;
+      border: 1px solid rgba(74, 124, 47, .13);
+      box-shadow: 0 2px 10px var(--shadow);
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      color: var(--green-deep);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .card-icon {
+      width: 30px;
+      height: 30px;
+      background: var(--green-pale);
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(-6px)
+      }
+    }
+
+    .bounce {
+      animation: bounce 1s ease-in-out infinite;
+      display: inline-block;
+    }
+
+    .kitchen-warn {
+      color: #c0392b;
+      font-weight: 600;
+      font-size: 14px;
+      text-align: center;
+      margin-bottom: 18px;
+      letter-spacing: .03em;
+    }
+
+    /* HOME GRID */
+    .home-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .home-grid .week-card {
+      grid-column: 1 / -1;
+    }
+
+    @media(max-width:900px) {
+      .home-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* THIS WEEK */
+    .week-card {
+      background: var(--green-deep);
+    }
+
+    .week-card .card-title {
+      color: var(--gold-light);
+    }
+
+    .week-card .card-icon {
+      background: rgba(196, 151, 58, .2);
+    }
+
+    .week-note {
+      font-size: 12px;
+      color: var(--gold-light);
+      background: rgba(196, 151, 58, .14);
+      border: 1px solid rgba(196, 151, 58, .3);
+      border-radius: 7px;
+      padding: 8px 12px;
+      margin-bottom: 14px;
+    }
+
+    .units-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    @media(max-width:700px) {
+      .units-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .unit-col {
+      background: rgba(255, 255, 255, .04);
+      border-radius: 9px;
+      padding: 14px;
+    }
+
+    .unit-col h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      color: var(--cream);
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .duty-block {
+      padding: 8px 0;
+      border-top: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .duty-head {
+      font-size: 11px;
+      color: var(--gold);
+      font-weight: 600;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
+
+    .duty-names {
+      font-size: 12px;
+      color: var(--green-pale);
+      margin: 5px 0 4px;
+      line-height: 1.5;
+    }
+
+    .duty-task {
+      font-size: 12px;
+      color: var(--cream);
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, .04);
+      margin-top: 3px;
+    }
+
+    .duty-task.today {
+      background: rgba(196, 151, 58, .25);
+    }
+
+    .duty-task.past {
+      opacity: .45;
+    }
+
+    .week-foot {
+      font-size: 11px;
+      color: var(--green-muted);
+      padding-top: 10px;
+      margin-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    /* GROUP BADGES (colors come from residents.json) */
+    .gbadge {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-family: 'DM Mono', monospace;
+      font-weight: 500;
+      white-space: nowrap;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    /* RULES */
+    .rule-item {
+      display: flex;
+      gap: 12px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--cream-dark);
+      align-items: flex-start;
+    }
+
+    .rule-item:last-child {
+      border-bottom: none;
+    }
+
+    .rule-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--gold);
+      background: rgba(196, 151, 58, .1);
+      border: 1px solid rgba(196, 151, 58, .25);
+      padding: 2px 6px;
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .rule-text {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--text-mid);
+    }
+
+    .rule-text strong {
+      color: var(--text-dark);
+    }
+
+    /* CALENDAR */
+    .filter-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+      align-items: center;
+    }
+
+    .fbtn,
+    .view-btn {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--cream-dark);
+      background: var(--warm-white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all .2s;
+      color: var(--text-mid);
+    }
+
+    .fbtn:hover,
+    .view-btn:hover {
+      border-color: var(--green-muted);
+    }
+
+    .fbtn.active,
+    .view-btn.active {
+      background: var(--green-deep);
+      color: var(--cream);
+      border-color: var(--green-deep);
+    }
+
+    .cal-month-nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .cal-month-nav button {
+      background: var(--warm-white);
+      border: 1px solid var(--cream-dark);
+      border-radius: 6px;
+      padding: 4px 14px;
+      font-size: 20px;
+      cursor: pointer;
+      line-height: 1.3;
+      color: var(--text-mid);
+    }
+
+    .cal-month-nav button:hover {
+      background: var(--cream-dark);
+    }
+
+    .cal-month-nav button:disabled {
+      opacity: .35;
+      cursor: default;
+    }
+
+    #cal-month-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--green-deep);
+    }
+
+    .month-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 3px;
+    }
+
+    .month-day-hdr {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-light);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 6px 2px;
+    }
+
+    .month-cell {
+      min-height: 72px;
+      background: var(--warm-white);
+      border-radius: 6px;
+      padding: 5px 4px;
+      min-width: 0;
+    }
+
+    .month-cell.other-month {
+      background: var(--cream);
+      opacity: .5;
+    }
+
+    .month-cell.today {
+      outline: 2px solid var(--gold);
+      outline-offset: -2px;
+    }
+
+    .month-cell-num {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-mid);
+      margin-bottom: 3px;
+    }
+
+    .cal-badge {
+      display: block;
+      font-size: 10px;
+      border-radius: 3px;
+      padding: 2px 4px;
+      margin-bottom: 2px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      line-height: 1.3;
+    }
+
+    .cal-legend {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-top: 12px;
+      line-height: 1.7;
+    }
+
+    .table-scroll {
+      overflow-x: auto;
+    }
+
+    .sched-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      min-width: 520px;
+    }
+
+    .sched-table th {
+      background: var(--green-deep);
+      color: var(--cream);
+      padding: 9px 12px;
+      text-align: left;
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .sched-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--cream-dark);
+      vertical-align: top;
+    }
+
+    .sched-table tr.current td {
+      background: rgba(196, 151, 58, .08);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 4px;
+    }
+
+    .chip {
+      background: var(--cream-dark);
+      border-radius: 20px;
+      padding: 2px 8px;
+      font-size: 11px;
+      color: var(--text-mid);
+    }
+
+    /* RESIDENTS */
+    .unit-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      color: var(--green-deep);
+      margin: 6px 0 4px;
+    }
+
+    .unit-sub {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-bottom: 12px;
+    }
+
+    .groups-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(210px, 100%), 1fr));
+      gap: 14px;
+      margin-bottom: 30px;
+    }
+
+    .grp-card {
+      background: var(--warm-white);
+      border-radius: 10px;
+      border: 1px solid rgba(74, 124, 47, .13);
+      overflow: hidden;
+    }
+
+    .grp-head {
+      padding: 11px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .grp-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      color: #fff;
+    }
+
+    .grp-count {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: rgba(255, 255, 255, .75);
+    }
+
+    .room-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 14px;
+      border-bottom: 1px solid var(--cream-dark);
+    }
+
+    .room-lbl {
+      font-size: 11px;
+      color: var(--text-light);
+      font-family: 'DM Mono', monospace;
+    }
+
+    .res-name {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .grp-next {
+      padding: 8px 14px 10px;
+      font-size: 11px;
+      color: var(--text-light);
+      line-height: 1.6;
+      background: var(--cream);
+    }
+
+    .rem-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .rem-btn {
+      padding: 8px 15px;
+      background: rgba(74, 124, 47, .1);
+      border: 1px solid rgba(74, 124, 47, .3);
+      border-radius: 6px;
+      font-size: 13px;
+      color: var(--green-light);
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: all .2s;
+    }
+
+    .rem-btn:hover {
+      background: rgba(74, 124, 47, .2);
+    }
+
+    /* NEWCOMER */
+    .nc-hero {
+      background: var(--green-deep);
+      border-radius: 14px;
+      padding: 36px;
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nc-hero::after {
+      content: '🌿';
+      position: absolute;
+      right: 28px;
+      top: 18px;
+      font-size: 72px;
+      opacity: .12;
+    }
+
+    .nc-hero h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      color: var(--cream);
+      margin-bottom: 8px;
+    }
+
+    .nc-hero p {
+      color: var(--green-muted);
+      font-size: 13px;
+      line-height: 1.6;
+      max-width: 480px;
+      font-weight: 300;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .info-card {
+      background: var(--warm-white);
+      border-radius: 10px;
+      padding: 20px;
+      border: 1px solid rgba(74, 124, 47, .13);
+    }
+
+    .info-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      color: var(--green-deep);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .info-list {
+      list-style: none;
+    }
+
+    .info-list li {
+      font-size: 13px;
+      color: var(--text-mid);
+      padding: 4px 0;
+      display: flex;
+      gap: 7px;
+      border-bottom: 1px solid var(--cream-dark);
+      line-height: 1.4;
+    }
+
+    .info-list li:last-child {
+      border-bottom: none;
+    }
+
+    .info-list li::before {
+      content: '—';
+      color: var(--green-muted);
+      flex-shrink: 0;
+    }
+
+    .supply-tag {
+      display: inline-block;
+      background: rgba(74, 124, 47, .1);
+      border: 1px solid rgba(74, 124, 47, .25);
+      color: var(--green-light);
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 8px;
+      margin-left: 4px;
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 46, 26, .55);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--warm-white);
+      border-radius: 13px;
+      padding: 26px;
+      max-width: 420px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, .25);
+    }
+
+    .modal h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 19px;
+      color: var(--green-deep);
+      margin-bottom: 6px;
+    }
+
+    .modal p {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+
+    .modal textarea {
+      width: 100%;
+      padding: 11px;
+      border: 1px solid var(--cream-dark);
+      border-radius: 7px;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--text-dark);
+      background: var(--cream);
+      resize: none;
+      height: 180px;
+      margin-bottom: 12px;
+    }
+
+    .modal-btns {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .btn-copy {
+      background: var(--green-deep);
+      color: var(--cream);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 5px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .btn-close {
+      background: var(--cream-dark);
+      color: var(--text-mid);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 5px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .picker-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    @media(max-width:520px) {
+      .picker-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .picker-card {
+      border-radius: 9px;
+      overflow: hidden;
+      border: 1px solid var(--cream-dark);
+      background: #fff;
+    }
+
+    .picker-head {
+      padding: 9px 14px;
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .picker-links {
+      padding: 10px 14px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .picker-links a,
+    .picker-links button {
+      display: block;
+      text-align: center;
+      padding: 7px 0;
+      border-radius: 6px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .lnk-primary {
+      background: var(--gold);
+      color: var(--green-deep);
+      border: none;
+    }
+
+    .lnk-secondary {
+      background: var(--warm-white);
+      color: var(--green-mid);
+      border: 1px solid rgba(74, 124, 47, .35);
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 26px;
+      right: 26px;
+      background: var(--green-deep);
+      color: var(--cream);
+      padding: 11px 18px;
+      border-radius: 7px;
+      font-size: 13px;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: all .3s;
+      z-index: 300;
+      pointer-events: none;
+      border-left: 3px solid var(--gold);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- TICKER -->
-<div class="ticker-wrap">
-  <div class="ticker-label" id="ticker-label">🏡 This week</div>
-  <div style="overflow:hidden;flex:1;display:flex;align-items:center;">
-    <div class="ticker-track" id="ticker"></div>
+  <!-- TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker-label" id="ticker-label">🏡 This week</div>
+    <div style="overflow:hidden;flex:1;display:flex;align-items:center;">
+      <div class="ticker-track" id="ticker"></div>
+    </div>
   </div>
-</div>
 
-<!-- HEADER -->
-<div class="site-header">
-  <div class="header-inner">
-  <div class="house-title">Jardin <em>Botanique</em> 6</div>
-  <div class="house-meta">Community dashboard</div>
-  <nav class="nav">
-    <button class="nav-btn active" onclick="showTab('home',this)">Home</button>
-    <button class="nav-btn" onclick="showTab('calendar',this)">Calendar</button>
-    <button class="nav-btn" onclick="showTab('newcomer',this)">Newcomer Guide</button>
-    <button class="nav-btn" onclick="showTab('residents',this)">Residents</button>
-  </nav>
+  <!-- HEADER -->
+  <div class="site-header">
+    <div class="header-inner">
+      <div class="house-title">Jardin <em>Botanique</em> 6</div>
+      <div class="house-meta">Community dashboard</div>
+      <nav class="nav">
+        <button class="nav-btn active" onclick="showTab('home',this)">Home</button>
+        <button class="nav-btn" onclick="showTab('calendar',this)">Calendar</button>
+        <button class="nav-btn" onclick="showTab('newcomer',this)">Newcomer Guide</button>
+        <button class="nav-btn" onclick="showTab('residents',this)">Residents</button>
+      </nav>
+    </div>
   </div>
-</div>
 
-<div class="content">
+  <div class="content">
 
-<div class="load-error" id="load-error"></div>
+    <div class="load-error" id="load-error"></div>
 
-<!-- ══════════ HOME ══════════ -->
-<div class="tab-panel active" id="tab-home">
-  <div class="kitchen-warn"><span class="bounce">🍳 Please clean the kitchen after use! 🍳</span></div>
-  <div class="home-grid">
+    <!-- ══════════ HOME ══════════ -->
+    <div class="tab-panel active" id="tab-home">
+      <div class="kitchen-warn"><span class="bounce">🍳 Please clean the kitchen after use! 🍳</span></div>
+      <div class="home-grid">
 
-    <div class="card week-card">
-      <div class="card-title">
-        <div class="card-icon">📅</div><span id="week-title">This Week's Duties</span>
+        <div class="card week-card">
+          <div class="card-title">
+            <div class="card-icon">📅</div><span id="week-title">This Week's Duties</span>
+          </div>
+          <div id="this-week"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            <div class="card-icon">📋</div>House Rules
+          </div>
+          <div id="rules"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            <div class="card-icon">🗑️</div>Commune Collection Days
+          </div>
+          <div style="font-size:13px;color:var(--text-mid);line-height:1.9;" id="collection-days"></div>
+        </div>
+
       </div>
-      <div id="this-week"></div>
     </div>
 
-    <div class="card">
-      <div class="card-title"><div class="card-icon">📋</div>House Rules</div>
-      <div id="rules"></div>
-    </div>
+    <!-- ══════════ CALENDAR ══════════ -->
+    <div class="tab-panel" id="tab-calendar">
+      <div class="section-title">Planning Calendar</div>
+      <div class="section-sub" id="cal-sub">Trash & dishwasher duties · each unit rotates separately</div>
 
-    <div class="card">
-      <div class="card-title"><div class="card-icon">🗑️</div>Commune Collection Days</div>
-      <div style="font-size:13px;color:var(--text-mid);line-height:1.9;" id="collection-days"></div>
-    </div>
-
-  </div>
-</div>
-
-<!-- ══════════ CALENDAR ══════════ -->
-<div class="tab-panel" id="tab-calendar">
-  <div class="section-title">Planning Calendar</div>
-  <div class="section-sub" id="cal-sub">Trash & dishwasher duties · each unit rotates separately</div>
-
-  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px;">
-    <button onclick="openGroupPicker()" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--gold);color:var(--green-deep);border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;letter-spacing:.03em;">📅 Add my duties to my calendar</button>
-    <div style="margin-left:auto;display:flex;gap:6px;">
-      <button class="view-btn active" id="btn-monthly" onclick="setCalView('monthly')">📅 Monthly</button>
-      <button class="view-btn" id="btn-table" onclick="setCalView('table')">📋 Schedule</button>
-    </div>
-  </div>
-
-  <div class="filter-row" id="cal-filters"></div>
-
-  <!-- Monthly view -->
-  <div id="cal-monthly-wrap">
-    <div class="cal-month-nav">
-      <button id="btn-prev-month" onclick="shiftMonth(-1)" aria-label="Previous month">‹</button>
-      <span id="cal-month-label"></span>
-      <button id="btn-next-month" onclick="shiftMonth(1)" aria-label="Next month">›</button>
-    </div>
-    <div class="month-grid" id="cal-monthly"></div>
-    <div class="cal-legend" id="cal-legend"></div>
-  </div>
-
-  <!-- Schedule / table view -->
-  <div id="cal-table-wrap" style="display:none;">
-    <div class="table-scroll" id="cal-table"></div>
-  </div>
-</div>
-
-<!-- ══════════ RESIDENTS ══════════ -->
-<div class="tab-panel" id="tab-residents">
-  <div class="section-title">Residents & Groups</div>
-  <div class="section-sub">All residents and their group assignments</div>
-  <div id="groups-by-unit"></div>
-
-  <div class="section-title" style="font-size:20px;margin-bottom:4px;">Send Reminder</div>
-  <div class="section-sub">Generates a ready-to-paste WhatsApp / Signal message</div>
-  <div class="rem-btns" id="rem-btns"></div>
-</div>
-
-<!-- ══════════ NEWCOMER ══════════ -->
-<div class="tab-panel" id="tab-newcomer">
-  <div class="nc-hero">
-    <h2>Welcome to Jardin Botanique 6 🌱</h2>
-    <p>Use this guide for the practical house basics and the current duties for the week.</p>
-  </div>
-  <div class="info-grid">
-    <div class="info-card">
-      <h3>🏠 Common Areas</h3>
-      <ul class="info-list">
-        <li>Shared kitchen</li>
-        <li>Living room</li>
-        <li>Laundry room (ground floor)</li>
-        <li>Bike storage (ground floor)</li>
-        <li>Cinema Room (basement)</li>
-        <li>Gym (basement)</li>
-        <li>Garden/terrace, shared with houses 4 and 8</li>
-      </ul>
-    </div>
-    <div class="info-card">
-      <h3>🍳 Your Kitchen Space</h3>
-      <ul class="info-list">
-        <li>1 fridge rack — label with your name</li>
-        <li>1 storage space in the kitchen — label with your name</li>
-        <li style="color:#c0392b;font-weight:600;"><span class="bounce">SUPER IMPORTANT: Clean up immediately after cooking</span></li>
-      </ul>
-    </div>
-    <div class="info-card">
-      <h3>☕ Supplied by Cohabs</h3>
-      <ul class="info-list">
-        <li>Monthly shared breakfast <span class="supply-tag">Free</span></li>
-        <li>Salt <span class="supply-tag">Free</span></li>
-        <li>Pepper <span class="supply-tag">Free</span></li>
-        <li>Olive oil <span class="supply-tag">Free</span></li>
-        <li>Coffee (shared machine) <span class="supply-tag">Free</span></li>
-        <li>Toilet paper (communal WCs) <span class="supply-tag">Free</span></li>
-        <li>Trash bags <span class="supply-tag">Free</span></li>
-      </ul>
-    </div>
-    <div class="info-card">
-      <h3>🗑️ Duty System</h3>
-      <ul class="info-list" id="duty-system"></ul>
-    </div>
-    <div class="info-card">
-      <h3>📜 Key Rules</h3>
-      <ul class="info-list">
-        <li>Quiet hours: 11pm – 8am</li>
-        <li>No smoking indoors</li>
-        <li>Clean common areas after use</li>
-      </ul>
-    </div>
-    <div class="info-card">
-      <h3>📞 Contacts</h3>
-      <ul class="info-list" id="contacts"></ul>
-    </div>
-    <div class="info-card" style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
-      <div>
-        <h3 style="margin-bottom:6px;">📄 Cohabs Welcome Guide</h3>
-        <p style="font-size:13px;color:var(--text-light);font-weight:300;">Full house information document</p>
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px;">
+        <button onclick="openGroupPicker()"
+          style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--gold);color:var(--green-deep);border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;letter-spacing:.03em;">📅
+          Add my duties to my calendar</button>
+        <div style="margin-left:auto;display:flex;gap:6px;">
+          <button class="view-btn active" id="btn-monthly" onclick="setCalView('monthly')">📅 Monthly</button>
+          <button class="view-btn" id="btn-table" onclick="setCalView('table')">📋 Schedule</button>
+        </div>
       </div>
-      <a href="Welcome%20to%20Cohabs%20-%20Brussels.pdf" download style="flex-shrink:0;font-size:13px;color:var(--green-light);text-decoration:none;padding:8px 16px;border:1px solid rgba(74,124,47,.3);border-radius:7px;background:rgba(74,124,47,.08);font-weight:500;">⬇ Download PDF</a>
+
+      <div class="filter-row" id="cal-filters"></div>
+
+      <!-- Monthly view -->
+      <div id="cal-monthly-wrap">
+        <div class="cal-month-nav">
+          <button id="btn-prev-month" onclick="shiftMonth(-1)" aria-label="Previous month">‹</button>
+          <span id="cal-month-label"></span>
+          <button id="btn-next-month" onclick="shiftMonth(1)" aria-label="Next month">›</button>
+        </div>
+        <div class="month-grid" id="cal-monthly"></div>
+        <div class="cal-legend" id="cal-legend"></div>
+      </div>
+
+      <!-- Schedule / table view -->
+      <div id="cal-table-wrap" style="display:none;">
+        <div class="table-scroll" id="cal-table"></div>
+      </div>
+    </div>
+
+    <!-- ══════════ RESIDENTS ══════════ -->
+    <div class="tab-panel" id="tab-residents">
+      <div class="section-title">Residents & Groups</div>
+      <div class="section-sub">All residents and their group assignments</div>
+      <div id="groups-by-unit"></div>
+
+      <div class="section-title" style="font-size:20px;margin-bottom:4px;">Send Reminder</div>
+      <div class="section-sub">Generates a ready-to-paste WhatsApp / Signal message</div>
+      <div class="rem-btns" id="rem-btns"></div>
+    </div>
+
+    <!-- ══════════ NEWCOMER ══════════ -->
+    <div class="tab-panel" id="tab-newcomer">
+      <div class="nc-hero">
+        <h2>Welcome to Jardin Botanique 6 🌱</h2>
+        <p>Use this guide for the practical house basics and the current duties for the week.</p>
+      </div>
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>🏠 Common Areas</h3>
+          <ul class="info-list">
+            <li>Shared kitchen</li>
+            <li>Living room</li>
+            <li>Laundry room (ground floor)</li>
+            <li>Bike storage (ground floor)</li>
+            <li>Cinema Room (basement)</li>
+            <li>Gym (basement)</li>
+            <li>Garden/terrace, shared with houses 4 and 8</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h3>🍳 Your Kitchen Space</h3>
+          <ul class="info-list">
+            <li>1 fridge rack — label with your name</li>
+            <li>1 storage space in the kitchen — label with your name</li>
+            <li style="color:#c0392b;font-weight:600;"><span class="bounce">SUPER IMPORTANT: Clean up immediately after
+                cooking</span></li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h3>☕ Supplied by Cohabs</h3>
+          <ul class="info-list">
+            <li>Monthly shared breakfast <span class="supply-tag">Free</span></li>
+            <li>Salt <span class="supply-tag">Free</span></li>
+            <li>Pepper <span class="supply-tag">Free</span></li>
+            <li>Olive oil <span class="supply-tag">Free</span></li>
+            <li>Coffee (shared machine) <span class="supply-tag">Free</span></li>
+            <li>Toilet paper (communal WCs) <span class="supply-tag">Free</span></li>
+            <li>Trash bags <span class="supply-tag">Free</span></li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h3>🗑️ Duty System</h3>
+          <ul class="info-list" id="duty-system"></ul>
+        </div>
+        <div class="info-card">
+          <h3>📜 Key Rules</h3>
+          <ul class="info-list">
+            <li>Quiet hours: 11pm – 8am</li>
+            <li>No smoking indoors</li>
+            <li>Clean common areas after use</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h3>📞 Contacts</h3>
+          <ul class="info-list" id="contacts"></ul>
+        </div>
+        <div class="info-card" style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
+          <div>
+            <h3 style="margin-bottom:6px;">📄 Cohabs Welcome Guide</h3>
+            <p style="font-size:13px;color:var(--text-light);font-weight:300;">Full house information document</p>
+          </div>
+          <a href="Welcome%20to%20Cohabs%20-%20Brussels.pdf" download
+            style="flex-shrink:0;font-size:13px;color:var(--green-light);text-decoration:none;padding:8px 16px;border:1px solid rgba(74,124,47,.3);border-radius:7px;background:rgba(74,124,47,.08);font-weight:500;">⬇
+            Download PDF</a>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+
+  <!-- REMINDER MODAL -->
+  <div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this)closeModal()">
+    <div class="modal">
+      <h3 id="modal-title">Reminder</h3>
+      <p>Copy and paste into WhatsApp or Signal:</p>
+      <textarea id="modal-text" readonly></textarea>
+      <div class="modal-btns">
+        <button class="btn-close" onclick="closeModal()">Close</button>
+        <button class="btn-copy" onclick="copyModal()">📋 Copy message</button>
+      </div>
     </div>
   </div>
-</div>
 
-</div><!-- /content -->
-
-<!-- REMINDER MODAL -->
-<div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this)closeModal()">
-  <div class="modal">
-    <h3 id="modal-title">Reminder</h3>
-    <p>Copy and paste into WhatsApp or Signal:</p>
-    <textarea id="modal-text" readonly></textarea>
-    <div class="modal-btns">
-      <button class="btn-close" onclick="closeModal()">Close</button>
-      <button class="btn-copy" onclick="copyModal()">📋 Copy message</button>
+  <!-- CALENDAR PICKER -->
+  <div class="modal-overlay" id="group-picker-overlay" onclick="if(event.target===this)closeGroupPicker()">
+    <div class="modal" style="max-width:560px;">
+      <h3>Add your group's duties to your calendar</h3>
+      <p><strong>Subscribe</strong> (recommended): your calendar stays in sync automatically if the rotation changes.
+        To stop, just remove the subscribed “JB6 Duties” calendar.<br>
+        <strong>Download</strong> gives a one-off copy that won't update.
+      </p>
+      <div class="picker-grid" id="group-picker-cards"></div>
+      <div class="modal-btns" style="margin-top:16px;">
+        <button class="btn-close" onclick="closeGroupPicker()">Close</button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- CALENDAR PICKER -->
-<div class="modal-overlay" id="group-picker-overlay" onclick="if(event.target===this)closeGroupPicker()">
-  <div class="modal" style="max-width:560px;">
-    <h3>Add your group's duties to your calendar</h3>
-    <p><strong>Subscribe</strong> (recommended): your calendar stays in sync automatically if the rotation changes.
-      To stop, just remove the subscribed “JB6 Duties” calendar.<br>
-      <strong>Download</strong> gives a one-off copy that won't update.</p>
-    <div class="picker-grid" id="group-picker-cards"></div>
-    <div class="modal-btns" style="margin-top:16px;">
-      <button class="btn-close" onclick="closeGroupPicker()">Close</button>
-    </div>
-  </div>
-</div>
+  <div class="toast" id="toast"></div>
 
-<div class="toast" id="toast"></div>
+  <script src="schedule.js"></script>
+  <script>
+    // ══════════════════════════════════════════════
+    // DATA — everything comes from residents.json (see schedule.js for the rotation)
+    // ══════════════════════════════════════════════
+    let MODEL = null;
 
-<script src="schedule.js"></script>
-<script>
-// ══════════════════════════════════════════════
-// DATA — everything comes from residents.json (see schedule.js for the rotation)
-// ══════════════════════════════════════════════
-let MODEL = null;
+    const COLLECTION_DAYS = [
+      '🟩 <strong>Sunday</strong> — Glass bin (put out at 8pm)',
+      '🔵⬜ <strong>Monday</strong> — Blue bags (PMC) + White bags',
+      '🟡⬜ <strong>Thursday</strong> — White bags + Yellow (paper) bags (put out at 6pm)',
+      '🟠 <strong>Friday</strong> — Orange bags',
+    ];
+    const COLLECTION_TIMES = '⏰ <strong>Sun:</strong> glass bin out at 8pm · <strong>Mon:</strong> bags out evening before (6pm–midnight) · <strong>Thu:</strong> white + yellow (paper) bags out at 6pm · <strong>Fri:</strong> out between 5am and noon';
 
-const COLLECTION_DAYS = [
-  '🟩 <strong>Sunday</strong> — Glass bin (put out at 8pm)',
-  '🔵⬜ <strong>Monday</strong> — Blue bags (PMC) + White bags',
-  '🟡⬜ <strong>Thursday</strong> — White bags + Yellow (paper) bags (put out at 6pm)',
-  '🟠 <strong>Friday</strong> — Orange bags',
-];
-const COLLECTION_TIMES = '⏰ <strong>Sun:</strong> glass bin out at 8pm · <strong>Mon:</strong> bags out evening before (6pm–midnight) · <strong>Thu:</strong> white + yellow (paper) bags out at 6pm · <strong>Fri:</strong> out between 5am and noon';
+    function houseRules() {
+      const trash = JB6.TRASH_TASKS.map(t => `${t.icon} ${t.when}`).join(' ·<br/> ');
+      return [
+        '<strong>Quiet hours</strong> are 11pm to 8am. Be mindful of neighbours above, below, and beside you.',
+        '<strong>No smoking</strong> indoors at any time.',
+        '<strong>Common areas</strong> must be left clean immediately after use: Kitchen, Living room, Gym and Cinema.',
+        '<strong>Label your cabinet and shelf</strong> in the fridge. Never use items that are not yours.',
+        '<strong>Duty groups</strong> rotate weekly (Monday to Sunday), separately in each unit. Swaps are allowed, just communicate them :).',
+        `<strong>Trash</strong> duty group puts the bags out: ${trash}.`,
+        `<strong>Dishwasher</strong> duty group: ${JB6.DISH_RULE.toLowerCase()}.`,
+        '<strong>Bikes</strong> must be stored in the bike room.',
+        '<strong>Respect</strong> everyone\'s privacy, space, and schedule. This is a shared home :)',
+      ];
+    }
 
-function houseRules() {
-  const trash = JB6.TRASH_TASKS.map(t => `${t.icon} ${t.when}`).join(' · ');
-  return [
-    '<strong>Quiet hours</strong> are 11pm to 8am. Be mindful of neighbours above, below, and beside you.',
-    '<strong>No smoking</strong> indoors at any time.',
-    '<strong>Common areas</strong> must be left clean immediately after use: Kitchen, Living room, Gym and Cinema.',
-    '<strong>Label your cabinet and shelf</strong> in the fridge. Never use items that are not yours.',
-    '<strong>Duty groups</strong> rotate weekly (Monday to Sunday), separately in each unit. Swaps are allowed, just communicate them :).',
-    `<strong>Trash</strong> duty group puts the bags out: ${trash}.`,
-    `<strong>Dishwasher</strong> duty group: ${JB6.DISH_RULE.toLowerCase()}.`,
-    '<strong>Bikes</strong> must be stored in the bike room.',
-    '<strong>Respect</strong> everyone\'s privacy, space, and schedule. This is a shared home :)',
-  ];
-}
+    // ══════════════════════════════════════════════
+    // HELPERS
+    // ══════════════════════════════════════════════
+    function esc(str) {
+      return String(str).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+    }
+    function names(g) { return g.members.map(m => m.name).join(', '); }
+    function badge(g, text = g.name) {
+      return `<span class="gbadge" style="background:${g.color.bg};color:${g.color.fg};">${esc(text)}</span>`;
+    }
+    const fmtLong = day => JB6.fmtDay(day, { weekday: 'short', day: 'numeric', month: 'short' });
+    const fmtShort = day => JB6.fmtDay(day, { day: 'numeric', month: 'short' });
+    const fmtFull = day => JB6.fmtDay(day, { day: 'numeric', month: 'long', year: 'numeric' });
 
-// ══════════════════════════════════════════════
-// HELPERS
-// ══════════════════════════════════════════════
-function esc(str) {
-  return String(str).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
-}
-function names(g) { return g.members.map(m => m.name).join(', '); }
-function badge(g, text = g.name) {
-  return `<span class="gbadge" style="background:${g.color.bg};color:${g.color.fg};">${esc(text)}</span>`;
-}
-const fmtLong  = day => JB6.fmtDay(day, {weekday:'short', day:'numeric', month:'short'});
-const fmtShort = day => JB6.fmtDay(day, {day:'numeric', month:'short'});
-const fmtFull  = day => JB6.fmtDay(day, {day:'numeric', month:'long', year:'numeric'});
+    // The week shown as "current": this week, or the first rotation week if it hasn't started yet
+    function displayedMonday() {
+      return Math.max(JB6.mondayOf(JB6.localToday()), MODEL.start);
+    }
 
-// The week shown as "current": this week, or the first rotation week if it hasn't started yet
-function displayedMonday() {
-  return Math.max(JB6.mondayOf(JB6.localToday()), MODEL.start);
-}
+    function nextDuty(group, type, fromDay) {
+      for (const mon of JB6.weeks(MODEL)) {
+        if (mon < JB6.mondayOf(fromDay)) continue;
+        const d = JB6.dutiesForWeek(MODEL, mon).find(x => x.unit.id === group.unitId);
+        if (d && d[type].id === group.id) return mon;
+      }
+      return null;
+    }
 
-function nextDuty(group, type, fromDay) {
-  for (const mon of JB6.weeks(MODEL)) {
-    if (mon < JB6.mondayOf(fromDay)) continue;
-    const d = JB6.dutiesForWeek(MODEL, mon).find(x => x.unit.id === group.unitId);
-    if (d && d[type].id === group.id) return mon;
-  }
-  return null;
-}
+    // ══════════════════════════════════════════════
+    // RENDER: TICKER + THIS WEEK
+    // ══════════════════════════════════════════════
+    function renderTicker() {
+      const today = JB6.localToday();
+      const mon = displayedMonday();
+      const duties = JB6.dutiesForWeek(MODEL, mon);
+      document.getElementById('ticker-label').textContent =
+        mon > JB6.mondayOf(today) ? `🏡 From ${fmtLong(mon)}` : '🏡 This week';
+      const t = duties.length
+        ? duties.map(d => `${esc(d.unit.name.toUpperCase())} — 🗑️ TRASH: ${esc(d.trash.short)} (${esc(names(d.trash))}) <span class="sep">·</span> 🍽️ DISHWASHER: ${esc(d.dish.short)} (${esc(names(d.dish))})`).join(' <span class="sep">|</span> ')
+        : 'The duty rotation has ended — update the rotation dates in residents.json';
+      document.getElementById('ticker').innerHTML = `<span>${t}</span><span>${t}</span>`;
+    }
 
-// ══════════════════════════════════════════════
-// RENDER: TICKER + THIS WEEK
-// ══════════════════════════════════════════════
-function renderTicker() {
-  const today = JB6.localToday();
-  const mon = displayedMonday();
-  const duties = JB6.dutiesForWeek(MODEL, mon);
-  document.getElementById('ticker-label').textContent =
-    mon > JB6.mondayOf(today) ? `🏡 From ${fmtLong(mon)}` : '🏡 This week';
-  const t = duties.length
-    ? duties.map(d => `${esc(d.unit.name.toUpperCase())} — 🗑️ TRASH: ${esc(d.trash.short)} (${esc(names(d.trash))}) <span class="sep">·</span> 🍽️ DISHWASHER: ${esc(d.dish.short)} (${esc(names(d.dish))})`).join(' <span class="sep">|</span> ')
-    : 'The duty rotation has ended — update the rotation dates in residents.json';
-  document.getElementById('ticker').innerHTML = `<span>${t}</span><span>${t}</span>`;
-}
+    function renderThisWeek() {
+      const today = JB6.localToday();
+      const mon = displayedMonday();
+      const duties = JB6.dutiesForWeek(MODEL, mon);
+      const el = document.getElementById('this-week');
 
-function renderThisWeek() {
-  const today = JB6.localToday();
-  const mon = displayedMonday();
-  const duties = JB6.dutiesForWeek(MODEL, mon);
-  const el = document.getElementById('this-week');
+      if (!duties.length) {
+        el.innerHTML = `<div class="week-note">The duty rotation ended on ${fmtFull(MODEL.end)}. Extend <code>rotation.end</code> in residents.json.</div>`;
+        return;
+      }
+      const upcoming = mon > JB6.mondayOf(today);
+      document.getElementById('week-title').textContent = upcoming ? 'First Week of Duties' : "This Week's Duties";
 
-  if (!duties.length) {
-    el.innerHTML = `<div class="week-note">The duty rotation ended on ${fmtFull(MODEL.end)}. Extend <code>rotation.end</code> in residents.json.</div>`;
-    return;
-  }
-  const upcoming = mon > JB6.mondayOf(today);
-  document.getElementById('week-title').textContent = upcoming ? 'First Week of Duties' : "This Week's Duties";
+      const taskRow = (day, text) => {
+        const cls = day === today ? ' today' : (day < today ? ' past' : '');
+        return `<div class="duty-task${cls}">${text}</div>`;
+      };
 
-  const taskRow = (day, text) => {
-    const cls = day === today ? ' today' : (day < today ? ' past' : '');
-    return `<div class="duty-task${cls}">${text}</div>`;
-  };
-
-  const cols = duties.map(d => {
-    const trashTasks = JB6.TRASH_TASKS.map(t =>
-      taskRow(mon + t.offset, `${t.icon} ${fmtLong(mon + t.offset)} · ${esc(t.label)}`)).join('');
-    const dishToday = today >= mon && today < mon + 7
-      ? taskRow(today, `🍽️ Today: empty before 10:00`)
-      : taskRow(mon, `🍽️ Every morning ${fmtShort(mon)} – ${fmtShort(mon + 6)}, before 10:00`);
-    return `<div class="unit-col">
+      const cols = duties.map(d => {
+        const trashTasks = JB6.TRASH_TASKS.map(t =>
+          taskRow(mon + t.offset, `${t.icon} ${fmtLong(mon + t.offset)} · ${esc(t.label)}`)).join('');
+        const dishToday = today >= mon && today < mon + 7
+          ? taskRow(today, `🍽️ Today: empty before 10:00`)
+          : taskRow(mon, `🍽️ Every morning ${fmtShort(mon)} – ${fmtShort(mon + 6)}, before 10:00`);
+        return `<div class="unit-col">
       <h4>${esc(d.unit.name)}</h4>
       <div class="duty-block">
         <div class="duty-head">🗑️ Trash ${badge(d.trash, d.trash.short)}</div>
@@ -480,130 +1314,130 @@ function renderThisWeek() {
         ${dishToday}
       </div>
     </div>`;
-  }).join('');
+      }).join('');
 
-  el.innerHTML = `
+      el.innerHTML = `
     ${upcoming ? `<div class="week-note">The rotation starts on Monday ${fmtFull(mon)}. Here's the first week.</div>` : ''}
     <div class="units-grid">${cols}</div>
     <div class="week-foot">📅 Week of ${fmtFull(mon)} (Mon – Sun)</div>`;
-}
+    }
 
-function renderRules() {
-  document.getElementById('rules').innerHTML = houseRules().map((t, i) => `
+    function renderRules() {
+      document.getElementById('rules').innerHTML = houseRules().map((t, i) => `
     <div class="rule-item">
       <span class="rule-num">${String(i + 1).padStart(2, '0')}</span>
       <span class="rule-text">${t}</span>
     </div>`).join('');
-  document.getElementById('collection-days').innerHTML = COLLECTION_DAYS.join('<br>') +
-    `<div style="margin-top:12px;padding:9px 12px;background:rgba(196,151,58,.08);border-radius:7px;border:1px solid rgba(196,151,58,.2);font-size:12px;line-height:1.6;color:#8a6020;">${COLLECTION_TIMES}</div>`;
-}
-
-// ══════════════════════════════════════════════
-// RENDER: CALENDAR
-// ══════════════════════════════════════════════
-let calView = 'monthly';
-let calFilter = 'all';   // 'all' | unit id | group id
-let calYear, calMonth;
-
-function filterMatches(d, type) {
-  if (calFilter === 'all' || calFilter === d.unit.id) return true;
-  return d[type].id === calFilter;
-}
-function unitVisible(unit) {
-  return calFilter === 'all' || calFilter === unit.id || calFilter.startsWith(unit.id + '-');
-}
-
-function renderFilters() {
-  const btn = (id, label) => `<button class="fbtn${calFilter === id ? ' active' : ''}" onclick="setCalFilter('${id}')">${esc(label)}</button>`;
-  document.getElementById('cal-filters').innerHTML =
-    `<span style="font-size:12px;color:var(--text-light);">Show:</span>` +
-    btn('all', 'Everyone') +
-    MODEL.units.map(u => btn(u.id, u.name) + u.groups.map(g => btn(g.id, g.short)).join('')).join('');
-}
-
-function setCalFilter(id) { calFilter = id; renderFilters(); renderCalendar(); }
-
-function setCalView(v) {
-  calView = v;
-  document.getElementById('cal-monthly-wrap').style.display = v === 'monthly' ? '' : 'none';
-  document.getElementById('cal-table-wrap').style.display   = v === 'table'   ? '' : 'none';
-  document.getElementById('btn-monthly').classList.toggle('active', v === 'monthly');
-  document.getElementById('btn-table').classList.toggle('active', v === 'table');
-  renderCalendar();
-}
-
-function monthKey(y, m) { return y * 12 + m; }
-function monthBounds() {
-  const s = JB6.dayToDate(MODEL.start), e = JB6.dayToDate(MODEL.end);
-  return [monthKey(s.getUTCFullYear(), s.getUTCMonth()), monthKey(e.getUTCFullYear(), e.getUTCMonth())];
-}
-function shiftMonth(delta) {
-  const [min, max] = monthBounds();
-  const k = Math.min(max, Math.max(min, monthKey(calYear, calMonth) + delta));
-  calYear = Math.floor(k / 12); calMonth = k % 12;
-  renderCalendar();
-}
-
-function renderCalendar() {
-  if (calView === 'monthly') renderMonthlyView();
-  else renderTableView();
-}
-
-function renderMonthlyView() {
-  const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  const today = JB6.localToday();
-  const [min, max] = monthBounds();
-  document.getElementById('cal-month-label').textContent = `${MONTH_NAMES[calMonth]} ${calYear}`;
-  document.getElementById('btn-prev-month').disabled = monthKey(calYear, calMonth) <= min;
-  document.getElementById('btn-next-month').disabled = monthKey(calYear, calMonth) >= max;
-
-  const first = JB6.parseDay(`${calYear}-${String(calMonth + 1).padStart(2,'0')}-01`);
-  const last  = JB6.parseDay(`${calMonth === 11 ? calYear + 1 : calYear}-${String(calMonth === 11 ? 1 : calMonth + 2).padStart(2,'0')}-01`) - 1;
-
-  let html = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(d => `<div class="month-day-hdr">${d}</div>`).join('');
-  for (let day = JB6.mondayOf(first); day <= JB6.mondayOf(last) + 6; day++) {
-    const inMonth = day >= first && day <= last;
-    const tasks = JB6.trashTasksOn(day);
-    let badges = '';
-    for (const d of JB6.dutiesForWeek(MODEL, day)) {
-      if (tasks.length && filterMatches(d, 'trash')) {
-        badges += `<span class="cal-badge" style="background:${d.trash.color.bg};color:${d.trash.color.fg};" title="${esc(d.trash.name)}: ${esc(tasks.map(t => t.label).join(' + '))} — ${esc(names(d.trash))}">${tasks.map(t => t.icon).join('')} ${esc(d.trash.short)}</span>`;
-      }
-      if (filterMatches(d, 'dish')) {
-        badges += `<span class="cal-badge" style="background:${d.dish.color.bg};color:${d.dish.color.fg};opacity:.8;" title="${esc(d.dish.name)}: dishwasher — ${esc(names(d.dish))}">🍽️ ${esc(d.dish.short)}</span>`;
-      }
+      document.getElementById('collection-days').innerHTML = COLLECTION_DAYS.join('<br>') +
+        `<div style="margin-top:12px;padding:9px 12px;background:rgba(196,151,58,.08);border-radius:7px;border:1px solid rgba(196,151,58,.2);font-size:12px;line-height:1.6;color:#8a6020;">${COLLECTION_TIMES}</div>`;
     }
-    html += `<div class="month-cell${inMonth ? '' : ' other-month'}${day === today ? ' today' : ''}">
+
+    // ══════════════════════════════════════════════
+    // RENDER: CALENDAR
+    // ══════════════════════════════════════════════
+    let calView = 'monthly';
+    let calFilter = 'all';   // 'all' | unit id | group id
+    let calYear, calMonth;
+
+    function filterMatches(d, type) {
+      if (calFilter === 'all' || calFilter === d.unit.id) return true;
+      return d[type].id === calFilter;
+    }
+    function unitVisible(unit) {
+      return calFilter === 'all' || calFilter === unit.id || calFilter.startsWith(unit.id + '-');
+    }
+
+    function renderFilters() {
+      const btn = (id, label) => `<button class="fbtn${calFilter === id ? ' active' : ''}" onclick="setCalFilter('${id}')">${esc(label)}</button>`;
+      document.getElementById('cal-filters').innerHTML =
+        `<span style="font-size:12px;color:var(--text-light);">Show:</span>` +
+        btn('all', 'Everyone') +
+        MODEL.units.map(u => btn(u.id, u.name) + u.groups.map(g => btn(g.id, g.short)).join('')).join('');
+    }
+
+    function setCalFilter(id) { calFilter = id; renderFilters(); renderCalendar(); }
+
+    function setCalView(v) {
+      calView = v;
+      document.getElementById('cal-monthly-wrap').style.display = v === 'monthly' ? '' : 'none';
+      document.getElementById('cal-table-wrap').style.display = v === 'table' ? '' : 'none';
+      document.getElementById('btn-monthly').classList.toggle('active', v === 'monthly');
+      document.getElementById('btn-table').classList.toggle('active', v === 'table');
+      renderCalendar();
+    }
+
+    function monthKey(y, m) { return y * 12 + m; }
+    function monthBounds() {
+      const s = JB6.dayToDate(MODEL.start), e = JB6.dayToDate(MODEL.end);
+      return [monthKey(s.getUTCFullYear(), s.getUTCMonth()), monthKey(e.getUTCFullYear(), e.getUTCMonth())];
+    }
+    function shiftMonth(delta) {
+      const [min, max] = monthBounds();
+      const k = Math.min(max, Math.max(min, monthKey(calYear, calMonth) + delta));
+      calYear = Math.floor(k / 12); calMonth = k % 12;
+      renderCalendar();
+    }
+
+    function renderCalendar() {
+      if (calView === 'monthly') renderMonthlyView();
+      else renderTableView();
+    }
+
+    function renderMonthlyView() {
+      const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      const today = JB6.localToday();
+      const [min, max] = monthBounds();
+      document.getElementById('cal-month-label').textContent = `${MONTH_NAMES[calMonth]} ${calYear}`;
+      document.getElementById('btn-prev-month').disabled = monthKey(calYear, calMonth) <= min;
+      document.getElementById('btn-next-month').disabled = monthKey(calYear, calMonth) >= max;
+
+      const first = JB6.parseDay(`${calYear}-${String(calMonth + 1).padStart(2, '0')}-01`);
+      const last = JB6.parseDay(`${calMonth === 11 ? calYear + 1 : calYear}-${String(calMonth === 11 ? 1 : calMonth + 2).padStart(2, '0')}-01`) - 1;
+
+      let html = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(d => `<div class="month-day-hdr">${d}</div>`).join('');
+      for (let day = JB6.mondayOf(first); day <= JB6.mondayOf(last) + 6; day++) {
+        const inMonth = day >= first && day <= last;
+        const tasks = JB6.trashTasksOn(day);
+        let badges = '';
+        for (const d of JB6.dutiesForWeek(MODEL, day)) {
+          if (tasks.length && filterMatches(d, 'trash')) {
+            badges += `<span class="cal-badge" style="background:${d.trash.color.bg};color:${d.trash.color.fg};" title="${esc(d.trash.name)}: ${esc(tasks.map(t => t.label).join(' + '))} — ${esc(names(d.trash))}">${tasks.map(t => t.icon).join('')} ${esc(d.trash.short)}</span>`;
+          }
+          if (filterMatches(d, 'dish')) {
+            badges += `<span class="cal-badge" style="background:${d.dish.color.bg};color:${d.dish.color.fg};opacity:.8;" title="${esc(d.dish.name)}: dishwasher — ${esc(names(d.dish))}">🍽️ ${esc(d.dish.short)}</span>`;
+          }
+        }
+        html += `<div class="month-cell${inMonth ? '' : ' other-month'}${day === today ? ' today' : ''}">
       <div class="month-cell-num">${JB6.dayToDate(day).getUTCDate()}</div>
       ${badges}
     </div>`;
-  }
-  document.getElementById('cal-monthly').innerHTML = html;
-  document.getElementById('cal-legend').innerHTML =
-    JB6.TRASH_TASKS.map(t => `${t.icon} ${esc(t.label)} (${esc(t.when)})`).join('<br>') +
-    '<br>🍽️ Dishwasher group of the week · hover a badge to see names';
-}
+      }
+      document.getElementById('cal-monthly').innerHTML = html;
+      document.getElementById('cal-legend').innerHTML =
+        JB6.TRASH_TASKS.map(t => `${t.icon} ${esc(t.label)} (${esc(t.when)})`).join('<br>') +
+        '<br>🍽️ Dishwasher group of the week · hover a badge to see names';
+    }
 
-function renderTableView() {
-  const current = displayedMonday();
-  const units = MODEL.units.filter(unitVisible);
-  const groupFilter = MODEL.groups.find(g => g.id === calFilter);
-  const cell = g => `${badge(g, g.short)}<div class="chips">${g.members.map(m => `<span class="chip">${esc(m.name)}</span>`).join('')}</div>`;
+    function renderTableView() {
+      const current = displayedMonday();
+      const units = MODEL.units.filter(unitVisible);
+      const groupFilter = MODEL.groups.find(g => g.id === calFilter);
+      const cell = g => `${badge(g, g.short)}<div class="chips">${g.members.map(m => `<span class="chip">${esc(m.name)}</span>`).join('')}</div>`;
 
-  const rows = JB6.weeks(MODEL).filter(mon => mon >= current).map(mon => {
-    const duties = JB6.dutiesForWeek(MODEL, mon).filter(d => unitVisible(d.unit));
-    if (groupFilter && !duties.some(d => d.trash.id === groupFilter.id || d.dish.id === groupFilter.id)) return '';
-    const tds = duties.map(d => {
-      const show = type => !groupFilter || d[type].id === groupFilter.id;
-      return `<td>${show('trash') ? cell(d.trash) : ''}</td><td>${show('dish') ? cell(d.dish) : ''}</td>`;
-    }).join('');
-    return `<tr class="${mon === current ? 'current' : ''}">
+      const rows = JB6.weeks(MODEL).filter(mon => mon >= current).map(mon => {
+        const duties = JB6.dutiesForWeek(MODEL, mon).filter(d => unitVisible(d.unit));
+        if (groupFilter && !duties.some(d => d.trash.id === groupFilter.id || d.dish.id === groupFilter.id)) return '';
+        const tds = duties.map(d => {
+          const show = type => !groupFilter || d[type].id === groupFilter.id;
+          return `<td>${show('trash') ? cell(d.trash) : ''}</td><td>${show('dish') ? cell(d.dish) : ''}</td>`;
+        }).join('');
+        return `<tr class="${mon === current ? 'current' : ''}">
       <td><strong>${fmtShort(mon)}</strong><br><span style="font-size:11px;color:var(--text-light);">– ${fmtShort(mon + 6)} ${JB6.dayToDate(mon + 6).getUTCFullYear()}</span></td>
       ${tds}
     </tr>`;
-  }).join('');
+      }).join('');
 
-  document.getElementById('cal-table').innerHTML = `
+      document.getElementById('cal-table').innerHTML = `
     <table class="sched-table">
       <thead><tr>
         <th>Week of</th>
@@ -611,14 +1445,14 @@ function renderTableView() {
       </tr></thead>
       <tbody>${rows}</tbody>
     </table>`;
-}
+    }
 
-// ══════════════════════════════════════════════
-// RENDER: RESIDENTS + NEWCOMER BITS
-// ══════════════════════════════════════════════
-function renderGroups() {
-  const today = JB6.localToday();
-  document.getElementById('groups-by-unit').innerHTML = MODEL.units.map(u => `
+    // ══════════════════════════════════════════════
+    // RENDER: RESIDENTS + NEWCOMER BITS
+    // ══════════════════════════════════════════════
+    function renderGroups() {
+      const today = JB6.localToday();
+      document.getElementById('groups-by-unit').innerHTML = MODEL.units.map(u => `
     <div class="unit-heading">${esc(u.name)}</div>
     <div class="unit-sub">${u.groups.length} groups rotating weekly${u.ambassador ? ` · Ambassador: <strong>${esc(u.ambassador)}</strong>` : ''}</div>
     <div class="groups-grid">
@@ -642,37 +1476,37 @@ function renderGroups() {
       }).join('')}
     </div>`).join('');
 
-  document.getElementById('rem-btns').innerHTML = MODEL.groups.map(g =>
-    `<button class="rem-btn" onclick="openGroupReminder('${g.id}')">💬 ${esc(g.name)}</button>`).join('');
+      document.getElementById('rem-btns').innerHTML = MODEL.groups.map(g =>
+        `<button class="rem-btn" onclick="openGroupReminder('${g.id}')">💬 ${esc(g.name)}</button>`).join('');
 
-  document.getElementById('duty-system').innerHTML = [
-    `Each unit has its own weekly rotation (Mon – Sun): ${MODEL.units.map(u => `${esc(u.name)} has ${u.groups.length} groups`).join(', ')}`,
-    ...JB6.TRASH_TASKS.map(t => `${t.icon} ${esc(t.label)}: ${esc(t.when)}`),
-    `🍽️ ${esc(JB6.DISH_RULE)}`,
-    'Check the Calendar tab for your schedule',
-    'Swaps OK — inform your group and the other group',
-  ].map(li => `<li>${li}</li>`).join('');
+      document.getElementById('duty-system').innerHTML = [
+        `Each unit has its own weekly rotation (Mon – Sun): ${MODEL.units.map(u => `${esc(u.name)} has ${u.groups.length} groups`).join(', ')}`,
+        ...JB6.TRASH_TASKS.map(t => `${t.icon} ${esc(t.label)}: ${esc(t.when)}`),
+        `🍽️ ${esc(JB6.DISH_RULE)}`,
+        'Check the Calendar tab for your schedule',
+        'Swaps OK — inform your group and the other group',
+      ].map(li => `<li>${li}</li>`).join('');
 
-  document.getElementById('contacts').innerHTML = [
-    ...MODEL.units.map(u => `${esc(u.name)} ambassador: ${u.ambassador ? `<strong>${esc(u.ambassador)}</strong>` : 'ask in the group chat'}`),
-    'Emergency maintenance: Cohabs app',
-    'House WhatsApp group',
-  ].map(li => `<li>${li}</li>`).join('');
-}
+      document.getElementById('contacts').innerHTML = [
+        ...MODEL.units.map(u => `${esc(u.name)} ambassador: ${u.ambassador ? `<strong>${esc(u.ambassador)}</strong>` : 'ask in the group chat'}`),
+        'Emergency maintenance: Cohabs app',
+        'House WhatsApp group',
+      ].map(li => `<li>${li}</li>`).join('');
+    }
 
-// ══════════════════════════════════════════════
-// CALENDAR SUBSCRIBE / DOWNLOAD
-// ══════════════════════════════════════════════
-function feedUrl(gid) {
-  return new URL(`calendars/${JB6.icsFileName(gid)}`, location.href).href;
-}
+    // ══════════════════════════════════════════════
+    // CALENDAR SUBSCRIBE / DOWNLOAD
+    // ══════════════════════════════════════════════
+    function feedUrl(gid) {
+      return new URL(`calendars/${JB6.icsFileName(gid)}`, location.href).href;
+    }
 
-function openGroupPicker() {
-  document.getElementById('group-picker-cards').innerHTML = MODEL.groups.map(g => {
-    const https = feedUrl(g.id);
-    const webcal = https.replace(/^https?:/, 'webcal:');
-    const google = `https://calendar.google.com/calendar/render?cid=${encodeURIComponent(webcal)}`;
-    return `<div class="picker-card">
+    function openGroupPicker() {
+      document.getElementById('group-picker-cards').innerHTML = MODEL.groups.map(g => {
+        const https = feedUrl(g.id);
+        const webcal = https.replace(/^https?:/, 'webcal:');
+        const google = `https://calendar.google.com/calendar/render?cid=${encodeURIComponent(webcal)}`;
+        return `<div class="picker-card">
       <div class="picker-head" style="background:${g.color.head};">${esc(g.name)}</div>
       <div style="padding:8px 14px 0;font-size:12px;color:var(--text-light);">${esc(names(g))}</div>
       <div class="picker-links">
@@ -682,114 +1516,115 @@ function openGroupPicker() {
         <button class="lnk-secondary" onclick="downloadGroupICS('${g.id}')">Download .ics (one-off)</button>
       </div>
     </div>`;
-  }).join('');
-  document.getElementById('group-picker-overlay').classList.add('open');
-}
+      }).join('');
+      document.getElementById('group-picker-overlay').classList.add('open');
+    }
 
-function closeGroupPicker() {
-  document.getElementById('group-picker-overlay').classList.remove('open');
-}
+    function closeGroupPicker() {
+      document.getElementById('group-picker-overlay').classList.remove('open');
+    }
 
-function copyFeed(gid) {
-  navigator.clipboard.writeText(feedUrl(gid)).then(() => showToast('Subscription link copied 📋'));
-}
+    function copyFeed(gid) {
+      navigator.clipboard.writeText(feedUrl(gid)).then(() => showToast('Subscription link copied 📋'));
+    }
 
-function downloadGroupICS(gid) {
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([JB6.groupIcs(MODEL, gid)], {type:'text/calendar'}));
-  a.download = JB6.icsFileName(gid);
-  a.click();
-  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
-  showToast('Calendar file downloaded 📅');
-}
+    function downloadGroupICS(gid) {
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([JB6.groupIcs(MODEL, gid)], { type: 'text/calendar' }));
+      a.download = JB6.icsFileName(gid);
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+      showToast('Calendar file downloaded 📅');
+    }
 
-// ══════════════════════════════════════════════
-// REMINDER MODAL
-// ══════════════════════════════════════════════
-function openGroupReminder(gid) {
-  const g = MODEL.groups.find(x => x.id === gid);
-  const mon = displayedMonday();
-  const d = JB6.dutiesForWeek(MODEL, mon).find(x => x.unit.id === g.unitId);
-  const hi = `🏡 *${MODEL.house}*\n\nHi ${names(g)}! 👋\n\n`;
-  let msg;
-  if (d && d.trash.id === gid) {
-    const tasks = JB6.TRASH_TASKS.map(t => `${t.icon} ${fmtLong(mon + t.offset)} — ${t.label}`).join('\n');
-    msg = `${hi}*${g.name}* is on *trash duty* the week of ${fmtFull(mon)}:\n\n${tasks}\n\nThank you! 🌿`;
-  } else if (d && d.dish.id === gid) {
-    msg = `${hi}*${g.name}* is on *dishwasher duty* the week of ${fmtFull(mon)}.\n\n🍽️ ${JB6.DISH_RULE}.\n\nThank you! 🌿`;
-  } else {
-    const nt = nextDuty(g, 'trash', mon), nd = nextDuty(g, 'dish', mon);
-    msg = `${hi}Heads-up on your next duties:\n\n🗑️ Trash: ${nt !== null ? `week of ${fmtFull(nt)}` : '—'}\n🍽️ Dishwasher: ${nd !== null ? `week of ${fmtFull(nd)}` : '—'}\n\nFull schedule: ${location.href.split('#')[0]}\n\nThank you! 🌿`;
-  }
-  document.getElementById('modal-title').textContent = `Reminder — ${g.name}`;
-  document.getElementById('modal-text').value = msg;
-  document.getElementById('modal-overlay').classList.add('open');
-}
+    // ══════════════════════════════════════════════
+    // REMINDER MODAL
+    // ══════════════════════════════════════════════
+    function openGroupReminder(gid) {
+      const g = MODEL.groups.find(x => x.id === gid);
+      const mon = displayedMonday();
+      const d = JB6.dutiesForWeek(MODEL, mon).find(x => x.unit.id === g.unitId);
+      const hi = `🏡 *${MODEL.house}*\n\nHi ${names(g)}! 👋\n\n`;
+      let msg;
+      if (d && d.trash.id === gid) {
+        const tasks = JB6.TRASH_TASKS.map(t => `${t.icon} ${fmtLong(mon + t.offset)} — ${t.label}`).join('\n');
+        msg = `${hi}*${g.name}* is on *trash duty* the week of ${fmtFull(mon)}:\n\n${tasks}\n\nThank you! 🌿`;
+      } else if (d && d.dish.id === gid) {
+        msg = `${hi}*${g.name}* is on *dishwasher duty* the week of ${fmtFull(mon)}.\n\n🍽️ ${JB6.DISH_RULE}.\n\nThank you! 🌿`;
+      } else {
+        const nt = nextDuty(g, 'trash', mon), nd = nextDuty(g, 'dish', mon);
+        msg = `${hi}Heads-up on your next duties:\n\n🗑️ Trash: ${nt !== null ? `week of ${fmtFull(nt)}` : '—'}\n🍽️ Dishwasher: ${nd !== null ? `week of ${fmtFull(nd)}` : '—'}\n\nFull schedule: ${location.href.split('#')[0]}\n\nThank you! 🌿`;
+      }
+      document.getElementById('modal-title').textContent = `Reminder — ${g.name}`;
+      document.getElementById('modal-text').value = msg;
+      document.getElementById('modal-overlay').classList.add('open');
+    }
 
-function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); }
-function copyModal() {
-  navigator.clipboard.writeText(document.getElementById('modal-text').value).then(() => {
-    showToast('Copied! Paste into WhatsApp or Signal 💬');
-    closeModal();
-  });
-}
+    function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); }
+    function copyModal() {
+      navigator.clipboard.writeText(document.getElementById('modal-text').value).then(() => {
+        showToast('Copied! Paste into WhatsApp or Signal 💬');
+        closeModal();
+      });
+    }
 
-function showTab(id, btn) {
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-' + id).classList.add('active');
-  if (btn) btn.classList.add('active');
-  history.replaceState(null, '', id === 'home' ? location.pathname + location.search : '#' + id);
-}
+    function showTab(id, btn) {
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-' + id).classList.add('active');
+      if (btn) btn.classList.add('active');
+      history.replaceState(null, '', id === 'home' ? location.pathname + location.search : '#' + id);
+    }
 
-// Allow direct links like …/JB6/#calendar
-function openTabFromHash() {
-  const id = location.hash.slice(1);
-  const btn = [...document.querySelectorAll('.nav-btn')].find(b => b.getAttribute('onclick').includes(`'${id}'`));
-  if (id && btn) showTab(id, btn);
-}
+    // Allow direct links like …/JB6/#calendar
+    function openTabFromHash() {
+      const id = location.hash.slice(1);
+      const btn = [...document.querySelectorAll('.nav-btn')].find(b => b.getAttribute('onclick').includes(`'${id}'`));
+      if (id && btn) showTab(id, btn);
+    }
 
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
-}
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3000);
+    }
 
-// ══════════════════════════════════════════════
-// INIT
-// ══════════════════════════════════════════════
-async function init() {
-  renderRules();
-  openTabFromHash();
-  try {
-    const response = await fetch('residents.json', {cache:'no-cache'});
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    MODEL = JB6.buildModel(await response.json());
-  } catch (error) {
-    const err = document.getElementById('load-error');
-    err.innerHTML = `<strong>Couldn't load residents.json</strong> (${esc(error.message)}).<br>` +
-      (location.protocol === 'file:'
-        ? 'Browsers block this when index.html is opened as a file. Preview it with a local server instead, e.g. <code>npx serve</code> or <code>python -m http.server</code> in this folder.'
-        : 'Check that residents.json is valid JSON (a missing comma or quote is the usual cause).');
-    err.classList.add('show');
-    return;
-  }
+    // ══════════════════════════════════════════════
+    // INIT
+    // ══════════════════════════════════════════════
+    async function init() {
+      renderRules();
+      openTabFromHash();
+      try {
+        const response = await fetch('residents.json', { cache: 'no-cache' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        MODEL = JB6.buildModel(await response.json());
+      } catch (error) {
+        const err = document.getElementById('load-error');
+        err.innerHTML = `<strong>Couldn't load residents.json</strong> (${esc(error.message)}).<br>` +
+          (location.protocol === 'file:'
+            ? 'Browsers block this when index.html is opened as a file. Preview it with a local server instead, e.g. <code>npx serve</code> or <code>python -m http.server</code> in this folder.'
+            : 'Check that residents.json is valid JSON (a missing comma or quote is the usual cause).');
+        err.classList.add('show');
+        return;
+      }
 
-  const shown = JB6.dayToDate(displayedMonday());
-  calYear = shown.getUTCFullYear();
-  calMonth = shown.getUTCMonth();
-  document.getElementById('cal-sub').textContent =
-    `Trash & dishwasher duties · each unit rotates separately · ${fmtFull(MODEL.start)} – ${fmtFull(MODEL.end)}`;
+      const shown = JB6.dayToDate(displayedMonday());
+      calYear = shown.getUTCFullYear();
+      calMonth = shown.getUTCMonth();
+      document.getElementById('cal-sub').textContent =
+        `Trash & dishwasher duties · each unit rotates separately · ${fmtFull(MODEL.start)} – ${fmtFull(MODEL.end)}`;
 
-  renderTicker();
-  renderThisWeek();
-  renderFilters();
-  renderCalendar();
-  renderGroups();
-}
+      renderTicker();
+      renderThisWeek();
+      renderFilters();
+      renderCalendar();
+      renderGroups();
+    }
 
-init();
-</script>
+    init();
+  </script>
 </body>
+
 </html>
