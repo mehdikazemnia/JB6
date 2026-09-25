@@ -393,11 +393,12 @@
 let MODEL = null;
 
 const COLLECTION_DAYS = [
-  '🟩 <strong>Sunday</strong> — Glass bin out at 8pm',
-  '🔵⬜ <strong>Monday</strong> — Blue (PMC) + White bags · out Sunday evening (6pm–midnight)',
-  '⬜🟡 <strong>Thursday</strong> — White + Yellow (paper) bags · out at 6pm',
-  '🟠 <strong>Friday</strong> — Orange bags · out in the morning, before 9am',
+  '🟩 <strong>Sunday</strong> — Glass bin (put out at 8pm)',
+  '🔵⬜ <strong>Monday</strong> — Blue bags (PMC) + White bags',
+  '🟡⬜ <strong>Thursday</strong> — White bags + Yellow (paper) bags (put out at 6pm)',
+  '🟠 <strong>Friday</strong> — Orange bags',
 ];
+const COLLECTION_TIMES = '⏰ <strong>Sun:</strong> glass bin out at 8pm · <strong>Mon:</strong> bags out evening before (6pm–midnight) · <strong>Thu:</strong> white + yellow (paper) bags out at 6pm · <strong>Fri:</strong> out between 5am and noon';
 
 function houseRules() {
   const trash = JB6.TRASH_TASKS.map(t => `${t.icon} ${t.when}`).join(' · ');
@@ -508,7 +509,8 @@ function renderRules() {
       <span class="rule-num">${String(i + 1).padStart(2, '0')}</span>
       <span class="rule-text">${t}</span>
     </div>`).join('');
-  document.getElementById('collection-days').innerHTML = COLLECTION_DAYS.join('<br>');
+  document.getElementById('collection-days').innerHTML = COLLECTION_DAYS.join('<br>') +
+    `<div style="margin-top:12px;padding:9px 12px;background:rgba(196,151,58,.08);border-radius:7px;border:1px solid rgba(196,151,58,.2);font-size:12px;line-height:1.6;color:#8a6020;">${COLLECTION_TIMES}</div>`;
 }
 
 // ══════════════════════════════════════════════
@@ -576,11 +578,11 @@ function renderMonthlyView() {
   let html = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(d => `<div class="month-day-hdr">${d}</div>`).join('');
   for (let day = JB6.mondayOf(first); day <= JB6.mondayOf(last) + 6; day++) {
     const inMonth = day >= first && day <= last;
-    const task = JB6.trashTaskOn(day);
+    const tasks = JB6.trashTasksOn(day);
     let badges = '';
     for (const d of JB6.dutiesForWeek(MODEL, day)) {
-      if (task && filterMatches(d, 'trash')) {
-        badges += `<span class="cal-badge" style="background:${d.trash.color.bg};color:${d.trash.color.fg};" title="${esc(d.trash.name)}: ${esc(task.label)} — ${esc(names(d.trash))}">${task.icon} ${esc(d.trash.short)}</span>`;
+      if (tasks.length && filterMatches(d, 'trash')) {
+        badges += `<span class="cal-badge" style="background:${d.trash.color.bg};color:${d.trash.color.fg};" title="${esc(d.trash.name)}: ${esc(tasks.map(t => t.label).join(' + '))} — ${esc(names(d.trash))}">${tasks.map(t => t.icon).join('')} ${esc(d.trash.short)}</span>`;
       }
       if (filterMatches(d, 'dish')) {
         badges += `<span class="cal-badge" style="background:${d.dish.color.bg};color:${d.dish.color.fg};opacity:.8;" title="${esc(d.dish.name)}: dishwasher — ${esc(names(d.dish))}">🍽️ ${esc(d.dish.short)}</span>`;

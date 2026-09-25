@@ -34,12 +34,14 @@
   // ── Duties ─────────────────────────────────────
   // Trash tasks happen on the day the bags go OUT, all inside the Mon–Sun duty week.
   const TRASH_TASKS = [
-    { key: 'thu', offset: 3, start: [18, 0], end: [18, 30], icon: '⬜🟡',
+    { key: 'thu', offset: 3, start: [18, 0], end: [18, 30], icon: '🟡⬜',
       label: 'White + Yellow (paper) bags out', when: 'Thursday at 6pm' },
-    { key: 'fri', offset: 4, start: [7, 30], end: [9, 0], icon: '🟠',
-      label: 'Orange bags out', when: 'Friday morning, before 9am' },
-    { key: 'sun', offset: 6, start: [20, 0], end: [20, 30], icon: '🟩🔵⬜',
-      label: 'Glass bin + Blue (PMC) & White bags out', when: 'Sunday at 8pm (for Monday collection)' },
+    { key: 'fri', offset: 4, start: [5, 0], end: [12, 0], icon: '🟠',
+      label: 'Orange bags out', when: 'Friday between 5am and noon' },
+    { key: 'mon', offset: 6, start: [18, 0], end: [18, 30], icon: '🔵⬜',
+      label: 'Blue (PMC) + White bags out', when: 'Sunday evening, 6pm–midnight (Monday collection)' },
+    { key: 'glass', offset: 6, start: [20, 0], end: [20, 30], icon: '🟩',
+      label: 'Glass bin out', when: 'Sunday at 8pm' },
   ];
   const DISH_RULE = 'Empty the dishwasher every morning before 10:00 and keep salt & rinse aid topped up';
 
@@ -108,9 +110,9 @@
     });
   }
 
-  // Trash tasks falling on a given day (0..1 entry, since each weekday has at most one task)
-  function trashTaskOn(day) {
-    return TRASH_TASKS.find(t => t.offset === weekday(day)) || null;
+  // Trash tasks falling on a given day
+  function trashTasksOn(day) {
+    return TRASH_TASKS.filter(t => t.offset === weekday(day));
   }
 
   // ── iCalendar ──────────────────────────────────
@@ -196,7 +198,7 @@
   return {
     parseDay, localToday, dayToDate, dayToYMD, weekday, mondayOf, fmtDay,
     TRASH_TASKS, DISH_RULE, COLORS,
-    buildModel, weeks, inRotation, dutiesForWeek, trashTaskOn,
+    buildModel, weeks, inRotation, dutiesForWeek, trashTasksOn,
     groupIcs, icsFileName,
   };
 });
