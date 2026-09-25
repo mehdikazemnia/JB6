@@ -1,11 +1,11 @@
 {
   "name": "jb6-duty-schedule",
-  "version": "1.0.0",
+  "version": "2.0.0",
+  "private": true,
   "description": "Duty schedule for Jardin Botanique 6",
-  "main": "send-reminders.js",
   "scripts": {
-    "schedule": "node send-reminders.js",
-    "check": "node send-reminders.js"
+    "build": "node build-calendars.js",
+    "serve": "node build-calendars.js && npx serve ."
   },
   "engines": {
     "node": ">=18"

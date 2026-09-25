@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jardin Botanique 6</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
@@ -32,7 +32,7 @@
   /* TICKER */
   .ticker-wrap { background:var(--green-deep); overflow:hidden; height:38px; display:flex; align-items:center; border-bottom:2px solid var(--gold); position:sticky; top:0; z-index:100; }
   .ticker-label { background:var(--gold); color:var(--green-deep); font-family:'DM Mono',monospace; font-size:11px; font-weight:500; padding:0 14px; height:100%; display:flex; align-items:center; white-space:nowrap; letter-spacing:.08em; text-transform:uppercase; flex-shrink:0; }
-  .ticker-track { display:flex; animation:ticker 36s linear infinite; white-space:nowrap; }
+  .ticker-track { display:flex; animation:ticker 40s linear infinite; white-space:nowrap; }
   .ticker-track span { padding:0 36px; font-size:13px; color:var(--green-pale); font-weight:300; }
   .ticker-track .sep { color:var(--gold); opacity:.5; padding:0 4px; }
   @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
@@ -42,13 +42,9 @@
   .header-inner { max-width:1100px; margin:0 auto; padding:28px 24px 0; }
   .site-header::before { content:''; position:absolute; top:-60px; right:-60px; width:300px; height:300px; background:radial-gradient(circle,rgba(74,124,47,.25) 0%,transparent 70%); pointer-events:none; }
   .site-header::after { content:'JB6'; position:absolute; right:36px; bottom:8px; font-family:'Playfair Display',serif; font-size:110px; color:rgba(255,255,255,.04); line-height:1; pointer-events:none; }
-  .house-eyebrow { font-size:12px; color:var(--green-muted); letter-spacing:.18em; text-transform:uppercase; margin-bottom:5px; }
   .house-title { font-family:'Playfair Display',serif; font-size:clamp(26px,5vw,44px); color:var(--cream); line-height:1.1; }
   .house-title em { color:var(--gold-light); font-style:italic; }
   .house-meta { font-size:13px; color:var(--green-muted); margin-top:7px; font-weight:300; }
-  .intro-pop { display:inline-block; margin-top:9px; font-size:13px; font-weight:700; line-height:1.25; cursor:pointer; position:relative; z-index:2; background:linear-gradient(100deg,#ff6b57,#f2c14e 42%,#39b66a 100%); -webkit-background-clip:text; background-clip:text; color:transparent; animation:introPulse 2.8s ease-in-out infinite; }
-  .intro-pop:hover { filter:brightness(1.18); }
-  @keyframes introPulse { 0%,100%{opacity:.86} 50%{opacity:1} }
   .nav { display:flex; margin-top:24px; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
   .nav::-webkit-scrollbar { display:none; }
   .nav-btn { background:none; border:none; color:var(--green-muted); font-family:'DM Sans',sans-serif; font-size:13px; font-weight:500; letter-spacing:.06em; text-transform:uppercase; padding:12px 22px; cursor:pointer; border-bottom:3px solid transparent; transition:all .2s; flex-shrink:0; }
@@ -62,6 +58,8 @@
   .tab-panel.active { display:block; }
   .section-title { font-family:'Playfair Display',serif; font-size:26px; color:var(--green-deep); margin-bottom:4px; }
   .section-sub { font-size:13px; color:var(--text-light); margin-bottom:28px; font-weight:300; }
+  .load-error { display:none; background:#fdecea; border:1px solid #e6a39b; color:#8a2a1f; border-radius:10px; padding:14px 16px; margin-bottom:20px; font-size:13px; line-height:1.5; }
+  .load-error.show { display:block; }
 
   /* CARDS */
   .card { background:var(--warm-white); border-radius:12px; padding:26px; border:1px solid rgba(74,124,47,.13); box-shadow:0 2px 10px var(--shadow); }
@@ -72,28 +70,30 @@
   .bounce { animation:bounce 1s ease-in-out infinite; display:inline-block; }
   .kitchen-warn { color:#c0392b; font-weight:600; font-size:14px; text-align:center; margin-bottom:18px; letter-spacing:.03em; }
 
-
   /* HOME GRID */
   .home-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
-  @media(max-width:900px){.home-grid{grid-template-columns:1fr;} .bottom-grid{grid-template-columns:1fr;}}
+  .home-grid .week-card { grid-column:1 / -1; }
+  @media(max-width:900px){ .home-grid{grid-template-columns:1fr;} }
 
   /* THIS WEEK */
   .week-card { background:var(--green-deep); }
   .week-card .card-title { color:var(--gold-light); }
   .week-card .card-icon { background:rgba(196,151,58,.2); }
-  .duty-row { display:flex; justify-content:space-between; align-items:flex-start; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.08); }
-  .duty-row:last-child { border-bottom:none; }
-  .duty-label { font-size:13px; color:var(--green-muted); }
-  .duty-names { font-size:12px; color:var(--gold-light); margin-top:3px; line-height:1.5; }
-  .duty-right { text-align:right; }
+  .week-note { font-size:12px; color:var(--gold-light); background:rgba(196,151,58,.14); border:1px solid rgba(196,151,58,.3); border-radius:7px; padding:8px 12px; margin-bottom:14px; }
+  .units-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  @media(max-width:700px){ .units-grid{grid-template-columns:1fr;} }
+  .unit-col { background:rgba(255,255,255,.04); border-radius:9px; padding:14px; }
+  .unit-col h4 { font-family:'Playfair Display',serif; font-size:16px; color:var(--cream); margin-bottom:10px; font-weight:700; }
+  .duty-block { padding:8px 0; border-top:1px solid rgba(255,255,255,.08); }
+  .duty-head { font-size:11px; color:var(--gold); font-weight:600; letter-spacing:.07em; text-transform:uppercase; display:flex; align-items:center; gap:7px; flex-wrap:wrap; }
+  .duty-names { font-size:12px; color:var(--green-pale); margin:5px 0 4px; line-height:1.5; }
+  .duty-task { font-size:12px; color:var(--cream); padding:4px 8px; border-radius:6px; background:rgba(255,255,255,.04); margin-top:3px; }
+  .duty-task.today { background:rgba(196,151,58,.25); }
+  .duty-task.past { opacity:.45; }
+  .week-foot { font-size:11px; color:var(--green-muted); padding-top:10px; margin-top:12px; border-top:1px solid rgba(255,255,255,.08); }
 
-  /* GROUP BADGES */
-  .gbadge { display:inline-block; padding:3px 9px; border-radius:20px; font-size:11px; font-family:'DM Mono',monospace; font-weight:500; }
-  .g1b { background:rgba(180,160,0,.25); color:#d4c030; }
-  .g2b { background:rgba(30,100,200,.25); color:#60a8f0; }
-  .g3b { background:rgba(150,50,180,.25); color:#c080e8; }
-  .g4b { background:rgba(200,40,40,.25); color:#f08080; }
-  .g5b { background:rgba(50,160,50,.25); color:#80d080; }
+  /* GROUP BADGES (colors come from residents.json) */
+  .gbadge { display:inline-block; padding:3px 9px; border-radius:20px; font-size:11px; font-family:'DM Mono',monospace; font-weight:500; white-space:nowrap; text-transform:none; letter-spacing:0; }
 
   /* RULES */
   .rule-item { display:flex; gap:12px; padding:11px 0; border-bottom:1px solid var(--cream-dark); align-items:flex-start; }
@@ -102,67 +102,44 @@
   .rule-text { font-size:13px; line-height:1.5; color:var(--text-mid); }
   .rule-text strong { color:var(--text-dark); }
 
-  /* POLL */
-  .poll-opt { display:flex; align-items:center; gap:10px; padding:9px 12px; border-radius:7px; border:1px solid var(--cream-dark); margin-bottom:7px; cursor:pointer; transition:all .2s; }
-  .poll-opt:hover { border-color:var(--green-muted); background:var(--green-pale); }
-  .poll-bar-wrap { flex:1; }
-  .poll-bar-label { font-size:13px; margin-bottom:3px; }
-  .poll-bar-track { height:5px; background:var(--cream-dark); border-radius:3px; overflow:hidden; }
-  .poll-bar-fill { height:100%; background:var(--green-light); border-radius:3px; transition:width .5s; }
-  .poll-pct { font-family:'DM Mono',monospace; font-size:11px; color:var(--text-light); width:32px; text-align:right; }
-
   /* CALENDAR */
-  .filter-row { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:26px; align-items:center; }
-  .fbtn { padding:6px 14px; border-radius:20px; border:1px solid var(--cream-dark); background:var(--warm-white); font-family:'DM Sans',sans-serif; font-size:12px; cursor:pointer; transition:all .2s; color:var(--text-mid); }
-  .fbtn:hover { border-color:var(--green-muted); }
-  .fbtn.active { background:var(--green-deep); color:var(--cream); border-color:var(--green-deep); }
-  /* Calendar view toggle */
-  .view-btn { padding:6px 14px; border-radius:20px; border:1px solid var(--cream-dark); background:var(--warm-white); font-family:'DM Sans',sans-serif; font-size:12px; cursor:pointer; transition:all .2s; color:var(--text-mid); }
-  .view-btn:hover { border-color:var(--green-muted); }
-  .view-btn.active { background:var(--green-deep); color:var(--cream); border-color:var(--green-deep); }
-  /* Month navigation */
+  .filter-row { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px; align-items:center; }
+  .fbtn, .view-btn { padding:6px 14px; border-radius:20px; border:1px solid var(--cream-dark); background:var(--warm-white); font-family:'DM Sans',sans-serif; font-size:12px; cursor:pointer; transition:all .2s; color:var(--text-mid); }
+  .fbtn:hover, .view-btn:hover { border-color:var(--green-muted); }
+  .fbtn.active, .view-btn.active { background:var(--green-deep); color:var(--cream); border-color:var(--green-deep); }
   .cal-month-nav { display:flex; align-items:center; gap:16px; margin-bottom:14px; }
   .cal-month-nav button { background:var(--warm-white); border:1px solid var(--cream-dark); border-radius:6px; padding:4px 14px; font-size:20px; cursor:pointer; line-height:1.3; color:var(--text-mid); }
   .cal-month-nav button:hover { background:var(--cream-dark); }
+  .cal-month-nav button:disabled { opacity:.35; cursor:default; }
   #cal-month-label { font-family:'Playfair Display',serif; font-size:20px; font-weight:700; color:var(--green-deep); }
-  /* Monthly grid */
-  .month-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:3px; overflow-x:auto; }
+  .month-grid { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:3px; }
   .month-day-hdr { text-align:center; font-size:11px; font-weight:600; color:var(--text-light); letter-spacing:.06em; text-transform:uppercase; padding:6px 2px; }
-  .month-cell { min-height:72px; background:var(--warm-white); border-radius:6px; padding:5px 4px; }
+  .month-cell { min-height:72px; background:var(--warm-white); border-radius:6px; padding:5px 4px; min-width:0; }
   .month-cell.other-month { background:var(--cream); opacity:.5; }
   .month-cell.today { outline:2px solid var(--gold); outline-offset:-2px; }
   .month-cell-num { font-size:11px; font-weight:600; color:var(--text-mid); margin-bottom:3px; }
   .cal-badge { display:block; font-size:10px; border-radius:3px; padding:2px 4px; margin-bottom:2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; line-height:1.3; }
-  .cal-badge.trash { background:rgba(74,124,47,.15); color:var(--green-mid); }
-  .cal-badge.dish { background:rgba(196,151,58,.12); color:#7a5500; }
-  /* Schedule table */
-  .sched-table { width:100%; border-collapse:collapse; font-size:13px; }
+  .cal-legend { font-size:12px; color:var(--text-light); margin-top:12px; line-height:1.7; }
+  .table-scroll { overflow-x:auto; }
+  .sched-table { width:100%; border-collapse:collapse; font-size:13px; min-width:520px; }
   .sched-table th { background:var(--green-deep); color:var(--cream); padding:9px 12px; text-align:left; font-weight:500; font-size:11px; letter-spacing:.06em; text-transform:uppercase; }
   .sched-table td { padding:10px 12px; border-bottom:1px solid var(--cream-dark); vertical-align:top; }
-  .sched-table tr:hover td { background:rgba(74,124,47,.04); }
-  .sched-table tr.hidden { display:none; }
+  .sched-table tr.current td { background:rgba(196,151,58,.08); }
   .chips { display:flex; flex-wrap:wrap; gap:5px; margin-top:4px; }
   .chip { background:var(--cream-dark); border-radius:20px; padding:2px 8px; font-size:11px; color:var(--text-mid); }
 
   /* RESIDENTS */
-  .groups-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(195px,1fr)); gap:14px; margin-bottom:30px; }
+  .unit-heading { font-family:'Playfair Display',serif; font-size:20px; color:var(--green-deep); margin:6px 0 4px; }
+  .unit-sub { font-size:12px; color:var(--text-light); margin-bottom:12px; }
+  .groups-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(min(210px,100%),1fr)); gap:14px; margin-bottom:30px; }
   .grp-card { background:var(--warm-white); border-radius:10px; border:1px solid rgba(74,124,47,.13); overflow:hidden; }
   .grp-head { padding:11px 14px; display:flex; justify-content:space-between; align-items:center; }
   .grp-title { font-family:'Playfair Display',serif; font-size:15px; color:#fff; }
-  .gh-g1 { background:#2a2200; } .gh-g2 { background:#0a1e3a; } .gh-g3 { background:#1e0a2e; }
-  .gh-g4 { background:#2e0a0a; } .gh-g5 { background:#0a1e0a; }
+  .grp-count { font-family:'DM Mono',monospace; font-size:11px; color:rgba(255,255,255,.75); }
   .room-row { display:flex; justify-content:space-between; align-items:center; padding:7px 14px; border-bottom:1px solid var(--cream-dark); }
-  .room-row:last-child { border-bottom:none; }
   .room-lbl { font-size:11px; color:var(--text-light); font-family:'DM Mono',monospace; }
-  .res-name { font-size:13px; font-weight:500; cursor:pointer; padding:2px 6px; border-radius:4px; border:1px dashed transparent; transition:all .2s; }
-  .resident-admin-panel { display:none; margin-bottom:16px; padding:14px 16px; background:linear-gradient(100deg,rgba(255,107,87,.13),rgba(242,193,78,.17),rgba(57,182,106,.13)); border:1px solid rgba(196,151,58,.35); border-radius:10px; }
-  .resident-admin-panel.open { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
-  .resident-admin-copy { font-size:12px; color:var(--text-mid); line-height:1.45; }
-  .resident-admin-actions { display:flex; gap:8px; flex-wrap:wrap; }
-  .resident-admin-actions button { border:none; border-radius:7px; padding:8px 12px; font-family:'DM Sans',sans-serif; font-size:12px; font-weight:700; cursor:pointer; }
-  .resident-save { background:var(--green-deep); color:var(--cream); }
-  .resident-cancel { background:var(--cream-dark); color:var(--text-mid); }
-  .resident-edit-input { width:100%; min-width:82px; border:1px solid rgba(74,124,47,.28); border-radius:6px; padding:5px 7px; font-family:'DM Sans',sans-serif; font-size:13px; font-weight:600; color:var(--text-dark); background:var(--warm-white); }
+  .res-name { font-size:13px; font-weight:500; }
+  .grp-next { padding:8px 14px 10px; font-size:11px; color:var(--text-light); line-height:1.6; background:var(--cream); }
   .rem-btns { display:flex; flex-wrap:wrap; gap:8px; }
   .rem-btn { padding:8px 15px; background:rgba(74,124,47,.1); border:1px solid rgba(74,124,47,.3); border-radius:6px; font-size:13px; color:var(--green-light); cursor:pointer; font-family:'DM Sans',sans-serif; transition:all .2s; }
   .rem-btn:hover { background:rgba(74,124,47,.2); }
@@ -172,7 +149,7 @@
   .nc-hero::after { content:'🌿'; position:absolute; right:28px; top:18px; font-size:72px; opacity:.12; }
   .nc-hero h2 { font-family:'Playfair Display',serif; font-size:24px; color:var(--cream); margin-bottom:8px; }
   .nc-hero p { color:var(--green-muted); font-size:13px; line-height:1.6; max-width:480px; font-weight:300; }
-  .info-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:14px; margin-bottom:20px; }
+  .info-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(min(250px,100%),1fr)); gap:14px; margin-bottom:20px; }
   .info-card { background:var(--warm-white); border-radius:10px; padding:20px; border:1px solid rgba(74,124,47,.13); }
   .info-card h3 { font-family:'Playfair Display',serif; font-size:15px; color:var(--green-deep); margin-bottom:10px; display:flex; align-items:center; gap:7px; }
   .info-list { list-style:none; }
@@ -182,60 +159,32 @@
   .supply-tag { display:inline-block; background:rgba(74,124,47,.1); border:1px solid rgba(74,124,47,.25); color:var(--green-light); font-size:10px; padding:1px 6px; border-radius:8px; margin-left:4px; }
 
   /* MODAL */
-  .modal-overlay { display:none; position:fixed; inset:0; background:rgba(26,46,26,.55); z-index:200; align-items:center; justify-content:center; }
+  .modal-overlay { display:none; position:fixed; inset:0; background:rgba(26,46,26,.55); z-index:200; align-items:center; justify-content:center; padding:16px; }
   .modal-overlay.open { display:flex; }
-  .modal { background:var(--warm-white); border-radius:13px; padding:30px; max-width:420px; width:90%; box-shadow:0 18px 50px rgba(0,0,0,.25); }
+  .modal { background:var(--warm-white); border-radius:13px; padding:26px; max-width:420px; width:100%; max-height:90vh; overflow-y:auto; box-shadow:0 18px 50px rgba(0,0,0,.25); }
   .modal h3 { font-family:'Playfair Display',serif; font-size:19px; color:var(--green-deep); margin-bottom:6px; }
-  .modal p { font-size:13px; color:var(--text-light); margin-bottom:14px; }
-  .modal textarea { width:100%; padding:11px; border:1px solid var(--cream-dark); border-radius:7px; font-family:'DM Mono',monospace; font-size:12px; color:var(--text-dark); background:var(--cream); resize:none; height:130px; margin-bottom:12px; }
+  .modal p { font-size:13px; color:var(--text-light); margin-bottom:14px; line-height:1.5; }
+  .modal textarea { width:100%; padding:11px; border:1px solid var(--cream-dark); border-radius:7px; font-family:'DM Mono',monospace; font-size:12px; color:var(--text-dark); background:var(--cream); resize:none; height:180px; margin-bottom:12px; }
   .modal-btns { display:flex; gap:8px; justify-content:flex-end; }
   .btn-copy { background:var(--green-deep); color:var(--cream); border:none; padding:8px 16px; border-radius:5px; font-family:'DM Sans',sans-serif; font-size:13px; cursor:pointer; }
   .btn-close { background:var(--cream-dark); color:var(--text-mid); border:none; padding:8px 16px; border-radius:5px; font-family:'DM Sans',sans-serif; font-size:13px; cursor:pointer; }
+  .picker-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px; }
+  @media(max-width:520px){ .picker-grid{grid-template-columns:1fr;} }
+  .picker-card { border-radius:9px; overflow:hidden; border:1px solid var(--cream-dark); background:#fff; }
+  .picker-head { padding:9px 14px; font-family:'Playfair Display',serif; font-size:14px; color:#fff; }
+  .picker-links { padding:10px 14px 12px; display:flex; flex-direction:column; gap:6px; }
+  .picker-links a, .picker-links button { display:block; text-align:center; padding:7px 0; border-radius:6px; font-family:'DM Sans',sans-serif; font-size:12px; font-weight:600; cursor:pointer; text-decoration:none; }
+  .lnk-primary { background:var(--gold); color:var(--green-deep); border:none; }
+  .lnk-secondary { background:var(--warm-white); color:var(--green-mid); border:1px solid rgba(74,124,47,.35); }
   .toast { position:fixed; bottom:26px; right:26px; background:var(--green-deep); color:var(--cream); padding:11px 18px; border-radius:7px; font-size:13px; opacity:0; transform:translateY(8px); transition:all .3s; z-index:300; pointer-events:none; border-left:3px solid var(--gold); }
   .toast.show { opacity:1; transform:translateY(0); }
-
-  /* SECRETS GUIDE */
-  .secrets-table { width:100%; border-collapse:collapse; font-size:12px; margin-top:14px; }
-  .secrets-table th { background:var(--green-deep); color:var(--green-pale); padding:8px 12px; text-align:left; font-weight:500; }
-  .secrets-table td { padding:7px 12px; border-bottom:1px solid var(--cream-dark); font-family:'DM Mono',monospace; color:var(--text-mid); }
-  .secrets-table tr:last-child td { border-bottom:none; }
-  .name-col { color:var(--text-dark); font-family:'DM Sans',sans-serif; font-weight:500; }
-
-  /* TASK SYSTEM */
-  .week-columns { display:grid; grid-template-columns:1fr; gap:14px; }
-  .week-col-header { font-size:11px; color:var(--gold); font-weight:600; letter-spacing:.07em; text-transform:uppercase; padding:4px 0 8px; border-bottom:1px solid rgba(255,255,255,.1); margin-bottom:6px; display:flex; align-items:center; gap:7px; flex-wrap:wrap; }
-  .task-row { display:flex; align-items:center; gap:7px; padding:6px 7px; border-radius:6px; margin-bottom:3px; transition:background .15s; }
-  .task-row.done { background:rgba(74,124,47,.22); }
-  .task-row.pending { background:rgba(255,255,255,.04); cursor:pointer; }
-  .task-row.pending:hover { background:rgba(255,255,255,.09); }
-  .task-check { font-size:13px; flex-shrink:0; width:16px; text-align:center; color:var(--green-muted); }
-  .task-check.ok { color:#80d080; }
-  .task-info { flex:1; min-width:0; }
-  .task-label { font-size:12px; color:var(--cream); font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .task-done-by { font-size:10px; color:var(--green-muted); margin-top:1px; }
-  .task-pending-by { font-size:10px; color:rgba(255,255,255,.3); margin-top:1px; }
-  .task-tap { font-size:10px; color:var(--gold-light); opacity:.65; flex-shrink:0; }
-  .task-undo { background:none; border:none; color:rgba(255,255,255,.25); font-size:12px; cursor:pointer; padding:2px 3px; border-radius:3px; flex-shrink:0; line-height:1; }
-  .task-undo:hover { color:rgba(255,255,255,.65); background:rgba(255,255,255,.08); }
-  .task-completers { display:flex; flex-direction:column; gap:2px; margin-top:2px; }
-  .task-completer { display:flex; align-items:center; gap:5px; }
-  .completer-name { font-size:10px; color:var(--green-muted); }
-  .completer-time { font-size:10px; color:rgba(255,255,255,.3); }
-  .task-add-more { background:none; border:1px solid rgba(255,255,255,.15); color:rgba(255,255,255,.4); font-size:10px; cursor:pointer; padding:2px 6px; border-radius:10px; flex-shrink:0; white-space:nowrap; transition:all .15s; }
-  .task-add-more:hover { border-color:var(--gold-light); color:var(--gold-light); }
-
-  /* NAME PICKER */
-  .name-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:7px; margin-top:12px; }
-  .name-btn { padding:9px 6px; background:var(--cream); border:1px solid var(--cream-dark); border-radius:7px; font-family:'DM Sans',sans-serif; font-size:12px; font-weight:500; cursor:pointer; transition:all .15s; color:var(--text-dark); text-align:center; }
-  .name-btn:hover { background:var(--green-pale); border-color:var(--green-muted); }
-
 </style>
 </head>
 <body>
 
 <!-- TICKER -->
 <div class="ticker-wrap">
-  <div class="ticker-label">🏡 This week</div>
+  <div class="ticker-label" id="ticker-label">🏡 This week</div>
   <div style="overflow:hidden;flex:1;display:flex;align-items:center;">
     <div class="ticker-track" id="ticker"></div>
   </div>
@@ -257,6 +206,8 @@
 
 <div class="content">
 
+<div class="load-error" id="load-error"></div>
+
 <!-- ══════════ HOME ══════════ -->
 <div class="tab-panel active" id="tab-home">
   <div class="kitchen-warn"><span class="bounce">🍳 Please clean the kitchen after use! 🍳</span></div>
@@ -264,7 +215,7 @@
 
     <div class="card week-card">
       <div class="card-title">
-        <div class="card-icon">📅</div>This Week's Duties
+        <div class="card-icon">📅</div><span id="week-title">This Week's Duties</span>
       </div>
       <div id="this-week"></div>
     </div>
@@ -276,15 +227,7 @@
 
     <div class="card">
       <div class="card-title"><div class="card-icon">🗑️</div>Commune Collection Days</div>
-      <div style="font-size:13px;color:var(--text-mid);line-height:1.9;">
-        🟩 <strong>Sunday</strong> — Glass bin (put out at 8pm)<br>
-        🔵⬜ <strong>Monday</strong> — Blue bags (PMC) + White bags<br>
-        🟡⬜ <strong>Thursday</strong> — White bags + Yellow (paper) bags (put out at 6pm)<br>
-        🟠 <strong>Friday</strong> — Orange bags
-      </div>
-      <div style="margin-top:12px;padding:9px 12px;background:rgba(196,151,58,.08);border-radius:7px;border:1px solid rgba(196,151,58,.2);font-size:12px;color:#8a6020;">
-        ⏰ <strong>Sun:</strong> glass bin out at 8pm · <strong>Mon:</strong> bags out evening before (6pm–midnight) · <strong>Thu:</strong> white + yellow (paper) bags out at 6pm · <strong>Fri:</strong> out between 5am and noon
-      </div>
+      <div style="font-size:13px;color:var(--text-mid);line-height:1.9;" id="collection-days"></div>
     </div>
 
   </div>
@@ -293,57 +236,40 @@
 <!-- ══════════ CALENDAR ══════════ -->
 <div class="tab-panel" id="tab-calendar">
   <div class="section-title">Planning Calendar</div>
-  <div class="section-sub">Trash collection & dishwasher duties · Feb 2025 – Dec 2026</div>
+  <div class="section-sub" id="cal-sub">Trash & dishwasher duties · each unit rotates separately</div>
 
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px;">
-    <button onclick="openGroupPicker()" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--gold);color:var(--green-deep);border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;letter-spacing:.03em;">📅 Add my duties to calendar</button>
-    <span style="font-size:12px;color:var(--text-light);">Download your group's duties as a .ics file</span>
+    <button onclick="openGroupPicker()" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--gold);color:var(--green-deep);border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;letter-spacing:.03em;">📅 Add my duties to my calendar</button>
     <div style="margin-left:auto;display:flex;gap:6px;">
       <button class="view-btn active" id="btn-monthly" onclick="setCalView('monthly')">📅 Monthly</button>
       <button class="view-btn" id="btn-table" onclick="setCalView('table')">📋 Schedule</button>
     </div>
   </div>
 
+  <div class="filter-row" id="cal-filters"></div>
+
   <!-- Monthly view -->
   <div id="cal-monthly-wrap">
     <div class="cal-month-nav">
-      <button onclick="prevMonth()">‹</button>
+      <button id="btn-prev-month" onclick="shiftMonth(-1)" aria-label="Previous month">‹</button>
       <span id="cal-month-label"></span>
-      <button onclick="nextMonth()">›</button>
+      <button id="btn-next-month" onclick="shiftMonth(1)" aria-label="Next month">›</button>
     </div>
     <div class="month-grid" id="cal-monthly"></div>
+    <div class="cal-legend" id="cal-legend"></div>
   </div>
 
   <!-- Schedule / table view -->
   <div id="cal-table-wrap" style="display:none;">
-    <div class="filter-row" style="margin-bottom:16px;">
-      <span style="font-size:12px;color:var(--text-light);">Show group:</span>
-      <button class="fbtn active" onclick="setTableFilter('all',this)">All</button>
-      <button class="fbtn" onclick="setTableFilter('G1',this)">Group 1</button>
-      <button class="fbtn" onclick="setTableFilter('G2',this)">Group 2</button>
-      <button class="fbtn" onclick="setTableFilter('G3',this)">Group 3</button>
-      <button class="fbtn" onclick="setTableFilter('G4',this)">Group 4</button>
-      <button class="fbtn" onclick="setTableFilter('G5',this)">Group 5</button>
-    </div>
-    <div id="cal-table"></div>
+    <div class="table-scroll" id="cal-table"></div>
   </div>
 </div>
 
 <!-- ══════════ RESIDENTS ══════════ -->
 <div class="tab-panel" id="tab-residents">
-  <div class="section-title" onclick="residentAdminTap()" title="Residents & Groups">Residents & Groups</div>
+  <div class="section-title">Residents & Groups</div>
   <div class="section-sub">All residents and their group assignments</div>
-  <div class="resident-admin-panel" id="resident-admin-panel">
-    <div class="resident-admin-copy">
-      <strong>Resident edit mode</strong><br>
-      Change names directly in the group cards, then save. Hidden access: add <code>?editResidents=1</code> to the URL, or tap this section title five times.
-    </div>
-    <div class="resident-admin-actions">
-      <button class="resident-save" onclick="saveResidentNames()">Save names</button>
-      <button class="resident-cancel" onclick="disableResidentEditing()">Done</button>
-    </div>
-  </div>
-  <div class="groups-grid" id="groups-grid"></div>
+  <div id="groups-by-unit"></div>
 
   <div class="section-title" style="font-size:20px;margin-bottom:4px;">Send Reminder</div>
   <div class="section-sub">Generates a ready-to-paste WhatsApp / Signal message</div>
@@ -366,7 +292,7 @@
         <li>Bike storage (ground floor)</li>
         <li>Cinema Room (basement)</li>
         <li>Gym (basement)</li>
-        <li> Garden/terrace, shared with houses 6 and 8</li>
+        <li>Garden/terrace, shared with houses 6 and 8</li>
       </ul>
     </div>
     <div class="info-card">
@@ -391,13 +317,7 @@
     </div>
     <div class="info-card">
       <h3>🗑️ Duty System</h3>
-      <ul class="info-list">
-        <li>7 groups rotate weekly across the two units</li>
-        <li>Trash: Mon/Thu — bags out the <strong>evening before</strong>; Fri — out by 9am</li>
-        <li>Dishwasher: empty before 10:00 AM</li>
-        <li>Check the Calendar tab for your schedule</li>
-        <li>Swaps OK — inform your team</li>
-      </ul>
+      <ul class="info-list" id="duty-system"></ul>
     </div>
     <div class="info-card">
       <h3>📜 Key Rules</h3>
@@ -409,12 +329,7 @@
     </div>
     <div class="info-card">
       <h3>📞 Contacts</h3>
-      <ul class="info-list">
-        <li>Unit 1 ambassador: ask in the group chat</li>
-        <li>Unit 2 ambassador: ask in the group chat</li>
-        <li>Emergency maintenance: Cohabs app</li>
-        <li>House WhatsApp group</li>
-      </ul>
+      <ul class="info-list" id="contacts"></ul>
     </div>
     <div class="info-card" style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
       <div>
@@ -434,20 +349,18 @@
       <button class="fbtn" onclick="filterMap('sport',this)">🏋️ Sport</button>
       <button class="fbtn" onclick="filterMap('nature',this)">🌿 Nature</button>
       <button class="fbtn" onclick="filterMap('cultural',this)">🎭 Cultural</button>
-      <button class="fbtn" onclick="filterMap('social',this)">🍺 Social</button>
     </div>
     <div id="map" style="width:100%;height:55vh;border-radius:10px;border:1px solid var(--cream-dark);"></div>
   </div>
 </div>
 
-
 </div><!-- /content -->
 
-<!-- MODAL -->
+<!-- REMINDER MODAL -->
 <div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this)closeModal()">
   <div class="modal">
     <h3 id="modal-title">Reminder</h3>
-    <p id="modal-desc">Copy and paste into WhatsApp or Signal:</p>
+    <p>Copy and paste into WhatsApp or Signal:</p>
     <textarea id="modal-text" readonly></textarea>
     <div class="modal-btns">
       <button class="btn-close" onclick="closeModal()">Close</button>
@@ -456,330 +369,172 @@
   </div>
 </div>
 
+<!-- CALENDAR PICKER -->
 <div class="modal-overlay" id="group-picker-overlay" onclick="if(event.target===this)closeGroupPicker()">
-  <div class="modal" style="max-width:540px;">
-    <h3>Choose your group</h3>
-    <p>Download your duties as a .ics calendar file. <strong>Tip:</strong> when importing, put the events in a calendar named <em>"JB6 Duties"</em> — then to remove all events at once, just delete that calendar in your app.</p>
-    <div id="group-picker-cards" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;"></div>
+  <div class="modal" style="max-width:560px;">
+    <h3>Add your group's duties to your calendar</h3>
+    <p><strong>Subscribe</strong> (recommended): your calendar stays in sync automatically if the rotation changes.
+      To stop, just remove the subscribed “JB6 Duties” calendar.<br>
+      <strong>Download</strong> gives a one-off copy that won't update.</p>
+    <div class="picker-grid" id="group-picker-cards"></div>
     <div class="modal-btns" style="margin-top:16px;">
-      <button class="btn-close" onclick="closeGroupPicker()">Cancel</button>
-    </div>
-  </div>
-</div>
-
-<div class="modal-overlay" id="remove-help-overlay" onclick="if(event.target===this)document.getElementById('remove-help-overlay').classList.remove('open')">
-  <div class="modal" style="max-width:460px;">
-    <h3>Remove calendar events</h3>
-    <p style="margin-bottom:12px;">To delete all <strong id="remove-help-name"></strong> events at once:</p>
-    <ol style="padding-left:20px;font-size:14px;line-height:2;color:var(--text-mid);">
-      <li>Open your calendar app (Google Calendar, Apple Calendar, Outlook…)</li>
-      <li>Find the calendar named <strong>"JB6 Duties"</strong></li>
-      <li>Delete / unsubscribe from that calendar — all events disappear instantly</li>
-    </ol>
-    <p style="margin-top:12px;font-size:12px;color:var(--text-light);">If you imported into your main calendar instead, you'll need to delete the events one by one — or re-import with the file below (works in Outlook).</p>
-    <div class="modal-btns" style="margin-top:16px;">
-      <button class="btn-close" onclick="document.getElementById('remove-help-overlay').classList.remove('open')">Close</button>
-    </div>
-  </div>
-</div>
-
-<div class="modal-overlay" id="task-picker-overlay" onclick="if(event.target===this)closeTaskPicker()">
-  <div class="modal" style="max-width:430px;">
-    <h3>Who completed this?</h3>
-    <p>Tap your name to mark this task as done.</p>
-    <div class="name-grid" id="task-name-grid"></div>
-    <div class="modal-btns" style="margin-top:16px;">
-      <button class="btn-close" onclick="closeTaskPicker()">Cancel</button>
+      <button class="btn-close" onclick="closeGroupPicker()">Close</button>
     </div>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
+<script src="schedule.js"></script>
 <script>
 // ══════════════════════════════════════════════
-// DATA  — source of truth lives in residents.json
+// DATA — everything comes from residents.json (see schedule.js for the rotation)
 // ══════════════════════════════════════════════
-let HOUSE_NAME = 'Jardin Botanique 6';
-const DEFAULT_GROUPS = [
-  { id:'U1-G1', unit:'U1', name:'Unit 1 · Group 1', color:'g1b', hdr:'gh-g1', members:[
-    {room:'1', name:''},
-    {room:'2', name:''},
-    {room:'3', name:''},
-    {room:'4', name:''},
-  ]},
-  { id:'U1-G2', unit:'U1', name:'Unit 1 · Group 2', color:'g2b', hdr:'gh-g2', members:[
-    {room:'5', name:''},
-    {room:'6', name:''},
-    {room:'7', name:''},
-    {room:'8', name:''},
-  ]},
-  { id:'U1-G3', unit:'U1', name:'Unit 1 · Group 3', color:'g3b', hdr:'gh-g3', members:[
-    {room:'9', name:''},
-    {room:'10', name:''},
-    {room:'11', name:''},
-    {room:'12', name:''},
-  ]},
-  { id:'U1-G4', unit:'U1', name:'Unit 1 · Group 4', color:'g4b', hdr:'gh-g4', members:[
-    {room:'13', name:''},
-    {room:'14', name:''},
-    {room:'15', name:''},
-    {room:'16', name:''},
-  ]},
-  { id:'U2-G1', unit:'U2', name:'Unit 2 · Group 1', color:'g5b', hdr:'gh-g5', members:[
-    {room:'1', name:''},
-    {room:'2', name:''},
-    {room:'3', name:''},
-    {room:'4', name:''},
-  ]},
-  { id:'U2-G2', unit:'U2', name:'Unit 2 · Group 2', color:'g1b', hdr:'gh-g1', members:[
-    {room:'5', name:''},
-    {room:'6', name:''},
-    {room:'7', name:''},
-    {room:'8', name:''},
-  ]},
-  { id:'U2-G3', unit:'U2', name:'Unit 2 · Group 3', color:'g2b', hdr:'gh-g2', members:[
-    {room:'9', name:''},
-    {room:'10', name:''},
-    {room:'11', name:''},
-    {room:'12', name:''},
-  ]},
+let MODEL = null;
+
+const COLLECTION_DAYS = [
+  '🟩 <strong>Sunday</strong> — Glass bin out at 8pm',
+  '🔵⬜ <strong>Monday</strong> — Blue (PMC) + White bags · out Sunday evening (6pm–midnight)',
+  '⬜🟡 <strong>Thursday</strong> — White + Yellow (paper) bags · out at 6pm',
+  '🟠 <strong>Friday</strong> — Orange bags · out in the morning, before 9am',
 ];
 
-let GROUPS = DEFAULT_GROUPS.map(group => ({
-  ...group,
-  members: group.members.map(member => ({ ...member }))
-}));
-
-const REF_MONDAY = new Date('2025-02-09');
-const SCHEDULE_END = new Date('2027-12-31');
-
-function buildTrashSchedule(start = REF_MONDAY, end = SCHEDULE_END) {
-  const schedule = [];
-  const cursor = new Date(start);
-  cursor.setHours(0, 0, 0, 0);
-  while (cursor <= end) {
-    schedule.push({
-      date: cursor.toISOString().slice(0, 10),
-      type: 'blue',
-      label: 'Blue+White (Mon) · White+Yellow (Thu) · Orange (Fri)'
-    });
-    cursor.setDate(cursor.getDate() + 7);
-  }
-  return schedule;
+function houseRules() {
+  const trash = JB6.TRASH_TASKS.map(t => `${t.icon} ${t.when}`).join(' · ');
+  return [
+    '<strong>Quiet hours</strong> are 11pm to 8am. Be mindful of neighbours above, below, and beside you.',
+    '<strong>No smoking</strong> indoors at any time.',
+    '<strong>Common areas</strong> must be left clean immediately after use: Kitchen, Living room, Gym and Cinema.',
+    '<strong>Label your cabinet and shelf</strong> in the fridge. Never use items that are not yours.',
+    '<strong>Duty groups</strong> rotate weekly (Monday to Sunday), separately in each unit. Swaps are allowed, just communicate them :).',
+    `<strong>Trash</strong> duty group puts the bags out: ${trash}.`,
+    `<strong>Dishwasher</strong> duty group: ${JB6.DISH_RULE.toLowerCase()}.`,
+    '<strong>Bikes</strong> must be stored in the bike room.',
+    '<strong>Respect</strong> everyone\'s privacy, space, and schedule. This is a shared home :)',
+  ];
 }
-
-const TRASH_SCHEDULE = buildTrashSchedule();
-
-const HOUSE_RULES = [
-  {n:'01', t:'<strong>Quiet hours</strong> are 11pm to 8am. Be mindful of neighbours above, below, and beside you.'},
-  {n:'02', t:'<strong>No smoking</strong> indoors at any time.'},
-  {n:'04', t:'<strong>Common areas</strong> must be left clean immediately after use: Kitchen, Living room, Gym and Cinema.'},
-  {n:'05', t:'<strong>Label your cabinet and shelf</strong> in the fridge. Never use items that are not yours.'},
-  {n:'06', t:'<strong>Duty groups</strong> rotate weekly. Swaps are allowed, just communicate them :).'},
-  {n:'07', t:'<strong>Trash</strong> Mon/Thu: bags out the evening before (6pm–midnight). Friday: out by 9:00 AM, check the calendar.'},
-{n:'08', t:'<strong>Dishwasher</strong> must be emptied daily by the duty group.<br><strong style="color:#c0392b;">Important</strong>: regularly check the salt and cleaning reserve of the dishwasher'},
-  {n:'09', t:'<strong>Bikes</strong> must be stored in the bike room.'},
-  {n:'10', t:'<strong>Respect</strong> everyone\'s privacy, space, and schedule. This is a shared home :)'},
-];
 
 // ══════════════════════════════════════════════
 // HELPERS
 // ══════════════════════════════════════════════
-function getMondayOfWeek(d = new Date()) {
-  const date = new Date(d);
-  const day = date.getDay();
-  date.setDate(date.getDate() - (day === 0 ? 6 : day - 1));
-  date.setHours(0,0,0,0);
-  return date;
+function esc(str) {
+  return String(str).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+}
+function names(g) { return g.members.map(m => m.name).join(', '); }
+function badge(g, text = g.name) {
+  return `<span class="gbadge" style="background:${g.color.bg};color:${g.color.fg};">${esc(text)}</span>`;
+}
+const fmtLong  = day => JB6.fmtDay(day, {weekday:'short', day:'numeric', month:'short'});
+const fmtShort = day => JB6.fmtDay(day, {day:'numeric', month:'short'});
+const fmtFull  = day => JB6.fmtDay(day, {day:'numeric', month:'long', year:'numeric'});
+
+// The week shown as "current": this week, or the first rotation week if it hasn't started yet
+function displayedMonday() {
+  return Math.max(JB6.mondayOf(JB6.localToday()), MODEL.start);
 }
 
-function weekIdx(monday) {
-  return Math.round((monday - REF_MONDAY) / (7*24*3600*1000));
+function nextDuty(group, type, fromDay) {
+  for (const mon of JB6.weeks(MODEL)) {
+    if (mon < JB6.mondayOf(fromDay)) continue;
+    const d = JB6.dutiesForWeek(MODEL, mon).find(x => x.unit.id === group.unitId);
+    if (d && d[type].id === group.id) return mon;
+  }
+  return null;
 }
-
-// Trash rotation: +2 per week (mod 5), offset +1 to align with actual planning
-function trashGroupForWeek(wi) {
-  const count = GROUPS.length || 1;
-  return GROUPS[((wi * 2 + 1) % count + count) % count];
-}
-function dishGroupForWeek(wi) {
-  const count = GROUPS.length || 1;
-  return GROUPS[((wi * 2 + 2) % count + count) % count];
-}
-
-function fmtDate(s) {
-  return new Date(s).toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
-}
-function fmtShort(d) {
-  return d.toLocaleDateString('en-GB',{day:'numeric',month:'short'});
-}
-function names(g) { return g.members.map(m=>m.name).join(', '); }
-function bagClass(t) { return {blue:'blue-t',yellow:'yellow-t',green:'green-t',glass:'glass-t'}[t]||'blue-t'; }
-function bagEmoji(t) { return {blue:'🔵',yellow:'🟡',green:'🟩',glass:'⬜',bulk:'🟫'}[t]||'🗑️'; }
 
 // ══════════════════════════════════════════════
-// RENDER: TICKER
+// RENDER: TICKER + THIS WEEK
 // ══════════════════════════════════════════════
 function renderTicker() {
-  const wi = weekIdx(getMondayOfWeek());
-  const tg = trashGroupForWeek(wi);
-  const dg = dishGroupForWeek(wi);
-  const t = `🗑️ TRASH — ${tg.name.toUpperCase()}: ${names(tg)} <span class="sep">|</span> 🍽️ DISHWASHER — ${dg.name.toUpperCase()}: ${names(dg)} <span class="sep">|</span> 🗑️ TRASH — ${tg.name.toUpperCase()}: ${names(tg)} <span class="sep">|</span> 🍽️ DISHWASHER — ${dg.name.toUpperCase()}: ${names(dg)}`;
+  const today = JB6.localToday();
+  const mon = displayedMonday();
+  const duties = JB6.dutiesForWeek(MODEL, mon);
+  document.getElementById('ticker-label').textContent =
+    mon > JB6.mondayOf(today) ? `🏡 From ${fmtLong(mon)}` : '🏡 This week';
+  const t = duties.length
+    ? duties.map(d => `${esc(d.unit.name.toUpperCase())} — 🗑️ TRASH: ${esc(d.trash.short)} (${esc(names(d.trash))}) <span class="sep">·</span> 🍽️ DISHWASHER: ${esc(d.dish.short)} (${esc(names(d.dish))})`).join(' <span class="sep">|</span> ')
+    : 'The duty rotation has ended — update the rotation dates in residents.json';
   document.getElementById('ticker').innerHTML = `<span>${t}</span><span>${t}</span>`;
 }
 
-// ══════════════════════════════════════════════
-// STATIC DATA ONLY — no Firebase / storage layer
-// ══════════════════════════════════════════════
-let _tasks = {};
-let residentEditMode = false;
-let residentAdminTapCount = 0;
-let residentAdminTapTimer = null;
-
-function loadTasks() { return _tasks; }
-
-// ══════════════════════════════════════════════
-// TASK SYSTEM
-// ══════════════════════════════════════════════
-function openTaskPicker(taskId) {
-  showToast('Task tracking is intentionally disabled in this static repo setup. Update residents.json and regenerate the site when people move.');
-}
-function closeTaskPicker() {
-  document.getElementById('task-picker-overlay').classList.remove('open');
-}
-function completeTask(taskId, personName) {
-  showToast('Task updates are not persisted in this setup.');
-}
-function removeCompleter(taskId, personName) {
-  showToast('Task updates are not persisted in this setup.');
-}
-
-// ══════════════════════════════════════════════
-// RENDER: THIS WEEK
-// ══════════════════════════════════════════════
 function renderThisWeek() {
-  const mon = getMondayOfWeek();
-  const wi = weekIdx(mon);
-  const tg = trashGroupForWeek(wi);
-  const dg = dishGroupForWeek(wi);
-  const gi_t = GROUPS.indexOf(tg)+1;
-  const gi_d = GROUPS.indexOf(dg)+1;
-  const tasks = loadTasks();
+  const today = JB6.localToday();
+  const mon = displayedMonday();
+  const duties = JB6.dutiesForWeek(MODEL, mon);
+  const el = document.getElementById('this-week');
 
-  const pad2 = n => String(n).padStart(2,'0');
-  const dateStr = d => `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}`;
-  const sun = new Date(mon); sun.setDate(mon.getDate()+6);
-  const thu = new Date(mon); thu.setDate(mon.getDate()+3);
-  const fri = new Date(mon); fri.setDate(mon.getDate()+4);
-  const DAY_ABBR = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-
-  function taskRow(taskId, label, group, taskDate) {
-    const completions = tasks[taskId] || {};
-    const completers = Object.entries(completions)
-      .sort((a,b) => new Date(a[1].time) - new Date(b[1].time));
-    const gi = GROUPS.indexOf(group)+1;
-
-    const today = new Date(); today.setHours(0,0,0,0);
-    const isToday = taskDate && taskDate.toDateString() === today.toDateString();
-    const isPast  = taskDate && taskDate < today;
-
-    if (!completers.length) {
-      if (isToday) {
-        return `<div class="task-row pending" onclick="openTaskPicker('${taskId}')">
-          <span class="task-check">○</span>
-          <div class="task-info">
-            <div class="task-label">${label}</div>
-            <div class="task-pending-by"><span class="gbadge g${gi}b">${group.name}</span> · not done</div>
-          </div>
-          <span class="task-tap">tap ›</span>
-        </div>`;
-      }
-      return `<div class="task-row pending" style="opacity:.45;cursor:default;">
-        <span class="task-check">○</span>
-        <div class="task-info">
-          <div class="task-label">${label}</div>
-          <div class="task-pending-by"><span class="gbadge g${gi}b">${group.name}</span> · ${isPast ? 'not completed' : 'upcoming'}</div>
-        </div>
-      </div>`;
-    }
-
-    const completersHtml = completers.map(([name, c]) => {
-      const dt = new Date(c.time);
-      const timeStr = `${pad2(dt.getHours())}:${pad2(dt.getMinutes())}`;
-      const undoBtn = isToday
-        ? `<button class="task-undo" onclick="event.stopPropagation();removeCompleter('${taskId}','${name}')" title="Remove">×</button>`
-        : '';
-      return `<div class="task-completer">
-        <span class="completer-name">${name}</span>
-        <span class="completer-time">· ${timeStr}</span>
-        ${undoBtn}
-      </div>`;
-    }).join('');
-
-    const addBtn = isToday
-      ? `<button class="task-add-more" onclick="openTaskPicker('${taskId}')">+ add</button>`
-      : '';
-
-    return `<div class="task-row done">
-      <span class="task-check ok">✓</span>
-      <div class="task-info">
-        <div class="task-label">${label}</div>
-        <div class="task-completers">${completersHtml}</div>
-      </div>
-      ${addBtn}
-    </div>`;
+  if (!duties.length) {
+    el.innerHTML = `<div class="week-note">The duty rotation ended on ${fmtFull(MODEL.end)}. Extend <code>rotation.end</code> in residents.json.</div>`;
+    return;
   }
+  const upcoming = mon > JB6.mondayOf(today);
+  document.getElementById('week-title').textContent = upcoming ? 'First Week of Duties' : "This Week's Duties";
 
-  const dateFmt = d => d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'});
-  let trashHtml = taskRow(`trash_mon_${dateStr(mon)}`, `🔵⬜ Blue + White · ${dateFmt(mon)}`, tg, mon);
-  trashHtml    += taskRow(`trash_thu_${dateStr(thu)}`, `⬜🟡 White + Yellow bags · ${dateFmt(thu)}`,   tg, thu);
-  trashHtml    += taskRow(`trash_fri_${dateStr(fri)}`, `🟠 Orange bags · ${dateFmt(fri)}`,  tg, fri);
-  trashHtml    += taskRow(`glass_${dateStr(sun)}`,     `🟩 Glass · ${dateFmt(sun)}`,         tg, sun);
+  const taskRow = (day, text) => {
+    const cls = day === today ? ' today' : (day < today ? ' past' : '');
+    return `<div class="duty-task${cls}">${text}</div>`;
+  };
 
-  let dishHtml = '';
-  for (let i = 0; i < 7; i++) {
-    const d = new Date(mon); d.setDate(mon.getDate()+i);
-    const dayFmt = d.toLocaleDateString('en-GB',{day:'numeric',month:'short'});
-    dishHtml += taskRow(`dish_${dateStr(d)}`, `🍽️ ${DAY_ABBR[i]} ${dayFmt}`, dg, d);
-  }
-
-  document.getElementById('this-week').innerHTML = `
-    <div class="week-columns">
-      <div class="week-col">
-        <div class="week-col-header">🗑️ Trash <span class="gbadge g${gi_t}b">${tg.name}</span></div>
-        ${trashHtml}
+  const cols = duties.map(d => {
+    const trashTasks = JB6.TRASH_TASKS.map(t =>
+      taskRow(mon + t.offset, `${t.icon} ${fmtLong(mon + t.offset)} · ${esc(t.label)}`)).join('');
+    const dishToday = today >= mon && today < mon + 7
+      ? taskRow(today, `🍽️ Today: empty before 10:00`)
+      : taskRow(mon, `🍽️ Every morning ${fmtShort(mon)} – ${fmtShort(mon + 6)}, before 10:00`);
+    return `<div class="unit-col">
+      <h4>${esc(d.unit.name)}</h4>
+      <div class="duty-block">
+        <div class="duty-head">🗑️ Trash ${badge(d.trash, d.trash.short)}</div>
+        <div class="duty-names">${esc(names(d.trash))}</div>
+        ${trashTasks}
       </div>
-      <div class="week-col">
-        <div class="week-col-header">🍽️ Dishwasher <span class="gbadge g${gi_d}b">${dg.name}</span></div>
-        ${dishHtml}
+      <div class="duty-block">
+        <div class="duty-head">🍽️ Dishwasher ${badge(d.dish, d.dish.short)}</div>
+        <div class="duty-names">${esc(names(d.dish))}</div>
+        ${dishToday}
       </div>
-    </div>
-    <div style="font-size:11px;color:var(--green-muted);padding-top:8px;margin-top:6px;border-top:1px solid rgba(255,255,255,.08);">
-      📅 Week of ${mon.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}
     </div>`;
+  }).join('');
+
+  el.innerHTML = `
+    ${upcoming ? `<div class="week-note">The rotation starts on Monday ${fmtFull(mon)}. Here's the first week.</div>` : ''}
+    <div class="units-grid">${cols}</div>
+    <div class="week-foot">📅 Week of ${fmtFull(mon)} (Mon – Sun)</div>`;
 }
 
-
-// ══════════════════════════════════════════════
-// RENDER: RULES
-// ══════════════════════════════════════════════
 function renderRules() {
-  document.getElementById('rules').innerHTML = HOUSE_RULES.map(r=>`
+  document.getElementById('rules').innerHTML = houseRules().map((t, i) => `
     <div class="rule-item">
-      <span class="rule-num">${r.n}</span>
-      <span class="rule-text">${r.t}</span>
+      <span class="rule-num">${String(i + 1).padStart(2, '0')}</span>
+      <span class="rule-text">${t}</span>
     </div>`).join('');
+  document.getElementById('collection-days').innerHTML = COLLECTION_DAYS.join('<br>');
 }
-
 
 // ══════════════════════════════════════════════
 // RENDER: CALENDAR
 // ══════════════════════════════════════════════
-let calYear = new Date().getFullYear();
-let calMonth = new Date().getMonth();
 let calView = 'monthly';
-let calTableFilter = 'all';
+let calFilter = 'all';   // 'all' | unit id | group id
+let calYear, calMonth;
+
+function filterMatches(d, type) {
+  if (calFilter === 'all' || calFilter === d.unit.id) return true;
+  return d[type].id === calFilter;
+}
+function unitVisible(unit) {
+  return calFilter === 'all' || calFilter === unit.id || calFilter.startsWith(unit.id + '-');
+}
+
+function renderFilters() {
+  const btn = (id, label) => `<button class="fbtn${calFilter === id ? ' active' : ''}" onclick="setCalFilter('${id}')">${esc(label)}</button>`;
+  document.getElementById('cal-filters').innerHTML =
+    `<span style="font-size:12px;color:var(--text-light);">Show:</span>` +
+    btn('all', 'Everyone') +
+    MODEL.units.map(u => btn(u.id, u.name) + u.groups.map(g => btn(g.id, g.short)).join('')).join('');
+}
+
+function setCalFilter(id) { calFilter = id; renderFilters(); renderCalendar(); }
 
 function setCalView(v) {
   calView = v;
@@ -790,22 +545,16 @@ function setCalView(v) {
   renderCalendar();
 }
 
-function prevMonth() {
-  calMonth--;
-  if (calMonth < 0) { calMonth = 11; calYear--; }
-  renderCalendar();
+function monthKey(y, m) { return y * 12 + m; }
+function monthBounds() {
+  const s = JB6.dayToDate(MODEL.start), e = JB6.dayToDate(MODEL.end);
+  return [monthKey(s.getUTCFullYear(), s.getUTCMonth()), monthKey(e.getUTCFullYear(), e.getUTCMonth())];
 }
-function nextMonth() {
-  calMonth++;
-  if (calMonth > 11) { calMonth = 0; calYear++; }
+function shiftMonth(delta) {
+  const [min, max] = monthBounds();
+  const k = Math.min(max, Math.max(min, monthKey(calYear, calMonth) + delta));
+  calYear = Math.floor(k / 12); calMonth = k % 12;
   renderCalendar();
-}
-
-function setTableFilter(gid, btn) {
-  calTableFilter = gid;
-  document.querySelectorAll('#cal-table-wrap .fbtn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  renderTableView();
 }
 
 function renderCalendar() {
@@ -815,201 +564,138 @@ function renderCalendar() {
 
 function renderMonthlyView() {
   const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  const DAY_HDRS = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-  const today = new Date(); today.setHours(0,0,0,0);
-
+  const today = JB6.localToday();
+  const [min, max] = monthBounds();
   document.getElementById('cal-month-label').textContent = `${MONTH_NAMES[calMonth]} ${calYear}`;
+  document.getElementById('btn-prev-month').disabled = monthKey(calYear, calMonth) <= min;
+  document.getElementById('btn-next-month').disabled = monthKey(calYear, calMonth) >= max;
 
-  // Grid starts on Monday of the week containing the 1st
-  const firstOfMonth = new Date(calYear, calMonth, 1);
-  const dowFirst = firstOfMonth.getDay(); // 0=Sun
-  const startOffset = dowFirst === 0 ? 6 : dowFirst - 1;
-  const gridStart = new Date(firstOfMonth);
-  gridStart.setDate(1 - startOffset);
+  const first = JB6.parseDay(`${calYear}-${String(calMonth + 1).padStart(2,'0')}-01`);
+  const last  = JB6.parseDay(`${calMonth === 11 ? calYear + 1 : calYear}-${String(calMonth === 11 ? 1 : calMonth + 2).padStart(2,'0')}-01`) - 1;
 
-  // Grid ends on Sunday of the week containing the last day
-  const lastOfMonth = new Date(calYear, calMonth + 1, 0);
-  const dowLast = lastOfMonth.getDay();
-  const endOffset = dowLast === 0 ? 0 : 7 - dowLast;
-  const gridEnd = new Date(lastOfMonth);
-  gridEnd.setDate(lastOfMonth.getDate() + endOffset);
-
-  let html = DAY_HDRS.map(d => `<div class="month-day-hdr">${d}</div>`).join('');
-
-  const cur = new Date(gridStart);
-  while (cur <= gridEnd) {
-    const isThisMonth = cur.getMonth() === calMonth;
-    const isToday = cur.getTime() === today.getTime();
-    const dow = cur.getDay(); // 0=Sun, 1=Mon, ..., 6=Sat
-
-    // Week's Sunday (which is how TRASH_SCHEDULE indexes)
-    const sun = new Date(cur);
-    sun.setDate(cur.getDate() - dow);
-    const wi = weekIdx(sun);
-    const tg = trashGroupForWeek(wi);
-    const dg = dishGroupForWeek(wi);
-    const tgi = GROUPS.indexOf(tg) + 1;
-    const dgi = GROUPS.indexOf(dg) + 1;
-
-    let badges = `<span class="cal-badge dish">🍽️ G${dgi}</span>`;
-    if (dow === 1) badges += `<span class="cal-badge trash">🔵⬜️ G${tgi}</span>`;
-    if (dow === 0) badges += `<span class="cal-badge trash">🟩 G${tgi}</span>`;
-    if (dow === 4) badges += `<span class="cal-badge trash">🟡⬜ G${tgi}</span>`;
-    if (dow === 5) badges += `<span class="cal-badge trash">🟠 G${tgi}</span>`;
-
-    html += `<div class="month-cell${isThisMonth ? '' : ' other-month'}${isToday ? ' today' : ''}">
-      <div class="month-cell-num">${cur.getDate()}</div>
+  let html = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(d => `<div class="month-day-hdr">${d}</div>`).join('');
+  for (let day = JB6.mondayOf(first); day <= JB6.mondayOf(last) + 6; day++) {
+    const inMonth = day >= first && day <= last;
+    const task = JB6.trashTaskOn(day);
+    let badges = '';
+    for (const d of JB6.dutiesForWeek(MODEL, day)) {
+      if (task && filterMatches(d, 'trash')) {
+        badges += `<span class="cal-badge" style="background:${d.trash.color.bg};color:${d.trash.color.fg};" title="${esc(d.trash.name)}: ${esc(task.label)} — ${esc(names(d.trash))}">${task.icon} ${esc(d.trash.short)}</span>`;
+      }
+      if (filterMatches(d, 'dish')) {
+        badges += `<span class="cal-badge" style="background:${d.dish.color.bg};color:${d.dish.color.fg};opacity:.8;" title="${esc(d.dish.name)}: dishwasher — ${esc(names(d.dish))}">🍽️ ${esc(d.dish.short)}</span>`;
+      }
+    }
+    html += `<div class="month-cell${inMonth ? '' : ' other-month'}${day === today ? ' today' : ''}">
+      <div class="month-cell-num">${JB6.dayToDate(day).getUTCDate()}</div>
       ${badges}
     </div>`;
-    cur.setDate(cur.getDate() + 1);
   }
-
   document.getElementById('cal-monthly').innerHTML = html;
+  document.getElementById('cal-legend').innerHTML =
+    JB6.TRASH_TASKS.map(t => `${t.icon} ${esc(t.label)} (${esc(t.when)})`).join('<br>') +
+    '<br>🍽️ Dishwasher group of the week · hover a badge to see names';
 }
 
 function renderTableView() {
-  const today = new Date(); today.setHours(0,0,0,0);
-  const curSun = new Date(today);
-  curSun.setDate(today.getDate() - today.getDay());
+  const current = displayedMonday();
+  const units = MODEL.units.filter(unitVisible);
+  const groupFilter = MODEL.groups.find(g => g.id === calFilter);
+  const cell = g => `${badge(g, g.short)}<div class="chips">${g.members.map(m => `<span class="chip">${esc(m.name)}</span>`).join('')}</div>`;
 
-  const rows = TRASH_SCHEDULE
-    .filter(t => new Date(t.date) >= curSun)
-    .map(t => {
-      const sun = new Date(t.date);
-      const mon = new Date(sun); mon.setDate(sun.getDate() + 1);
-      const thu = new Date(mon); thu.setDate(mon.getDate() + 3);
-      const fri = new Date(mon); fri.setDate(mon.getDate() + 4);
-      const wi = weekIdx(sun);
-      const tg = trashGroupForWeek(wi);
-      const dg = dishGroupForWeek(wi);
-      const tgi = GROUPS.indexOf(tg) + 1;
-      const dgi = GROUPS.indexOf(dg) + 1;
-
-      const match = calTableFilter === 'all' || tg.id === calTableFilter || dg.id === calTableFilter;
-      const fmt = d => d.toLocaleDateString('en-GB', {day:'numeric', month:'short'});
-
-      return `<tr class="${match ? '' : 'hidden'}" data-trash="${tg.id}" data-dish="${dg.id}">
-        <td><strong>${fmt(mon)}</strong><br><span style="font-size:11px;color:var(--text-light);">${calYear !== mon.getFullYear() ? mon.getFullYear() : ''}</span></td>
-        <td>
-          <span class="gbadge g${tgi}b">${tg.name}</span>
-          <div class="chips">${tg.members.map(m=>`<span class="chip">${m.name}</span>`).join('')}</div>
-        </td>
-        <td style="font-size:12px;line-height:1.8;">
-          🟩 Glass · <strong>${fmt(sun)}</strong><br>
-          🔵⬜️ Blue + White · <strong>${fmt(mon)}</strong><br>
-          🟡⬜ Yellow + White · <strong>${fmt(thu)}</strong><br>
-          🟠 Orange · <strong>${fmt(fri)}</strong>
-        </td>
-        <td>
-          <span class="gbadge g${dgi}b">${dg.name}</span>
-          <div class="chips">${dg.members.map(m=>`<span class="chip">${m.name}</span>`).join('')}</div>
-        </td>
-      </tr>`;
+  const rows = JB6.weeks(MODEL).filter(mon => mon >= current).map(mon => {
+    const duties = JB6.dutiesForWeek(MODEL, mon).filter(d => unitVisible(d.unit));
+    if (groupFilter && !duties.some(d => d.trash.id === groupFilter.id || d.dish.id === groupFilter.id)) return '';
+    const tds = duties.map(d => {
+      const show = type => !groupFilter || d[type].id === groupFilter.id;
+      return `<td>${show('trash') ? cell(d.trash) : ''}</td><td>${show('dish') ? cell(d.dish) : ''}</td>`;
     }).join('');
+    return `<tr class="${mon === current ? 'current' : ''}">
+      <td><strong>${fmtShort(mon)}</strong><br><span style="font-size:11px;color:var(--text-light);">– ${fmtShort(mon + 6)} ${JB6.dayToDate(mon + 6).getUTCFullYear()}</span></td>
+      ${tds}
+    </tr>`;
+  }).join('');
 
   document.getElementById('cal-table').innerHTML = `
     <table class="sched-table">
       <thead><tr>
         <th>Week of</th>
-        <th>🗑️ Trash group</th>
-        <th>Collection days</th>
-        <th>🍽️ Dishwasher group</th>
+        ${units.map(u => `<th>🗑️ ${esc(u.name)} trash</th><th>🍽️ ${esc(u.name)} dishwasher</th>`).join('')}
       </tr></thead>
       <tbody>${rows}</tbody>
     </table>`;
 }
 
 // ══════════════════════════════════════════════
-// RENDER: RESIDENTS
+// RENDER: RESIDENTS + NEWCOMER BITS
 // ══════════════════════════════════════════════
 function renderGroups() {
-  document.getElementById('groups-grid').innerHTML = GROUPS.map((g,gi)=>`
-    <div class="grp-card">
-      <div class="grp-head ${g.hdr}">
-        <span class="grp-title">${g.name}</span>
-        <span class="gbadge ${g.color}">${g.members.length}</span>
-      </div>
-      ${g.members.map((m,mi)=>`
-        <div class="room-row">
-          <span class="room-lbl">${m.room}</span>
-          ${residentEditMode
-            ? `<input class="resident-edit-input" data-gi="${gi}" data-mi="${mi}" value="${escapeAttr(m.name)}" aria-label="${g.name} room ${m.room} resident name">`
-            : `<span class="res-name">${m.name}</span>`}
-        </div>`).join('')}
+  const today = JB6.localToday();
+  document.getElementById('groups-by-unit').innerHTML = MODEL.units.map(u => `
+    <div class="unit-heading">${esc(u.name)}</div>
+    <div class="unit-sub">${u.groups.length} groups rotating weekly${u.ambassador ? ` · Ambassador: <strong>${esc(u.ambassador)}</strong>` : ''}</div>
+    <div class="groups-grid">
+      ${u.groups.map(g => {
+        const nt = nextDuty(g, 'trash', today), nd = nextDuty(g, 'dish', today);
+        return `<div class="grp-card">
+          <div class="grp-head" style="background:${g.color.head};">
+            <span class="grp-title">${esc(g.name)}</span>
+            <span class="grp-count">${g.members.length} rooms</span>
+          </div>
+          ${g.members.map(m => `
+            <div class="room-row">
+              <span class="room-lbl">Room ${esc(m.room)}</span>
+              <span class="res-name">${esc(m.name)}</span>
+            </div>`).join('')}
+          <div class="grp-next">
+            Next 🗑️ trash: ${nt !== null ? `week of ${fmtShort(nt)}` : '—'}<br>
+            Next 🍽️ dishwasher: ${nd !== null ? `week of ${fmtShort(nd)}` : '—'}
+          </div>
+        </div>`;
+      }).join('')}
     </div>`).join('');
 
-  document.getElementById('rem-btns').innerHTML = GROUPS.map(g=>`
-    <button class="rem-btn" onclick="openGroupReminder('${g.id}')">💬 ${g.name}</button>`).join('');
+  document.getElementById('rem-btns').innerHTML = MODEL.groups.map(g =>
+    `<button class="rem-btn" onclick="openGroupReminder('${g.id}')">💬 ${esc(g.name)}</button>`).join('');
 
-  const panel = document.getElementById('resident-admin-panel');
-  if (panel) panel.classList.toggle('open', residentEditMode);
+  document.getElementById('duty-system').innerHTML = [
+    `Each unit has its own weekly rotation (Mon – Sun): ${MODEL.units.map(u => `${esc(u.name)} has ${u.groups.length} groups`).join(', ')}`,
+    ...JB6.TRASH_TASKS.map(t => `${t.icon} ${esc(t.label)}: ${esc(t.when)}`),
+    `🍽️ ${esc(JB6.DISH_RULE)}`,
+    'Check the Calendar tab for your schedule',
+    'Swaps OK — inform your group and the other group',
+  ].map(li => `<li>${li}</li>`).join('');
+
+  document.getElementById('contacts').innerHTML = [
+    ...MODEL.units.map(u => `${esc(u.name)} ambassador: ${u.ambassador ? `<strong>${esc(u.ambassador)}</strong>` : 'ask in the group chat'}`),
+    'Emergency maintenance: Cohabs app',
+    'House WhatsApp group',
+  ].map(li => `<li>${li}</li>`).join('');
 }
 
 // ══════════════════════════════════════════════
-// HIDDEN RESIDENT EDIT MODE
+// CALENDAR SUBSCRIBE / DOWNLOAD
 // ══════════════════════════════════════════════
-function escapeAttr(str) {
-  return String(str).replace(/[&<>"']/g, ch => ({
-    '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
-  }[ch]));
+function feedUrl(gid) {
+  return new URL(`calendars/${JB6.icsFileName(gid)}`, location.href).href;
 }
 
-function applyResidentNames(saved) {
-  if (!saved || typeof saved !== 'object') return;
-  GROUPS.forEach(g => {
-    const groupNames = saved[g.id];
-    if (!groupNames || typeof groupNames !== 'object') return;
-    g.members.forEach(m => {
-      if (typeof groupNames[m.room] === 'string' && groupNames[m.room].trim()) {
-        m.name = groupNames[m.room].trim();
-      }
-    });
-  });
-}
-
-function currentResidentNamesPayload() {
-  const payload = {};
-  GROUPS.forEach(g => {
-    payload[g.id] = {};
-    g.members.forEach(m => { payload[g.id][m.room] = m.name; });
-  });
-  return payload;
-}
-
-function refreshHouseViews() {
-  renderTicker();
-  renderThisWeek();
-  renderCalendar();
-  renderGroups();
-}
-
-function enableResidentEditing() {
-  residentEditMode = true;
-  renderGroups();
-  showToast('Resident edit mode enabled');
-}
-
-function disableResidentEditing() {
-  residentEditMode = false;
-  renderGroups();
-}
-
-
-
-// ══════════════════════════════════════════════
-// GROUP CALENDAR EXPORT
-// ══════════════════════════════════════════════
 function openGroupPicker() {
-  const hdrColors = {G1:'#2a2200',G2:'#0a1e3a',G3:'#1e0a2e',G4:'#2e0a0a',G5:'#0a1e0a'};
-  document.getElementById('group-picker-cards').innerHTML = GROUPS.map(g => `
-    <div style="border-radius:9px;overflow:hidden;border:1px solid var(--cream-dark);">
-      <div style="background:${hdrColors[g.id]};padding:10px 14px;font-family:'Playfair Display',serif;font-size:14px;color:#fff;">${g.name}</div>
-      <div style="padding:8px 14px 4px;font-size:12px;color:var(--text-light);line-height:1.6;">${g.members.map(m=>m.name).join('<br>')}</div>
-      <div style="padding:8px 14px 12px;display:flex;gap:8px;">
-        <button onclick="exportGroupICS('${g.id}',false)" style="flex:1;padding:7px 0;background:var(--gold);color:var(--green-deep);border:none;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;">📅 Add</button>
-        <button onclick="showRemoveHelp('${g.id}')" style="flex:1;padding:7px 0;background:var(--warm-white);color:#c0392b;border:1px solid #c0392b;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;">🗑️ Remove</button>
+  document.getElementById('group-picker-cards').innerHTML = MODEL.groups.map(g => {
+    const https = feedUrl(g.id);
+    const webcal = https.replace(/^https?:/, 'webcal:');
+    const google = `https://calendar.google.com/calendar/render?cid=${encodeURIComponent(webcal)}`;
+    return `<div class="picker-card">
+      <div class="picker-head" style="background:${g.color.head};">${esc(g.name)}</div>
+      <div style="padding:8px 14px 0;font-size:12px;color:var(--text-light);">${esc(names(g))}</div>
+      <div class="picker-links">
+        <a class="lnk-primary" href="${google}" target="_blank" rel="noopener">Subscribe in Google Calendar</a>
+        <a class="lnk-primary" href="${webcal}">Subscribe in Apple / Outlook</a>
+        <button class="lnk-secondary" onclick="copyFeed('${g.id}')">Copy subscription link</button>
+        <button class="lnk-secondary" onclick="downloadGroupICS('${g.id}')">Download .ics (one-off)</button>
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
   document.getElementById('group-picker-overlay').classList.add('open');
 }
 
@@ -1017,124 +703,71 @@ function closeGroupPicker() {
   document.getElementById('group-picker-overlay').classList.remove('open');
 }
 
-function showRemoveHelp(gid) {
-  closeGroupPicker();
-  const g = GROUPS.find(x => x.id === gid);
-  document.getElementById('remove-help-name').textContent = g.name;
-  document.getElementById('remove-help-overlay').classList.add('open');
+function copyFeed(gid) {
+  navigator.clipboard.writeText(feedUrl(gid)).then(() => showToast('Subscription link copied 📋'));
 }
 
-function exportGroupICS(gid, cancel) {
-  closeGroupPicker();
-  const g = GROUPS.find(x => x.id === gid);
-  const pad = n => String(n).padStart(2, '0');
-
-  const fmtDT = (d, h, m = 0) =>
-    `${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}T${pad(h)}${pad(m)}00`;
-
-  const alarm = `BEGIN:VALARM\r\nTRIGGER:-PT0M\r\nACTION:DISPLAY\r\nDESCRIPTION:Reminder\r\nEND:VALARM\r\n`;
-
-  const vevent = (uid, dtstart, dtend, summary, desc) => {
-    const status = cancel ? 'STATUS:CANCELLED\r\n' : '';
-    const alm    = cancel ? '' : alarm;
-    return `BEGIN:VEVENT\r\nUID:${uid}\r\nDTSTART:${dtstart}\r\nDTEND:${dtend}\r\nSUMMARY:${summary}\r\nDESCRIPTION:${desc}\r\nLOCATION:Jardin Botanique 6\\, Brussels\r\n${status}${alm}END:VEVENT\r\n`;
-  };
-
-  let events = '';
-
-  TRASH_SCHEDULE.forEach(t => {
-    const sun = new Date(t.date);                            // Sunday of that week
-    const mon = new Date(sun); mon.setDate(sun.getDate()+1); // Monday  (Blue collection)
-    const thu = new Date(sun); thu.setDate(sun.getDate()+4); // Thursday (Yellow collection)
-    const fri = new Date(sun); fri.setDate(sun.getDate()+5); // Friday  (Green collection)
-    const wi  = weekIdx(sun);
-    const tg  = trashGroupForWeek(wi);
-    const dg  = dishGroupForWeek(wi);
-    const mem = names(g);
-
-    if (tg.id === gid) {
-      events += vevent(`${gid}-${t.date}-glass@jb6`,  fmtDT(sun,20), fmtDT(sun,20,30),
-        `🟩 Glass out — ${g.name}`,  `Put glass bin outside Sunday evening at 8pm. ${mem}`);
-      events += vevent(`${gid}-${t.date}-blue@jb6`,   fmtDT(mon,18), fmtDT(mon,18,30),
-        `🔵⬜️ Blue+White bags out — ${g.name}`, `Put blue/PMC and white bags outside. ${mem}`);
-      events += vevent(`${gid}-${t.date}-yellow@jb6`, fmtDT(thu,18),  fmtDT(thu,18,30),
-        `🟡⬜ White+Yellow bags out — ${g.name}`, `Put white + yellow (paper) bags outside Thursday at 6pm. ${mem}`);
-      events += vevent(`${gid}-${t.date}-green@jb6`,  fmtDT(fri,18), fmtDT(fri,18,30),
-        `🟠 Orange bags out — ${g.name}`, `Put orange bags outside. ${mem}`);
-    }
-
-    if (dg.id === gid) {
-      events += vevent(`${gid}-${t.date}-dishes@jb6`, fmtDT(mon,8), fmtDT(mon,8,30),
-        `🍽️ Dishwasher week — ${g.name}`, `Your group empties the dishwasher this week (daily before 10:00). ${names(g)}`);
-    }
-  });
-
-  const method = cancel ? 'METHOD:CANCEL\r\n' : '';
-  const ics = `BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//JB6//Dashboard//EN\r\n${method}X-WR-CALNAME:JB6 Duties — ${g.name}\r\nX-WR-TIMEZONE:Europe/Brussels\r\n${events}END:VCALENDAR`;
+function downloadGroupICS(gid) {
   const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([ics], {type:'text/calendar'}));
-  a.download = `jb6-${gid.toLowerCase()}-duties${cancel ? '-CANCEL' : ''}.ics`;
+  a.href = URL.createObjectURL(new Blob([JB6.groupIcs(MODEL, gid)], {type:'text/calendar'}));
+  a.download = JB6.icsFileName(gid);
   a.click();
-  showToast(cancel ? `Cancel file ready — import it to remove all events` : `Calendar downloaded for ${g.name} 📅`);
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  showToast('Calendar file downloaded 📅');
 }
 
 // ══════════════════════════════════════════════
 // REMINDER MODAL
 // ══════════════════════════════════════════════
-function openReminder(gid, dateStr, type, label) {
-  const g = GROUPS.find(x=>x.id===gid);
-  const n = names(g);
-  const date = fmtDate(dateStr);
-  const msg = type==='trash'
-    ? `🏡 *Jardin Botanique 6 — Trash Reminder*\n\nHi ${n}! 👋\n\n*${g.name}* is on trash duty this week.\n\n🗑️ ${label}\n📅 ${date}\n⏰ Please put the bags outside *before 7:00 AM*\n\nThank you! 🌿`
-    : `🏡 *Jardin Botanique 6 — Dishwasher Reminder*\n\nHi ${n}! 👋\n\n*${g.name}* is on dishwasher duty this week.\n\n🍽️ Please empty the dishwasher *before 10:00 AM* each morning.\n📅 Week of ${date}\n\nThank you! 🌿`;
+function openGroupReminder(gid) {
+  const g = MODEL.groups.find(x => x.id === gid);
+  const mon = displayedMonday();
+  const d = JB6.dutiesForWeek(MODEL, mon).find(x => x.unit.id === g.unitId);
+  const hi = `🏡 *${MODEL.house}*\n\nHi ${names(g)}! 👋\n\n`;
+  let msg;
+  if (d && d.trash.id === gid) {
+    const tasks = JB6.TRASH_TASKS.map(t => `${t.icon} ${fmtLong(mon + t.offset)} — ${t.label}`).join('\n');
+    msg = `${hi}*${g.name}* is on *trash duty* the week of ${fmtFull(mon)}:\n\n${tasks}\n\nThank you! 🌿`;
+  } else if (d && d.dish.id === gid) {
+    msg = `${hi}*${g.name}* is on *dishwasher duty* the week of ${fmtFull(mon)}.\n\n🍽️ ${JB6.DISH_RULE}.\n\nThank you! 🌿`;
+  } else {
+    const nt = nextDuty(g, 'trash', mon), nd = nextDuty(g, 'dish', mon);
+    msg = `${hi}Heads-up on your next duties:\n\n🗑️ Trash: ${nt !== null ? `week of ${fmtFull(nt)}` : '—'}\n🍽️ Dishwasher: ${nd !== null ? `week of ${fmtFull(nd)}` : '—'}\n\nFull schedule: ${location.href.split('#')[0]}\n\nThank you! 🌿`;
+  }
   document.getElementById('modal-title').textContent = `Reminder — ${g.name}`;
   document.getElementById('modal-text').value = msg;
   document.getElementById('modal-overlay').classList.add('open');
 }
 
-function openGroupReminder(gid) {
-  const today = new Date();
-  const mon = getMondayOfWeek();
-  const wi = weekIdx(mon);
-  const tg = trashGroupForWeek(wi);
-  const sun = new Date(mon); sun.setDate(sun.getDate()+6);
-  const trash = TRASH_SCHEDULE.find(t=>{const d=new Date(t.date);return d>=mon&&d<=sun;});
-  if (tg.id===gid && trash) { openReminder(gid,trash.date,'trash',trash.label); return; }
-  const dg = dishGroupForWeek(wi);
-  if (dg.id===gid) { openReminder(gid,mon.toISOString().split('T')[0],'dishes','Dishwasher duty'); return; }
-  // Generic
-  const g = GROUPS.find(x=>x.id===gid);
-  document.getElementById('modal-title').textContent = `Reminder — ${g.name}`;
-  document.getElementById('modal-text').value = `🏡 *Jardin Botanique 6*\n\nHi ${names(g)}! 👋\n\nJust a heads-up to check your upcoming duties on the house dashboard. 📅\n\nThank you! 🌿`;
-  document.getElementById('modal-overlay').classList.add('open');
-}
-
 function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); }
 function copyModal() {
-  navigator.clipboard.writeText(document.getElementById('modal-text').value).then(()=>{
+  navigator.clipboard.writeText(document.getElementById('modal-text').value).then(() => {
     showToast('Copied! Paste into WhatsApp or Signal 💬');
     closeModal();
   });
 }
 
 function showTab(id, btn) {
-  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('tab-'+id).classList.add('active');
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
   if (btn) btn.classList.add('active');
   if (id === 'newcomer') initMap();
-  if (window.goatcounter?.count) window.goatcounter.count({ path: '/' + id, title: id });
+  history.replaceState(null, '', id === 'home' ? location.pathname + location.search : '#' + id);
 }
 
-// ══════════════════════════════════════════════
-// TOAST
-// ══════════════════════════════════════════════
+// Allow direct links like …/JB6/#calendar
+function openTabFromHash() {
+  const id = location.hash.slice(1);
+  const btn = [...document.querySelectorAll('.nav-btn')].find(b => b.getAttribute('onclick').includes(`'${id}'`));
+  if (id && btn) showTab(id, btn);
+}
+
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
   t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'), 3000);
+  setTimeout(() => t.classList.remove('show'), 3000);
 }
 
 // ══════════════════════════════════════════════
@@ -1157,7 +790,6 @@ const PLACES = [
   // Cultural
   {name:'Le Botanique (venue)',     cat:'cultural',  lat:50.8549274, lng:4.3652033, note:'Concerts & exhibitions · next door!'},
   {name:'Bozar',                    cat:'cultural',  lat:50.8442043, lng:4.3590833, note:'Centre for Fine Arts · Rue Ravenstein 23'},
-  // Social — add your favourites here!
 ];
 
 let mapInstance = null;
@@ -1169,13 +801,12 @@ const CAT_COLORS = {
 };
 
 function initMap() {
-  if (mapInstance) return;
+  if (mapInstance || typeof L === 'undefined') return;
   mapInstance = L.map('map').setView([50.8542519, 4.3679838], 16);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution:'© OpenStreetMap contributors', maxZoom:19
   }).addTo(mapInstance);
 
-  // House marker
   const houseIcon = L.divIcon({html:'<div style="background:#1a2e1a;color:#e8c87a;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:14px;border:2px solid #e8c87a;">🏡</div>', className:'', iconSize:[28,28], iconAnchor:[14,14]});
   L.marker([50.8542519, 4.3679838], {icon:houseIcon}).addTo(mapInstance).bindPopup('<strong>Jardin Botanique 6</strong><br>Rue Traversière 4, 1210 Saint-Josse');
 
@@ -1192,8 +823,9 @@ function initMap() {
 }
 
 function filterMap(cat, btn) {
-  document.querySelectorAll('#map-filter-btns .fbtn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('#map-filter-btns .fbtn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
+  if (!mapInstance) return;
   mapMarkers.forEach(m => {
     if (cat === 'all' || m._cat === cat) m.addTo(mapInstance);
     else mapInstance.removeLayer(m);
@@ -1203,40 +835,37 @@ function filterMap(cat, btn) {
 // ══════════════════════════════════════════════
 // INIT
 // ══════════════════════════════════════════════
-async function loadHouseConfig() {
+async function init() {
+  renderRules();
+  openTabFromHash();
   try {
-    const response = await fetch('./residents.json');
-    if (!response.ok) throw new Error('Could not fetch residents.json');
-    const data = await response.json();
-    if (typeof data.house === 'string' && data.house.trim()) {
-      HOUSE_NAME = data.house.trim();
-    }
-    if (Array.isArray(data.groups) && data.groups.length) {
-      GROUPS = data.groups.map(group => ({
-        ...group,
-        members: Array.isArray(group.members) ? group.members.map(member => ({ ...member })) : []
-      }));
-    }
+    const response = await fetch('residents.json', {cache:'no-cache'});
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    MODEL = JB6.buildModel(await response.json());
   } catch (error) {
-    GROUPS = DEFAULT_GROUPS.map(group => ({
-      ...group,
-      members: group.members.map(member => ({ ...member }))
-    }));
+    const err = document.getElementById('load-error');
+    err.innerHTML = `<strong>Couldn't load residents.json</strong> (${esc(error.message)}).<br>` +
+      (location.protocol === 'file:'
+        ? 'Browsers block this when index.html is opened as a file. Preview it with a local server instead, e.g. <code>npx serve</code> or <code>python -m http.server</code> in this folder.'
+        : 'Check that residents.json is valid JSON (a missing comma or quote is the usual cause).');
+    err.classList.add('show');
+    return;
   }
 
-  if (window.location.hostname === 'localhost' || window.location.protocol === 'file:') {
-    document.title = `${HOUSE_NAME} — House Dashboard`;
-  }
+  const shown = JB6.dayToDate(displayedMonday());
+  calYear = shown.getUTCFullYear();
+  calMonth = shown.getUTCMonth();
+  document.getElementById('cal-sub').textContent =
+    `Trash & dishwasher duties · each unit rotates separately · ${fmtFull(MODEL.start)} – ${fmtFull(MODEL.end)}`;
 
   renderTicker();
   renderThisWeek();
-  renderRules();
+  renderFilters();
   renderCalendar();
   renderGroups();
-  if (new URLSearchParams(window.location.search).get('editResidents') === '1') enableResidentEditing();
 }
 
-loadHouseConfig();
+init();
 </script>
 </body>
 </html>

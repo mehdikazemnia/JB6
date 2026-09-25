@@ -1,103 +1,83 @@
 {
   "house": "Jardin Botanique 6",
-  "referenceMonday": "2025-02-09",
+  "rotation": {
+    "start": "2026-09-28",
+    "end": "2027-12-31"
+  },
   "units": [
     {
-      "id": "U1",
       "name": "Unit 1",
-      "ambassador": { "name": "Mehdi" },
-      "note": "Rooms 1-16 grouped 4 by 4"
+      "ambassador": "Mehdi",
+      "groups": [
+        {
+          "color": "yellow",
+          "members": [
+            { "room": 1, "name": "Eloise" },
+            { "room": 2, "name": "Aurore" },
+            { "room": 3, "name": "Polad" },
+            { "room": 4, "name": "Amin" }
+          ]
+        },
+        {
+          "color": "blue",
+          "members": [
+            { "room": 5, "name": "Mehdi" },
+            { "room": 6, "name": "Maria" },
+            { "room": 7, "name": "Amira" },
+            { "room": 8, "name": "Tibo" }
+          ]
+        },
+        {
+          "color": "purple",
+          "members": [
+            { "room": 9, "name": "Deniz" },
+            { "room": 10, "name": "Louise" },
+            { "room": 11, "name": "Nizar" },
+            { "room": 12, "name": "Samy" }
+          ]
+        },
+        {
+          "color": "red",
+          "members": [
+            { "room": 13, "name": "Seoyeon" },
+            { "room": 14, "name": "Mariana" },
+            { "room": 15, "name": "Seb/Martyna" },
+            { "room": 16, "name": "Nadjib" }
+          ]
+        }
+      ]
     },
     {
-      "id": "U2",
       "name": "Unit 2",
-      "ambassador": { "name": "Aurora" },
-      "note": "Rooms 1-12 grouped 4 by 4"
-    }
-  ],
-  "groups": [
-    {
-      "id": "U1-G1",
-      "unit": "U1",
-      "name": "Unit 1 · Group 1",
-      "color": "yellow",
-      "members": [
-        { "room": "1", "name": "Eloise" },
-        { "room": "2", "name": "Aurore" },
-        { "room": "3", "name": "Polad" },
-        { "room": "4", "name": "Amin" }
-      ]
-    },
-    {
-      "id": "U1-G2",
-      "unit": "U1",
-      "name": "Unit 1 · Group 2",
-      "color": "blue",
-      "members": [
-        { "room": "5", "name": "Mehdi" },
-        { "room": "6", "name": "Maria" },
-        { "room": "7", "name": "Amira" },
-        { "room": "8", "name": "Tibo" }
-      ]
-    },
-    {
-      "id": "U1-G3",
-      "unit": "U1",
-      "name": "Unit 1 · Group 3",
-      "color": "purple",
-      "members": [
-        { "room": "9", "name": "Deniz" },
-        { "room": "10", "name": "Louise" },
-        { "room": "11", "name": "Nizar" },
-        { "room": "12", "name": "Samy" }
-      ]
-    },
-    {
-      "id": "U1-G4",
-      "unit": "U1",
-      "name": "Unit 1 · Group 4",
-      "color": "red",
-      "members": [
-        { "room": "13", "name": "Seoyeon" },
-        { "room": "14", "name": "Mariana" },
-        { "room": "15", "name": "Seb/Martyna" },
-        { "room": "16", "name": "Nadjib" }
-      ]
-    },
-    {
-      "id": "U2-G1",
-      "unit": "U2",
-      "name": "Unit 2 · Group 1",
-      "color": "green",
-      "members": [
-        { "room": "1", "name": "Auxence" },
-        { "room": "2", "name": "Arshia" },
-        { "room": "3", "name": "Dhir" },
-        { "room": "4", "name": "Laura" }
-      ]
-    },
-    {
-      "id": "U2-G2",
-      "unit": "U2",
-      "name": "Unit 2 · Group 2",
-      "color": "grey",
-      "members": [
-        { "room": "5", "name": "Haitham" },
-        { "room": "6", "name": "Aaryaman" },
-        { "room": "7", "name": "Aurora" },
-        { "room": "8", "name": "Marco" }
-      ]
-    },
-    {
-      "id": "U2-G3",
-      "unit": "U2",
-      "name": "Unit 2 · Group 3",
-      "color": "orange",
-      "members": [
-        { "room": "9", "name": "Gabriel" },
-        { "room": "10", "name": "Joan" },
-        { "room": "11", "name": "Elisa" },
-        { "room": "12", "name": "Erwan" }
+      "ambassador": "Aurora",
+      "groups": [
+        {
+          "color": "green",
+          "members": [
+            { "room": 1, "name": "Auxence" },
+            { "room": 2, "name": "Arshia" },
+            { "room": 3, "name": "Dhir" },
+            { "room": 4, "name": "Laura" }
+          ]
+        },
+        {
+          "color": "orange",
+          "members": [
+            { "room": 5, "name": "Haitham" },
+            { "room": 6, "name": "Aaryaman" },
+            { "room": 7, "name": "Aurora" },
+            { "room": 8, "name": "Marco" }
+          ]
+        },
+        {
+          "color": "teal",
+          "members": [
+            { "room": 9, "name": "Gabriel" },
+            { "room": 10, "name": "Joan" },
+            { "room": 11, "name": "Elisa" },
+            { "room": 12, "name": "Erwan" }
+          ]
+        }
       ]
     }
   ]
