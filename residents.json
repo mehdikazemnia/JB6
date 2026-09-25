@@ -5,13 +5,13 @@
     {
       "id": "U1",
       "name": "Unit 1",
-      "ambassador": { "name": "TBD" },
+      "ambassador": { "name": "Mehdi" },
       "note": "Rooms 1-16 grouped 4 by 4"
     },
     {
       "id": "U2",
       "name": "Unit 2",
-      "ambassador": { "name": "TBD" },
+      "ambassador": { "name": "Aurora" },
       "note": "Rooms 1-12 grouped 4 by 4"
     }
   ],
@@ -22,10 +22,10 @@
       "name": "Unit 1 · Group 1",
       "color": "yellow",
       "members": [
-        { "room": "1", "name": "" },
-        { "room": "2", "name": "" },
-        { "room": "3", "name": "" },
-        { "room": "4", "name": "" }
+        { "room": "1", "name": "Eloise" },
+        { "room": "2", "name": "Aurore" },
+        { "room": "3", "name": "Polad" },
+        { "room": "4", "name": "Amin" }
       ]
     },
     {
@@ -34,10 +34,10 @@
       "name": "Unit 1 · Group 2",
       "color": "blue",
       "members": [
-        { "room": "5", "name": "" },
-        { "room": "6", "name": "" },
-        { "room": "7", "name": "" },
-        { "room": "8", "name": "" }
+        { "room": "5", "name": "Mehdi" },
+        { "room": "6", "name": "Maria" },
+        { "room": "7", "name": "Amira" },
+        { "room": "8", "name": "Tibo" }
       ]
     },
     {
@@ -46,10 +46,10 @@
       "name": "Unit 1 · Group 3",
       "color": "purple",
       "members": [
-        { "room": "9", "name": "" },
-        { "room": "10", "name": "" },
-        { "room": "11", "name": "" },
-        { "room": "12", "name": "" }
+        { "room": "9", "name": "Deniz" },
+        { "room": "10", "name": "Louise" },
+        { "room": "11", "name": "Nizar" },
+        { "room": "12", "name": "Samy" }
       ]
     },
     {
@@ -58,10 +58,10 @@
       "name": "Unit 1 · Group 4",
       "color": "red",
       "members": [
-        { "room": "13", "name": "" },
-        { "room": "14", "name": "" },
-        { "room": "15", "name": "" },
-        { "room": "16", "name": "" }
+        { "room": "13", "name": "Seoyeon" },
+        { "room": "14", "name": "Mariana" },
+        { "room": "15", "name": "Seb/Martyna" },
+        { "room": "16", "name": "Nadjib" }
       ]
     },
     {
@@ -70,10 +70,10 @@
       "name": "Unit 2 · Group 1",
       "color": "green",
       "members": [
-        { "room": "1", "name": "" },
-        { "room": "2", "name": "" },
-        { "room": "3", "name": "" },
-        { "room": "4", "name": "" }
+        { "room": "1", "name": "Auxence" },
+        { "room": "2", "name": "Arshia" },
+        { "room": "3", "name": "Dhir" },
+        { "room": "4", "name": "Laura" }
       ]
     },
     {
@@ -82,10 +82,10 @@
       "name": "Unit 2 · Group 2",
       "color": "grey",
       "members": [
-        { "room": "5", "name": "" },
-        { "room": "6", "name": "" },
-        { "room": "7", "name": "" },
-        { "room": "8", "name": "" }
+        { "room": "5", "name": "Haitham" },
+        { "room": "6", "name": "Aaryaman" },
+        { "room": "7", "name": "Aurora" },
+        { "room": "8", "name": "Marco" }
       ]
     },
     {
@@ -94,10 +94,10 @@
       "name": "Unit 2 · Group 3",
       "color": "orange",
       "members": [
-        { "room": "9", "name": "" },
-        { "room": "10", "name": "" },
-        { "room": "11", "name": "" },
-        { "room": "12", "name": "" }
+        { "room": "9", "name": "Gabriel" },
+        { "room": "10", "name": "Joan" },
+        { "room": "11", "name": "Elisa" },
+        { "room": "12", "name": "Erwan" }
       ]
     }
   ]

@@ -9,10 +9,6 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-<!-- GoatCounter analytics — replace YOUR_CODE with your goatcounter.com subdomain -->
-<script data-goatcounter="https://jb6.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
-
 <style>
   :root {
     --green-deep: #1a2e1a;
@@ -76,52 +72,6 @@
   .bounce { animation:bounce 1s ease-in-out infinite; display:inline-block; }
   .kitchen-warn { color:#c0392b; font-weight:600; font-size:14px; text-align:center; margin-bottom:18px; letter-spacing:.03em; }
 
-  /* TUTORIAL */
-  .tutorial-shell { display:grid; grid-template-columns:minmax(0,1.65fr) 320px; gap:18px; align-items:stretch; }
-  .tutorial-stage { background:var(--green-deep); border-radius:12px; border:1px solid rgba(196,151,58,.25); box-shadow:0 8px 24px var(--shadow); overflow:hidden; min-height:520px; display:flex; flex-direction:column; }
-  .tutorial-screen { flex:1; padding:28px; display:flex; flex-direction:column; gap:16px; position:relative; overflow:hidden; }
-  .tutorial-screen::after { content:'JB6'; position:absolute; right:22px; bottom:-10px; font-family:'Playfair Display',serif; font-size:96px; line-height:1; color:rgba(255,255,255,.035); pointer-events:none; }
-  .tutorial-kicker { font-family:'DM Mono',monospace; font-size:11px; color:var(--gold-light); letter-spacing:.12em; text-transform:uppercase; }
-  .tutorial-title { font-family:'Playfair Display',serif; font-size:clamp(25px,4vw,42px); color:var(--cream); line-height:1.05; max-width:620px; }
-  .tutorial-visual { flex:1; min-height:260px; border-radius:10px; border:1px solid rgba(255,255,255,.11); background:rgba(255,255,255,.05); padding:18px; display:flex; align-items:center; justify-content:center; position:relative; z-index:1; }
-  .tutorial-caption { min-height:64px; background:rgba(0,0,0,.24); color:var(--green-pale); border-left:3px solid var(--gold); border-radius:8px; padding:14px 16px; font-size:14px; line-height:1.55; position:relative; z-index:1; }
-  .tutorial-controls { display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(0,0,0,.22); border-top:1px solid rgba(255,255,255,.08); }
-  .tutorial-play { background:var(--gold); color:var(--green-deep); border:none; border-radius:8px; padding:8px 14px; font-family:'DM Sans',sans-serif; font-size:13px; font-weight:700; cursor:pointer; min-width:86px; }
-  .tutorial-time { font-family:'DM Mono',monospace; color:var(--green-muted); font-size:12px; white-space:nowrap; }
-  .tutorial-progress { flex:1; height:7px; background:rgba(255,255,255,.12); border-radius:999px; overflow:hidden; }
-  .tutorial-progress-bar { width:0%; height:100%; background:var(--gold-light); border-radius:999px; transition:width .25s linear; }
-  .tutorial-side { background:var(--warm-white); border:1px solid rgba(74,124,47,.13); border-radius:12px; padding:18px; box-shadow:0 2px 10px var(--shadow); }
-  .tutorial-side-title { font-size:11px; font-weight:700; color:var(--gold); letter-spacing:.08em; text-transform:uppercase; margin-bottom:10px; }
-  .tutorial-chapters { display:flex; flex-direction:column; gap:8px; }
-  .tutorial-chapter { width:100%; text-align:left; border:1px solid var(--cream-dark); background:var(--warm-white); color:var(--text-mid); border-radius:8px; padding:10px 11px; cursor:pointer; font-family:'DM Sans',sans-serif; transition:all .2s; }
-  .tutorial-chapter:hover { border-color:var(--green-muted); background:rgba(74,124,47,.06); }
-  .tutorial-chapter.active { border-color:var(--green-deep); background:var(--green-pale); color:var(--green-deep); }
-  .tutorial-chapter strong { display:block; font-size:13px; margin-bottom:2px; }
-  .tutorial-chapter span { display:block; font-size:11px; color:var(--text-light); }
-  .tutorial-actions { display:grid; gap:8px; }
-  .tutorial-actions button { text-align:left; border:1px solid rgba(74,124,47,.25); background:rgba(74,124,47,.08); color:var(--green-light); border-radius:8px; padding:9px 11px; cursor:pointer; font-family:'DM Sans',sans-serif; font-size:13px; font-weight:600; }
-  .tutorial-actions button:hover { background:rgba(74,124,47,.15); }
-  .tut-ui { width:100%; max-width:610px; display:grid; gap:12px; }
-  .tut-topbar { height:34px; background:rgba(255,255,255,.1); border-radius:8px; display:flex; align-items:center; gap:8px; padding:0 10px; }
-  .tut-dot { width:8px; height:8px; border-radius:50%; background:var(--gold-light); opacity:.8; }
-  .tut-card { background:var(--warm-white); border-radius:8px; padding:14px; color:var(--text-dark); box-shadow:0 5px 18px rgba(0,0,0,.18); }
-  .tut-card.dark { background:#213b21; color:var(--cream); border:1px solid rgba(255,255,255,.12); }
-  .tut-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-  .tut-line { height:9px; border-radius:999px; background:var(--cream-dark); margin:7px 0; }
-  .tut-line.green { background:var(--green-muted); }
-  .tut-line.gold { background:var(--gold-light); }
-  .tut-pill-row { display:flex; gap:6px; flex-wrap:wrap; margin-top:8px; }
-  .tut-pill { display:inline-flex; align-items:center; gap:4px; border-radius:999px; background:var(--green-pale); color:var(--green-deep); font-size:11px; padding:4px 8px; }
-  .tut-calendar-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; }
-  .tut-day { min-height:38px; border-radius:6px; background:rgba(255,255,255,.9); color:var(--text-mid); font-size:10px; padding:4px; }
-  .tut-day.mark { outline:2px solid var(--gold); }
-  .tut-badge { display:block; margin-top:3px; border-radius:3px; padding:1px 3px; background:var(--green-pale); color:var(--green-mid); overflow:hidden; white-space:nowrap; }
-  .tut-task { display:flex; align-items:center; gap:8px; padding:8px; border-radius:7px; margin-bottom:6px; background:rgba(255,255,255,.08); color:var(--cream); }
-  .tut-task.done { background:rgba(74,124,47,.28); }
-  .tut-medal { font-size:24px; width:34px; text-align:center; }
-  @media(max-width:850px){ .tutorial-shell{grid-template-columns:1fr;} .tutorial-stage{min-height:auto;} .tutorial-visual{min-height:230px;} }
-  @media(max-width:900px){ .intro-pop{font-size:12px;} }
-  @media(max-width:580px){ .tutorial-screen{padding:20px;} .tutorial-controls{flex-wrap:wrap;} .tutorial-time{order:3;width:100%;} .tut-grid{grid-template-columns:1fr;} }
 
   /* HOME GRID */
   .home-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
@@ -279,22 +229,6 @@
   .name-btn { padding:9px 6px; background:var(--cream); border:1px solid var(--cream-dark); border-radius:7px; font-family:'DM Sans',sans-serif; font-size:12px; font-weight:500; cursor:pointer; transition:all .15s; color:var(--text-dark); text-align:center; }
   .name-btn:hover { background:var(--green-pale); border-color:var(--green-muted); }
 
-  /* LEADERBOARD */
-  .lb-month { font-size:13px; color:var(--text-light); margin-bottom:22px; font-style:italic; }
-  .lb-row { display:flex; align-items:center; gap:14px; padding:14px 18px; background:var(--warm-white); border-radius:10px; border:1px solid rgba(74,124,47,.13); margin-bottom:10px; box-shadow:0 1px 4px var(--shadow); }
-  .lb-rank { font-size:24px; flex-shrink:0; width:34px; text-align:center; }
-  .lb-name { font-size:15px; font-weight:500; color:var(--text-dark); flex:1; }
-  .lb-bar-wrap { flex:2; }
-  .lb-bar-track { height:6px; background:var(--cream-dark); border-radius:3px; overflow:hidden; }
-  .lb-bar-fill { height:100%; background:var(--green-light); border-radius:3px; transition:width .4s; }
-  .lb-count { font-family:'DM Mono',monospace; font-size:12px; color:var(--text-light); white-space:nowrap; }
-  .lb-empty { text-align:center; padding:50px 20px; color:var(--text-light); font-size:14px; line-height:1.8; }
-  @media(max-width:900px){ .lb-grid{ grid-template-columns:1fr !important; } }
-  @keyframes lb-wave { 0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(196,151,58,0)} 40%{transform:scale(1.07);box-shadow:0 0 0 6px rgba(196,151,58,.22)} 70%{transform:scale(1.02);box-shadow:0 0 0 11px rgba(196,151,58,0)} }
-  .btn-lb-wave { animation: lb-wave 2.8s ease-in-out infinite; }
-  .lb-mode-btn { padding:6px 16px; border-radius:20px; border:1px solid var(--green-muted); background:transparent; color:var(--text-mid); font-family:'DM Sans',sans-serif; font-size:13px; cursor:pointer; transition:all .15s; }
-  .lb-mode-btn.active { background:var(--green-light); border-color:var(--green-light); color:#fff; font-weight:600; }
-  .lb-mode-btn:not(.active):hover { background:var(--green-pale); }
 </style>
 </head>
 <body>
@@ -312,55 +246,16 @@
   <div class="header-inner">
   <div class="house-title">Jardin <em>Botanique</em> 6</div>
   <div class="house-meta">Community dashboard</div>
-  <div class="intro-pop" onclick="startTutorialFromGuide()" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();startTutorialFromGuide();}">New here? Click for a quick intro</div>
   <nav class="nav">
     <button class="nav-btn active" onclick="showTab('home',this)">Home</button>
     <button class="nav-btn" onclick="showTab('calendar',this)">Calendar</button>
     <button class="nav-btn" onclick="showTab('newcomer',this)">Newcomer Guide</button>
-    <button class="nav-btn" onclick="showTab('leaderboard',this)">Leaderboard</button>
     <button class="nav-btn" onclick="showTab('residents',this)">Residents</button>
   </nav>
   </div>
 </div>
 
 <div class="content">
-
-<!-- ══════════ TUTORIAL ══════════ -->
-<div class="tab-panel" id="tab-tutorial">
-  <div class="section-title">Newcomer Video Tutorial</div>
-  <div class="section-sub">A quick guided tour of the JB6 dashboard: duties, calendar imports, task check-offs, rankings, and house basics.</div>
-
-  <div class="tutorial-shell" aria-label="JB6 newcomer video tutorial">
-    <div class="tutorial-stage">
-      <div class="tutorial-screen" id="tutorial-screen">
-        <div class="tutorial-kicker" id="tutorial-kicker">Welcome</div>
-        <div class="tutorial-title" id="tutorial-title">Welcome to JB6</div>
-        <div class="tutorial-visual" id="tutorial-visual"></div>
-        <div class="tutorial-caption" id="tutorial-caption"></div>
-      </div>
-      <div class="tutorial-controls">
-        <button class="tutorial-play" id="tutorial-play" onclick="toggleTutorialPlayback()">▶ Play</button>
-        <div class="tutorial-time" id="tutorial-time">0:00 / 0:00</div>
-        <div class="tutorial-progress" aria-hidden="true">
-          <div class="tutorial-progress-bar" id="tutorial-progress-bar"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="tutorial-side">
-      <div class="tutorial-side-title">Chapters</div>
-      <div class="tutorial-chapters" id="tutorial-chapters"></div>
-
-      <div class="tutorial-side-title" style="margin-top:18px;">Try It Now</div>
-      <div class="tutorial-actions">
-        <button onclick="tutorialGoTo('calendar')">📅 Import my calendar</button>
-        <button onclick="tutorialGoTo('home')">✓ Check off a task</button>
-        <button onclick="tutorialGoTo('leaderboard')">🏆 View leaderboard</button>
-        <button onclick="tutorialGoTo('newcomer')">🌱 Open newcomer guide</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- ══════════ HOME ══════════ -->
 <div class="tab-panel active" id="tab-home">
@@ -370,7 +265,6 @@
     <div class="card week-card">
       <div class="card-title">
         <div class="card-icon">📅</div>This Week's Duties
-        <button onclick="showLeaderboard()" class="btn-lb-wave" style="margin-left:auto;background:rgba(196,151,58,.15);border:1px solid rgba(196,151,58,.3);color:var(--gold-light);font-family:'DM Sans',sans-serif;font-size:11px;padding:4px 10px;border-radius:20px;cursor:pointer;white-space:nowrap;">🏆 Leaderboard</button>
       </div>
       <div id="this-week"></div>
     </div>
@@ -460,23 +354,9 @@
 <div class="tab-panel" id="tab-newcomer">
   <div class="nc-hero">
     <h2>Welcome to Jardin Botanique 6 🌱</h2>
-    <p>Start with the dashboard tutorial, then use this guide for the practical house basics.</p>
-    <button onclick="startTutorialFromGuide()" style="margin-top:18px;background:var(--gold);color:var(--green-deep);border:none;border-radius:8px;padding:10px 18px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">▶ Watch dashboard tutorial</button>
+    <p>Use this guide for the practical house basics and the current duties for the week.</p>
   </div>
   <div class="info-grid">
-    <div class="info-card" style="grid-column:1/-1;">
-      <h3>💬 WhatsApp Groups</h3>
-      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;">
-        <a href="https://chat.whatsapp.com/J6zQf7K3vWeC8DPrX3x7Yx?s=cl&p=i&mlu=1" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;text-decoration:none;padding:10px 16px;border:1px solid rgba(74,124,47,.3);border-radius:8px;background:rgba(74,124,47,.08);color:var(--green-light);font-weight:500;font-size:13px;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          JB6 House Group
-        </a>
-        <a href="https://chat.whatsapp.com/KQDrjWbt5KmDeyWAXrKAdX?s=cl&p=i&mlu=1" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;text-decoration:none;padding:10px 16px;border:1px solid rgba(74,124,47,.3);border-radius:8px;background:rgba(74,124,47,.08);color:var(--green-light);font-weight:500;font-size:13px;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Cohabs General Group
-        </a>
-      </div>
-    </div>
     <div class="info-card">
       <h3>🏠 Common Areas</h3>
       <ul class="info-list">
@@ -560,25 +440,6 @@
   </div>
 </div>
 
-<!-- ══════════ LEADERBOARD ══════════ -->
-<div class="tab-panel" id="tab-leaderboard">
-  <div style="display:flex;justify-content:center;gap:6px;margin-bottom:24px;">
-    <button class="lb-mode-btn active" data-mode="recent" onclick="setLbMode('recent')">Last 4 weeks</button>
-    <button class="lb-mode-btn" data-mode="alltime" onclick="setLbMode('alltime')">All time</button>
-  </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;" class="lb-grid">
-    <div>
-      <div class="section-title">Top 5 🏆</div>
-      <div class="section-sub" id="lb-sub-top">Most tasks completed in the last 4 weeks</div>
-      <div id="leaderboard-top"></div>
-    </div>
-    <div>
-      <div class="section-title">Bottom 5 😬</div>
-      <div class="section-sub" id="lb-sub-bot">Fewest tasks completed in the last 4 weeks</div>
-      <div id="leaderboard-bottom"></div>
-    </div>
-  </div>
-</div>
 
 </div><!-- /content -->
 
@@ -639,7 +500,7 @@
 // ══════════════════════════════════════════════
 // DATA  — source of truth lives in residents.json
 // ══════════════════════════════════════════════
-const HOUSE_NAME = 'Jardin Botanique 6';
+let HOUSE_NAME = 'Jardin Botanique 6';
 const DEFAULT_GROUPS = [
   { id:'U1-G1', unit:'U1', name:'Unit 1 · Group 1', color:'g1b', hdr:'gh-g1', members:[
     {room:'1', name:''},
@@ -899,98 +760,6 @@ function renderThisWeek() {
     </div>`;
 }
 
-// ══════════════════════════════════════════════
-// RENDER: LEADERBOARD
-// ══════════════════════════════════════════════
-let lbMode = 'recent'; // 'recent' | 'alltime'
-
-function setLbMode(mode) {
-  lbMode = mode;
-  document.querySelectorAll('.lb-mode-btn').forEach(b => {
-    b.classList.toggle('active', b.dataset.mode === mode);
-  });
-  renderLeaderboard();
-}
-
-function renderLeaderboard() {
-  const elTop = document.getElementById('leaderboard-top');
-  const elBot = document.getElementById('leaderboard-bottom');
-  if (!elTop || !elBot) return;
-
-  const tasks = loadTasks();
-  const now = new Date();
-  const lmStart = new Date(now - 28 * 24 * 3600 * 1000);
-  const lmEnd   = now;
-  const fmtDate = d => d.toLocaleDateString('en-GB',{day:'numeric',month:'short'});
-  const periodLabel = lbMode === 'recent'
-    ? `${fmtDate(lmStart)} – ${fmtDate(lmEnd)}`
-    : 'All time';
-  const subText = lbMode === 'recent' ? 'in the last 4 weeks' : 'of all time';
-  const elSubTop = document.getElementById('lb-sub-top');
-  const elSubBot = document.getElementById('lb-sub-bot');
-  if (elSubTop) elSubTop.textContent = `Most tasks completed ${subText}`;
-  if (elSubBot) elSubBot.textContent = `Fewest tasks completed ${subText}`;
-
-  // Seed all residents with 0 so everyone appears in bottom 5
-  const allNames = GROUPS.flatMap(g => g.members.map(m => m.name));
-  const currentResidents = new Set(allNames);
-  const counts = Object.fromEntries(allNames.map(n => [n, 0]));
-  for (const [taskId, completions] of Object.entries(tasks)) {
-    if (!completions || typeof completions !== 'object') continue;
-    const taskDate = new Date(taskId.slice(-10));
-    for (const [name, c] of Object.entries(completions)) {
-      if (!currentResidents.has(name)) continue;
-      if (typeof c !== 'object' || c === null) continue;
-      if (lbMode === 'recent') {
-        const t = c?.time ? new Date(c.time) : taskDate;
-        if (!(t >= lmStart && t <= lmEnd)) continue;
-      }
-      counts[name] += 1;
-    }
-  }
-
-  const sorted = Object.entries(counts).sort((a,b) => b[1]-a[1]);
-  const top5   = sorted.slice(0, 5);
-  const bot5   = [...sorted].sort((a,b) => a[1]-b[1]).slice(0, 5);
-  const maxCount = top5.length && top5[0][1] > 0 ? top5[0][1] : 1;
-  const topMedals = ['🥇','🥈','🥉','4️⃣','5️⃣'];
-  const botEmoji  = ['😬','😴','🛋️','🥲','😑'];
-
-  const anyDone = top5.some(([,c]) => c > 0);
-
-  function topRow([name,count], i) {
-    return `<div class="lb-row">
-      <div class="lb-rank">${topMedals[i]}</div>
-      <div class="lb-name">${name}</div>
-      <div class="lb-bar-wrap">
-        <div class="lb-bar-track"><div class="lb-bar-fill" style="width:${Math.round(count/maxCount*100)}%"></div></div>
-      </div>
-      <div class="lb-count">${count} task${count!==1?'s':''}</div>
-    </div>`;
-  }
-
-  function botRow([name,count], i) {
-    return `<div class="lb-row" style="border-color:rgba(192,57,43,.15);">
-      <div class="lb-rank">${botEmoji[i]}</div>
-      <div class="lb-name">${name}</div>
-      <div class="lb-bar-wrap">
-        <div class="lb-bar-track"><div class="lb-bar-fill" style="width:${Math.round(count/maxCount*100)}%;background:#c0392b;opacity:.5;"></div></div>
-      </div>
-      <div class="lb-count">${count} task${count!==1?'s':''}</div>
-    </div>`;
-  }
-
-  const periodDiv = `<div class="lb-month">${periodLabel}</div>`;
-
-  if (!anyDone) {
-    elTop.innerHTML = `<div class="lb-empty">No tasks completed ${subText} yet.</div>`;
-    elBot.innerHTML = `<div class="lb-empty">Complete tasks — you'll appear here!</div>`;
-    return;
-  }
-
-  elTop.innerHTML = periodDiv + top5.map(topRow).join('');
-  elBot.innerHTML = periodDiv + bot5.map(botRow).join('');
-}
 
 // ══════════════════════════════════════════════
 // RENDER: RULES
@@ -1212,7 +981,6 @@ function refreshHouseViews() {
   renderThisWeek();
   renderCalendar();
   renderGroups();
-  renderLeaderboard();
 }
 
 function enableResidentEditing() {
@@ -1226,223 +994,7 @@ function disableResidentEditing() {
   renderGroups();
 }
 
-function residentAdminTap() {
-  residentAdminTapCount++;
-  clearTimeout(residentAdminTapTimer);
-  residentAdminTapTimer = setTimeout(() => { residentAdminTapCount = 0; }, 1400);
-  if (residentAdminTapCount >= 5) {
-    residentAdminTapCount = 0;
-    enableResidentEditing();
-  }
-}
 
-function saveResidentNames() {
-  document.querySelectorAll('.resident-edit-input').forEach(input => {
-    const gi = Number(input.dataset.gi);
-    const mi = Number(input.dataset.mi);
-    const value = input.value.trim();
-    if (GROUPS[gi]?.members[mi] && value) GROUPS[gi].members[mi].name = value;
-  });
-
-  residentEditMode = false;
-  refreshHouseViews();
-  showToast('Resident names are kept in residents.json and should be updated in the repository.');
-}
-
-
-// ══════════════════════════════════════════════
-// TUTORIAL PLAYER
-// ══════════════════════════════════════════════
-const TUTORIAL_CHAPTERS = [
-  {
-    kicker:'Chapter 1 · 00:00',
-    title:'Start on Home: this week is your command center',
-    duration:7,
-    caption:'The Home tab shows the current duty groups, house rules, collection days, and the task checklist. The ticker at the top is the fastest way to see who is on trash and dishwasher duty this week.',
-    visual:() => `
-      <div class="tut-ui">
-        <div class="tut-topbar"><span class="tut-dot"></span><span class="tut-dot"></span><span class="tut-dot"></span><div class="tut-line gold" style="width:42%;margin-left:8px;"></div></div>
-        <div class="tut-grid">
-          <div class="tut-card dark">
-            <div style="font-family:'Playfair Display',serif;color:var(--gold-light);font-size:18px;margin-bottom:10px;">This Week's Duties</div>
-            <div class="tut-task"><span>○</span><span>🟩 Glass · Sunday</span></div>
-            <div class="tut-task"><span>○</span><span>🔵⬜ Blue + White · Monday</span></div>
-            <div class="tut-task done"><span>✓</span><span>🍽️ Dishwasher · Today</span></div>
-          </div>
-          <div class="tut-card">
-            <div style="font-family:'Playfair Display',serif;color:var(--green-deep);font-size:18px;">House Rules</div>
-            <div class="tut-line green" style="width:95%;"></div>
-            <div class="tut-line" style="width:82%;"></div>
-            <div class="tut-line" style="width:88%;"></div>
-            <div class="tut-pill-row"><span class="tut-pill">Quiet hours</span><span class="tut-pill">Clean kitchen</span></div>
-          </div>
-        </div>
-      </div>`
-  },
-  {
-    kicker:'Chapter 2 · 00:07',
-    title:'Import your duties into your calendar',
-    duration:8,
-    caption:'Open Calendar, choose “Add my duties to calendar”, then pick your group. The downloaded .ics file can be imported into Google Calendar, Apple Calendar, Outlook, or most calendar apps.',
-    visual:() => `
-      <div class="tut-ui">
-        <div class="tut-card">
-          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-            <span style="background:var(--gold);color:var(--green-deep);border-radius:8px;padding:10px 14px;font-weight:700;font-size:13px;">📅 Add my duties to calendar</span>
-            <span style="font-size:12px;color:var(--text-light);">Download your group's duties as a .ics file</span>
-          </div>
-        </div>
-        <div class="tut-grid">
-          ${GROUPS.slice(0,4).map(g => `<div class="tut-card" style="padding:12px;"><strong>${g.name}</strong><div class="tut-line" style="width:84%;"></div><span class="tut-pill">📅 Add</span><span class="tut-pill" style="background:#f5dddd;color:#9b2d22;">Remove</span></div>`).join('')}
-        </div>
-      </div>`
-  },
-  {
-    kicker:'Chapter 3 · 00:15',
-    title:'Use Monthly and Schedule views to plan ahead',
-    duration:7,
-    caption:'Monthly view is best for a quick visual scan. Schedule view is better when you want to filter by one group and see exactly who is responsible for trash and dishwasher duty.',
-    visual:() => {
-      const days = Array.from({length:28}, (_,i) => `<div class="tut-day${[3,7,12,18].includes(i) ? ' mark' : ''}">${i+1}<span class="tut-badge">🍽️ G${(i%5)+1}</span>${i%6===0 ? `<span class="tut-badge">🗑️ G${((i+1)%5)+1}</span>` : ''}</div>`).join('');
-      return `<div class="tut-ui">
-        <div style="display:flex;gap:8px;"><span class="tut-pill" style="background:var(--gold);">📅 Monthly</span><span class="tut-pill">📋 Schedule</span><span class="tut-pill">Group filter</span></div>
-        <div class="tut-calendar-grid">${days}</div>
-      </div>`;
-    }
-  },
-  {
-    kicker:'Chapter 4 · 00:22',
-    title:'Check off a task when you complete it',
-    duration:8,
-    caption:'On the Home checklist, today’s open tasks can be tapped. Choose your name in the popup. Your completion is saved live, and you can add another person or undo today’s entry if needed.',
-    visual:() => `
-      <div class="tut-ui">
-        <div class="tut-card dark">
-          <div class="tut-task"><span>○</span><span style="flex:1;">🍽️ Sat 2 May</span><span style="color:var(--gold-light);font-size:11px;">tap ›</span></div>
-          <div class="tut-task done"><span>✓</span><span style="flex:1;">⬜ White bags</span><span style="font-size:11px;color:var(--green-muted);">Rafael · 18:04</span></div>
-        </div>
-        <div class="tut-card" style="max-width:360px;margin:0 auto;width:100%;">
-          <strong>Who completed this?</strong>
-          <div class="name-grid" style="margin-top:12px;">
-            <span class="name-btn">Alex</span><span class="name-btn">Anna</span><span class="name-btn">Rafael</span>
-            <span class="name-btn">Claudia</span><span class="name-btn">Samy</span><span class="name-btn">Victoria</span>
-          </div>
-        </div>
-      </div>`
-  },
-  {
-    kicker:'Chapter 5 · 00:30',
-    title:'Leaderboard keeps the house accountable',
-    duration:7,
-    caption:'The Leaderboard ranks task completions over the last 4 weeks. Top 5 celebrates the most helpful residents; Bottom 5 makes it obvious who should step in next.',
-    visual:() => `
-      <div class="tut-ui">
-        <div class="tut-grid">
-          <div class="tut-card">
-            <strong style="color:var(--green-deep);">Top 5</strong>
-            ${['🥇 Rafael','🥈 Anna','🥉 Maxime'].map((n,i)=>`<div style="display:flex;align-items:center;gap:8px;margin-top:12px;"><span class="tut-medal">${n.split(' ')[0]}</span><span style="flex:1;">${n.split(' ')[1]}</span><div class="tut-line green" style="width:${90-i*18}px;"></div></div>`).join('')}
-          </div>
-          <div class="tut-card">
-            <strong style="color:#9b2d22;">Bottom 5</strong>
-            ${['😬 0 tasks','😴 1 task','😑 1 task'].map((n,i)=>`<div style="display:flex;align-items:center;gap:8px;margin-top:12px;"><span class="tut-medal">${n.split(' ')[0]}</span><span style="flex:1;">${n.replace(n.split(' ')[0] + ' ','')}</span><div class="tut-line" style="width:${36+i*16}px;background:#e7b1aa;"></div></div>`).join('')}
-          </div>
-        </div>
-      </div>`
-  },
-  {
-    kicker:'Chapter 6 · 00:37',
-    title:'Newcomer Guide has the practical house basics',
-    duration:8,
-    caption:'Use the Newcomer Guide for common areas, kitchen space, supplied items, duty expectations, contacts, the Cohabs PDF, and the neighbourhood map with groceries, health, sport, nature, and cultural places.',
-    visual:() => `
-      <div class="tut-ui">
-        <div class="tut-grid">
-          <div class="tut-card"><strong>🏠 Common Areas</strong><div class="tut-line green" style="width:86%;"></div><div class="tut-line" style="width:74%;"></div><div class="tut-line" style="width:92%;"></div></div>
-          <div class="tut-card"><strong>🍳 Kitchen Space</strong><div class="tut-line green" style="width:76%;"></div><div class="tut-line" style="width:90%;"></div><span class="tut-pill" style="background:#f5dddd;color:#9b2d22;">Clean immediately</span></div>
-          <div class="tut-card"><strong>📄 Cohabs Guide</strong><div class="tut-pill-row"><span class="tut-pill">Download PDF</span></div></div>
-          <div class="tut-card"><strong>📍 Useful Places</strong><div style="height:78px;border-radius:8px;background:linear-gradient(135deg,#d4e8c2,#f5f0e8);position:relative;margin-top:10px;"><span style="position:absolute;left:48%;top:35%;background:var(--green-deep);color:var(--gold-light);border-radius:50%;padding:6px;">🏡</span></div></div>
-        </div>
-      </div>`
-  }
-];
-
-let tutorialIndex = 0;
-let tutorialElapsed = 0;
-let tutorialTimer = null;
-
-function tutorialTotalDuration() {
-  return TUTORIAL_CHAPTERS.reduce((sum, c) => sum + c.duration, 0);
-}
-function tutorialElapsedBefore(idx) {
-  return TUTORIAL_CHAPTERS.slice(0, idx).reduce((sum, c) => sum + c.duration, 0);
-}
-function formatTutorialTime(seconds) {
-  const s = Math.max(0, Math.floor(seconds));
-  return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
-}
-function renderTutorial() {
-  const chapter = TUTORIAL_CHAPTERS[tutorialIndex];
-  const total = tutorialTotalDuration();
-  const elapsedTotal = tutorialElapsedBefore(tutorialIndex) + tutorialElapsed;
-  document.getElementById('tutorial-kicker').textContent = chapter.kicker;
-  document.getElementById('tutorial-title').textContent = chapter.title;
-  document.getElementById('tutorial-visual').innerHTML = chapter.visual();
-  document.getElementById('tutorial-caption').textContent = chapter.caption;
-  document.getElementById('tutorial-time').textContent = `${formatTutorialTime(elapsedTotal)} / ${formatTutorialTime(total)}`;
-  document.getElementById('tutorial-progress-bar').style.width = `${Math.min(100, elapsedTotal / total * 100)}%`;
-  document.getElementById('tutorial-play').textContent = tutorialTimer ? 'Pause' : '▶ Play';
-  document.getElementById('tutorial-chapters').innerHTML = TUTORIAL_CHAPTERS.map((c, i) => `
-    <button class="tutorial-chapter${i === tutorialIndex ? ' active' : ''}" onclick="setTutorialChapter(${i}, true)">
-      <strong>${c.title.replace(/^.*?: /, '')}</strong>
-      <span>${c.kicker.replace(' · ', ' · ')} · ${c.duration}s</span>
-    </button>`).join('');
-}
-function setTutorialChapter(idx, pauseFirst = false) {
-  if (pauseFirst) pauseTutorial();
-  tutorialIndex = Math.max(0, Math.min(idx, TUTORIAL_CHAPTERS.length - 1));
-  tutorialElapsed = 0;
-  renderTutorial();
-}
-function playTutorial() {
-  if (tutorialTimer) return;
-  tutorialTimer = setInterval(() => {
-    tutorialElapsed += 0.25;
-    if (tutorialElapsed >= TUTORIAL_CHAPTERS[tutorialIndex].duration) {
-      if (tutorialIndex >= TUTORIAL_CHAPTERS.length - 1) {
-        pauseTutorial();
-        tutorialElapsed = TUTORIAL_CHAPTERS[tutorialIndex].duration;
-      } else {
-        tutorialIndex++;
-        tutorialElapsed = 0;
-      }
-    }
-    renderTutorial();
-  }, 250);
-  renderTutorial();
-}
-function pauseTutorial() {
-  if (!tutorialTimer) return;
-  clearInterval(tutorialTimer);
-  tutorialTimer = null;
-  renderTutorial();
-}
-function toggleTutorialPlayback() {
-  if (tutorialTimer) pauseTutorial();
-  else playTutorial();
-}
-function tutorialGoTo(id) {
-  pauseTutorial();
-  const btn = document.querySelector(`.nav [onclick*="'${id}'"]`);
-  showTab(id, btn);
-  if (id === 'calendar') openGroupPicker();
-  if (id === 'home') showToast('Tap today’s open task to check it off.');
-}
-function startTutorialFromGuide() {
-  const btn = document.querySelector(`.nav [onclick*="'tutorial'"]`);
-  showTab('tutorial', btn);
-  setTutorialChapter(0, true);
-  playTutorial();
-}
 
 // ══════════════════════════════════════════════
 // GROUP CALENDAR EXPORT
@@ -1566,20 +1118,11 @@ function copyModal() {
   });
 }
 
-// ══════════════════════════════════════════════
-// TABS
-// ══════════════════════════════════════════════
-function showLeaderboard() {
-  const btn = document.querySelector('.nav [onclick*="leaderboard"]');
-  showTab('leaderboard', btn);
-}
-
 function showTab(id, btn) {
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('tab-'+id).classList.add('active');
   if (btn) btn.classList.add('active');
-  if (id === 'tutorial') renderTutorial();
   if (id === 'newcomer') initMap();
   if (window.goatcounter?.count) window.goatcounter.count({ path: '/' + id, title: id });
 }
@@ -1665,6 +1208,9 @@ async function loadHouseConfig() {
     const response = await fetch('./residents.json');
     if (!response.ok) throw new Error('Could not fetch residents.json');
     const data = await response.json();
+    if (typeof data.house === 'string' && data.house.trim()) {
+      HOUSE_NAME = data.house.trim();
+    }
     if (Array.isArray(data.groups) && data.groups.length) {
       GROUPS = data.groups.map(group => ({
         ...group,
@@ -1687,9 +1233,6 @@ async function loadHouseConfig() {
   renderRules();
   renderCalendar();
   renderGroups();
-  renderSecretsTable();
-  renderTutorial();
-  renderLeaderboard();
   if (new URLSearchParams(window.location.search).get('editResidents') === '1') enableResidentEditing();
 }
 
