@@ -1212,12 +1212,12 @@
     let MODEL = null;
 
     const COLLECTION_DAYS = [
-      '🟩 <strong>Sunday</strong> — Glass bin (put out at 8pm)',
       '🔵⚪ <strong>Monday</strong> — Blue bags (PMC) + White bags',
-      '🟡⚪ <strong>Thursday</strong> — White bags + Yellow (paper) bags (put out at 6pm)',
+      '🟡⚪ <strong>Thursday</strong> — White bags + Yellow (paper) bags',
       '🟠 <strong>Friday</strong> — Orange bags',
+      '🟩 <strong>Sunday</strong> — Glass',
     ];
-    const COLLECTION_TIMES = '⏰ <strong>Sun:</strong> glass bin out at 8pm · <strong>Mon:</strong> bags out evening before (6pm–midnight) · <strong>Thu:</strong> white + yellow (paper) bags out at 6pm · <strong>Fri:</strong> out between 5am and noon';
+    const COLLECTION_TIMES = '⏰ Put out: <strong>Mon</strong> 6pm–midnight · <strong>Thu</strong> 6pm–midnight · <strong>Fri</strong> 6am–noon · <strong>Sun</strong> 6pm–midnight';
 
     function houseRules() {
       const trash = JB6.TRASH_TASKS.map(t => `${t.icon} ${t.when}`).join(' ·<br/> ');

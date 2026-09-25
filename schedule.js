@@ -32,16 +32,17 @@
   }
 
   // ── Duties ─────────────────────────────────────
-  // Trash tasks happen on the day the bags go OUT, all inside the Mon–Sun duty week.
+  // Trash tasks: the window when the bags go OUT, all inside the Mon–Sun duty week.
+  // Calendar events span the whole window (midnight is written as 23:59).
   const TRASH_TASKS = [
-    { key: 'thu', offset: 3, start: [18, 0], end: [18, 30], icon: '🟡⬜',
-      label: 'White + Yellow (paper) bags out', when: 'Thursday at 6pm' },
-    { key: 'fri', offset: 4, start: [5, 0], end: [12, 0], icon: '🟠',
-      label: 'Orange bags out', when: 'Friday between 5am and noon' },
-    { key: 'mon', offset: 6, start: [18, 0], end: [18, 30], icon: '🔵⬜',
-      label: 'Blue (PMC) + White bags out', when: 'Sunday evening, 6pm–midnight (Monday collection)' },
-    { key: 'glass', offset: 6, start: [20, 0], end: [20, 30], icon: '🟩',
-      label: 'Glass bin out', when: 'Sunday at 8pm' },
+    { key: 'mon', offset: 0, start: [18, 0], end: [23, 59], icon: '🔵⚪',
+      label: 'Blue (PMC) + White bags out', when: 'Monday, 6pm–midnight' },
+    { key: 'thu', offset: 3, start: [18, 0], end: [23, 59], icon: '🟡⚪',
+      label: 'White + Yellow (paper) bags out', when: 'Thursday, 6pm–midnight' },
+    { key: 'fri', offset: 4, start: [6, 0], end: [12, 0], icon: '🟠',
+      label: 'Orange bags out', when: 'Friday, 6am–noon' },
+    { key: 'glass', offset: 6, start: [18, 0], end: [23, 59], icon: '🟩',
+      label: 'Glass out', when: 'Sunday, 6pm–midnight' },
   ];
   const DISH_RULE = 'Empty the dishwasher every morning before 10:00 and keep salt & rinse aid topped up';
 
