@@ -1542,7 +1542,9 @@
     // ══════════════════════════════════════════════
     function openGroupReminder(gid) {
       const g = MODEL.groups.find(x => x.id === gid);
-      const mon = displayedMonday();
+      const today = JB6.localToday();
+      const currentMonday = JB6.mondayOf(today);
+      const mon = Math.max(currentMonday + (JB6.weekday(today) === 6 ? 7 : 0), MODEL.start);
       const d = JB6.dutiesForWeek(MODEL, mon).find(x => x.unit.id === g.unitId);
       const hi = `🏡 *${MODEL.house}*\n\nHi ${names(g)}! 👋\n\n`;
       let msg;
