@@ -1214,10 +1214,10 @@
     const COLLECTION_DAYS = [
       '🔵⚪ <strong>Monday</strong> — Blue bags (PMC) + White bags',
       '🟡⚪ <strong>Thursday</strong> — White bags + Yellow (paper) bags',
-      '🟠 <strong>Friday</strong> — Orange bags',
-      '🟩 <strong>Sunday</strong> — Glass',
+      '🟠🟩 <strong>Friday</strong> — Orange bags + Glass bins',
+      // ' <strong>Sunday</strong> — Glass',
     ];
-    const COLLECTION_TIMES = '⏰ Put out: <strong>Mon</strong> 6pm–midnight · <strong>Thu</strong> 6pm–midnight · <strong>Fri</strong> 6am–noon · <strong>Sun</strong> 6pm–midnight';
+    const COLLECTION_TIMES = '⏰ Put out: <strong>Mon</strong> 6pm–midnight · <strong>Thu</strong> 6pm–midnight · <strong>Fri</strong> 6am–noon';
 
     function houseRules() {
       const trash = JB6.TRASH_TASKS.map(t => `${t.icon} ${t.when}`).join(' ·<br/> ');
