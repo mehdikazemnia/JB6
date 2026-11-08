@@ -39,10 +39,8 @@
       label: 'Blue (PMC) + White bags out', when: 'Monday, 6pm–midnight' },
     { key: 'thu', offset: 3, start: [18, 0], end: [23, 59], icon: '🟡⚪',
       label: 'White + Yellow (paper) bags out', when: 'Thursday, 6pm–midnight' },
-    { key: 'fri', offset: 4, start: [6, 0], end: [12, 0], icon: '🟠',
-      label: 'Orange bags out', when: 'Friday, 6am–noon' },
-    { key: 'glass', offset: 6, start: [18, 0], end: [23, 59], icon: '🟩',
-      label: 'Glass out', when: 'Sunday, 6pm–midnight' },
+    { key: 'fri', offset: 4, start: [6, 0], end: [12, 0], icon: '🟠🟩',
+      label: 'Orange bags & Glass bins out', when: 'Friday, 6am–noon' },
   ];
   const DISH_RULE = 'Empty the dishwasher every morning before 10:00 and keep salt & rinse aid topped up';
 
